@@ -71,7 +71,6 @@ export default function InvoicesPage() {
   return (
     <MainLayout>
       <div className="space-y-7">
-        <TopBar searchWidthClass="w-[27rem]" />
 
         <section className="space-y-6">
           <div className="flex items-center justify-between">
