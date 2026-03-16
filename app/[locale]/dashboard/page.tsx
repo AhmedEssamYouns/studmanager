@@ -77,77 +77,89 @@ export default function DashboardPage() {
 
   return (
     <MainLayout>
-      <div className="space-y-7">
-        <section className="grid grid-cols-4 gap-5 [direction:rtl]">
+      <div className="space-y-4 sm:space-y-6 lg:space-y-7">
+        <section className="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-4 [direction:rtl]">
           {stats.map((stat) => (
-            <article key={stat.label} className="flex flex-row-reverse items-center justify-between rounded-[24px] bg-white px-7 py-6">
-              <div className="space-y-1 text-right">
-                <div className={`text-[1.85rem] font-bold ${stat.accent}`}>{stat.value}</div>
-                <div className="text-[1.6rem] font-semibold text-[#2b2231]">{stat.label}</div>
+            <article key={stat.label} className="flex flex-col-reverse items-center justify-between gap-4 rounded-[16px] bg-white px-4 py-5 sm:rounded-[24px] sm:px-6 sm:py-6 lg:flex-row-reverse">
+              <div className="space-y-1 text-center sm:text-right">
+                <div className={`text-lg font-bold sm:text-[1.85rem] ${stat.accent}`}>{stat.value}</div>
+                <div className="text-sm font-semibold text-[#2b2231] sm:text-[1.6rem]">{stat.label}</div>
               </div>
               {stat.icon}
             </article>
           ))}
         </section>
 
-        <section className="rounded-[28px] bg-white shadow-[0_16px_36px_rgba(94,56,23,0.05)]">
-          <div className="flex items-center justify-between px-6 py-6">
-            <h2 className="text-[2.3rem] font-bold text-[#21203a]">الفواتير الأخيرة</h2>
-            <Link href={`/${locale}/invoices`} className="rounded-full bg-[#4b2f1a] px-6 py-2 text-sm font-semibold text-white transition hover:bg-[#3f2616]">
+        <section className="overflow-x-auto rounded-[16px] bg-white shadow-[0_16px_36px_rgba(94,56,23,0.05)] sm:rounded-[28px]">
+          <div className="flex flex-col gap-4 px-4 py-4 sm:flex-row sm:items-center sm:justify-between sm:px-6 sm:py-6">
+            <h2 className="text-lg font-bold text-[#21203a] sm:text-[2.3rem]">
+              الفواتير الأخيرة
+            </h2>
+            <Link
+              href={`/${locale}/invoices`}
+              className="inline-flex rounded-full bg-[#4b2f1a] px-4 py-2 text-xs font-semibold text-white transition hover:bg-[#3f2616] sm:px-6 sm:text-sm"
+            >
               الفواتير
             </Link>
           </div>
 
-          <table className="w-full border-separate border-spacing-0 text-right">
-            <thead>
-              <tr className="text-[1.02rem] text-[#c3beb9]">
-                <th className="border-b border-[#efe4dc] px-6 py-5 font-semibold">المنتج</th>
-                <th className="border-b border-[#efe4dc] px-6 py-5 font-semibold">اسم العميل</th>
-                <th className="border-b border-[#efe4dc] px-6 py-5 font-semibold">رقم الفاتورة</th>
-                <th className="border-b border-[#efe4dc] px-6 py-5 font-semibold">الحالة</th>
-                <th className="border-b border-[#efe4dc] px-6 py-5 font-semibold">الفئة</th>
-                <th className="border-b border-[#efe4dc] px-6 py-5 font-semibold">التكلفة</th>
-              </tr>
-            </thead>
-            <tbody className="text-[1.08rem] font-semibold text-[#27304a]">
-              {recentInvoices.map((invoice, index) => (
-                <tr key={`${invoice.number}-${index}`}>
-                  <td className="border-b border-[#f3e7df] px-6 py-5">{invoice.product}</td>
-                  <td className="border-b border-[#f3e7df] px-6 py-5">{invoice.client}</td>
-                  <td className="border-b border-[#f3e7df] px-6 py-5">{invoice.number}</td>
-                  <td className="border-b border-[#f3e7df] px-6 py-5">
-                    <span className={`inline-flex min-w-[5.8rem] justify-center rounded-xl px-4 py-2 text-sm font-bold ${invoice.statusClass}`}>
-                      {invoice.status}
-                    </span>
-                  </td>
-                  <td className="border-b border-[#f3e7df] px-6 py-5">{invoice.category}</td>
-                  <td className="border-b border-[#f3e7df] px-6 py-5">{invoice.cost}</td>
+          <div className="overflow-x-auto">
+            <table className="w-full border-separate border-spacing-0 text-right text-sm sm:text-base">
+              <thead className="hidden sm:table-header-group">
+                <tr className="text-[0.9rem] text-[#c3beb9] sm:text-[1.02rem]">
+                  <th className="border-b border-[#efe4dc] px-3 py-4 font-semibold sm:px-6 sm:py-5">المنتج</th>
+                  <th className="border-b border-[#efe4dc] px-3 py-4 font-semibold sm:px-6 sm:py-5">اسم العميل</th>
+                  <th className="border-b border-[#efe4dc] px-3 py-4 font-semibold sm:px-6 sm:py-5">رقم الفاتورة</th>
+                  <th className="border-b border-[#efe4dc] px-3 py-4 font-semibold sm:px-6 sm:py-5">الحالة</th>
+                  <th className="border-b border-[#efe4dc] px-3 py-4 font-semibold sm:px-6 sm:py-5">الفئة</th>
+                  <th className="border-b border-[#efe4dc] px-3 py-4 font-semibold sm:px-6 sm:py-5">التكلفة</th>
                 </tr>
-              ))}
-            </tbody>
-          </table>
+              </thead>
+              <tbody className="text-xs font-semibold text-[#27304a] sm:text-[1.08rem]">
+                {recentInvoices.slice(0, 5).map((invoice, index) => (
+                  <tr key={`${invoice.number}-${index}`} className="border-b border-[#f3e7df]">
+                    <td className="px-3 py-4 sm:px-6 sm:py-5">{invoice.product}</td>
+                    <td className="hidden px-3 py-4 sm:table-cell sm:px-6 sm:py-5">{invoice.client}</td>
+                    <td className="hidden px-3 py-4 sm:table-cell sm:px-6 sm:py-5">{invoice.number}</td>
+                    <td className="px-3 py-4 sm:px-6 sm:py-5">
+                      <span className={`inline-flex min-w-fit justify-center rounded-lg px-2 py-1 text-xs font-bold sm:min-w-[5.8rem] sm:rounded-xl sm:px-4 sm:py-2 sm:text-sm ${invoice.statusClass}`}>
+                        {invoice.status}
+                      </span>
+                    </td>
+                    <td className="hidden px-3 py-4 sm:table-cell sm:px-6 sm:py-5">{invoice.category}</td>
+                    <td className="px-3 py-4 sm:px-6 sm:py-5">{invoice.cost}</td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+          </div>
         </section>
 
-        <section className="grid grid-cols-[14.5rem_1fr] gap-5">
-          <aside className="rounded-[28px] bg-white p-6 shadow-[0_16px_36px_rgba(94,56,23,0.05)]">
-            <div className="mb-5 text-right">
-              <h3 className="text-[2.1rem] font-bold text-[#20203c]">الحدث</h3>
-              <p className="text-[#d7d0ca]">سحب و إفلات</p>
+        <section className="grid grid-cols-1 gap-4 lg:grid-cols-[14.5rem_1fr] lg:gap-5">
+          <aside className="order-2 rounded-[16px] bg-white p-4 shadow-[0_16px_36px_rgba(94,56,23,0.05)] sm:rounded-[28px] sm:p-6 lg:order-1">
+            <div className="mb-4 text-right sm:mb-5">
+              <h3 className="text-lg font-bold text-[#20203c] sm:text-[2.1rem]">
+                الحدث
+              </h3>
+              <p className="text-xs text-[#d7d0ca] sm:text-base">سحب و إفلات</p>
             </div>
 
-            <div className="space-y-4">
-              {events.map((event) => (
-                <div key={`${event.title}-${event.color}`} className={`rounded-2xl border-r-4 px-4 py-4 text-right ${event.color}`}>
-                  <div className="text-lg font-bold">{event.title}</div>
-                  <div className="mt-1 text-sm font-semibold">{event.time}</div>
+            <div className="space-y-2 sm:space-y-4">
+              {events.slice(0, 3).map((event) => (
+                <div
+                  key={`${event.title}-${event.color}`}
+                  className={`rounded-lg border-r-4 px-3 py-3 text-right sm:rounded-2xl sm:px-4 sm:py-4 ${event.color}`}
+                >
+                  <div className="text-xs font-bold sm:text-lg">{event.title}</div>
+                  <div className="mt-1 text-xs font-semibold sm:text-sm">{event.time}</div>
                 </div>
               ))}
             </div>
           </aside>
 
-          <article className="rounded-[28px] bg-white p-6 shadow-[0_16px_36px_rgba(94,56,23,0.05)]">
-            <div className="mb-5 flex items-center justify-between">
-              <div className="relative flex items-center rounded-xl border border-[#4b2f1a] p-0.5 text-sm font-semibold text-[#4b2f1a]">
+          <article className="order-1 rounded-[16px] bg-white p-4 shadow-[0_16px_36px_rgba(94,56,23,0.05)] sm:rounded-[28px] sm:p-6 lg:order-2">
+            <div className="mb-4 flex flex-col gap-3 sm:mb-5 sm:flex-row sm:items-center sm:justify-between">
+              <div className="relative flex items-center gap-1 rounded-xl border border-[#4b2f1a] p-0.5 text-xs font-semibold text-[#4b2f1a] sm:gap-0 sm:text-sm">
                 <span
                   className="absolute top-0.5 bottom-0.5 w-[calc(33.333%-2px)] rounded-[10px] bg-[#4b2f1a] transition-all duration-300 ease-out"
                   style={sliderStyle}
@@ -156,7 +168,7 @@ export default function DashboardPage() {
                   <button
                     key={tab.key}
                     onClick={() => setActiveView(tab.key)}
-                    className={`relative z-10 min-w-[4.35rem] px-4 py-1.5 transition-colors duration-300 ${
+                    className={`relative z-10 min-w-[3rem] px-2 py-1 transition-colors duration-300 sm:min-w-[4.35rem] sm:px-4 sm:py-1.5 ${
                       activeView === tab.key ? 'text-white' : 'text-[#4b2f1a]'
                     }`}
                   >
@@ -165,20 +177,29 @@ export default function DashboardPage() {
                 ))}
               </div>
 
-              <div className="text-[2rem] font-bold text-[#20203c]">
-                <span className="mr-2 text-[#2f2f55]">يناير</span>
+              <div className="text-base font-bold text-[#20203c] sm:text-[2rem]">
+                <span className="mr-2 text-xs text-[#2f2f55] sm:text-[#2f2f55]">
+                  يناير
+                </span>
                 2025
               </div>
 
-              <div className="flex items-center gap-3 text-[#4b2f1a]">
-                <button className="flex h-9 w-9 items-center justify-center rounded-full border border-[#4b2f1a] text-xl">›</button>
-                <button className="flex h-9 w-9 items-center justify-center rounded-full border border-[#4b2f1a] text-xl">‹</button>
+              <div className="flex items-center gap-2 text-[#4b2f1a] sm:gap-3">
+                <button className="flex h-7 w-7 items-center justify-center rounded-full border border-[#4b2f1a] text-lg sm:h-9 sm:w-9 sm:text-xl">
+                  ›
+                </button>
+                <button className="flex h-7 w-7 items-center justify-center rounded-full border border-[#4b2f1a] text-lg sm:h-9 sm:w-9 sm:text-xl">
+                  ‹
+                </button>
               </div>
             </div>
 
-            <div className="grid grid-cols-7 border-r border-t border-[#d9d4cf]">
+            <div className="grid grid-cols-7 gap-1 border-r border-t border-[#d9d4cf] sm:gap-0">
               {days.map((day) => (
-                <div key={day} className="border-b border-l border-[#efe7e2] px-3 py-4 text-center text-[1.02rem] font-semibold text-[#cbc5c0]">
+                <div
+                  key={day}
+                  className="border-b border-l border-[#efe7e2] px-2 py-2 text-center text-xs font-semibold text-[#cbc5c0] sm:px-3 sm:py-4 sm:text-[1.02rem]"
+                >
                   {day}
                 </div>
               ))}
@@ -196,17 +217,19 @@ export default function DashboardPage() {
                   return (
                     <div
                       key={`${weekIndex}-${dayIndex}`}
-                      className="relative min-h-[6.4rem] border-b border-l border-[#d9d4cf] px-3 py-2"
+                      className="relative min-h-[3rem] border-b border-l border-[#d9d4cf] px-1 py-1 sm:min-h-[6.4rem] sm:px-3 sm:py-2"
                     >
-                      <div className="text-right text-[1.7rem] font-bold text-[#232741]">{dayLabel}</div>
+                      <div className="text-right text-xs font-bold text-[#232741] sm:text-[1.7rem]">
+                        {dayLabel}
+                      </div>
                       {eventLabel && (
-                        <div className="absolute bottom-4 right-3 rounded-xl border-r-4 border-[#33a7ef] bg-[#dbf4ff] px-4 py-2 text-sm font-semibold text-[#26a1e5]">
+                        <div className="mt-1 hidden rounded-lg bg-[#fdb900] px-2 py-1 text-xs font-semibold text-[#2b2330] sm:block">
                           {eventLabel}
                         </div>
                       )}
                     </div>
                   );
-                })
+                }),
               )}
             </div>
           </article>

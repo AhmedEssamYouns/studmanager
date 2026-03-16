@@ -8,16 +8,15 @@ interface TopBarProps {
   searchWidthClass?: string;
 }
 
-export function TopBar({ searchWidthClass = 'w-[25rem]' }: TopBarProps) {
+export function TopBar({ searchWidthClass = 'sm:w-[25rem] md:w-[28rem]' }: TopBarProps) {
   const { t } = useTranslation();
   const { direction } = useLocale();
 
   return (
-    <div className="flex items-center justify-between gap-6 rounded-[26px] bg-white px-8 py-4 shadow-[0_10px_35px_rgba(94,56,23,0.06)]">
-      <div className={`relative ${searchWidthClass} max-w-full`}>
+    <div className="flex flex-col gap-3 rounded-[16px] bg-white px-4 py-3 shadow-[0_10px_35px_rgba(94,56,23,0.06)] sm:flex-row sm:items-center sm:justify-between sm:gap-6 sm:rounded-[26px] sm:px-6 sm:py-4 lg:px-8">
+      <div className={`relative w-full ${searchWidthClass}`}>
         <SearchIcon
-          className={`absolute top-1/2 h-5 w-5 -translate-y-1/2 text-[#5a473d] ${
-            direction === 'rtl' ? 'right-4' : 'left-4'
+          className={`absolute top-1/2 h-5 w-5 -translate-y-1/2 text-[#5a473d] ${            direction === 'rtl' ? 'right-4' : 'left-4'
           }`}
         />
         <input

@@ -160,33 +160,33 @@ export default function HorsesPage() {
   return (
     <MainLayout>
       <div
-        className={`bg-primary-light border-b border-border-gray p-6 rounded-[28px] ${
+        className={`bg-primary-light border-b border-border-gray p-4 sm:p-6 rounded-[16px] sm:rounded-[28px] ${
           isRTL ? "text-right" : "text-left"
         }`}
       >
         <div
-          className={`flex items-center justify-between gap-6 ${
-            isRTL ? "flex-row-reverse" : ""
+          className={`flex flex-col gap-4 sm:items-center sm:justify-between sm:gap-6 sm:flex-row ${
+            isRTL ? "sm:flex-row-reverse" : ""
           }`}
         >
-          <h1 className="text-2xl font-semibold text-text-dark">
+          <h1 className="text-lg font-semibold sm:text-2xl text-text-dark">
             {t("horses.title")}
           </h1>
 
-          <div className="relative flex-1 max-w-[30rem]">
+          <div className="relative w-full sm:flex-1 sm:max-w-[30rem]">
             <input
               type="search"
               value={mainSearchQuery}
               onChange={(e) => setMainSearchQuery(e.target.value)}
               placeholder={t("common.search")}
-              className={`h-11 w-full rounded-2xl border border-[#ece2da] bg-white text-sm text-[#2c2330] outline-none transition placeholder:text-[#d9cfc5] focus:border-[#5a3b25] focus:ring-2 focus:ring-[#5a3b25]/10 ${
-                isRTL ? "pr-12 text-right" : "pl-12 text-left"
+              className={`h-10 sm:h-11 w-full rounded-lg sm:rounded-2xl border border-[#ece2da] bg-white text-xs sm:text-sm text-[#2c2330] outline-none transition placeholder:text-[#d9cfc5] focus:border-[#5a3b25] focus:ring-2 focus:ring-[#5a3b25]/10 ${
+                isRTL ? "pr-10 sm:pr-12 text-right" : "pl-10 sm:pl-12 text-left"
               }`}
             />
 
             <span
               className={`absolute top-1/2 h-5 w-5 -translate-y-1/2 text-[#5a473d] ${
-                isRTL ? "right-4" : "left-4"
+                isRTL ? "right-3 sm:right-4" : "left-3 sm:left-4"
               }`}
             >
               <svg
@@ -207,7 +207,7 @@ export default function HorsesPage() {
 
           <button
             onClick={handleOpenStudbook}
-            className="bg-primary-dark text-primary-light px-6 py-2 rounded-full text-sm font-medium hover:bg-opacity-90 transition-all flex items-center gap-2"
+            className="w-full sm:w-auto bg-primary-dark text-primary-light px-4 sm:px-6 py-2 rounded-full text-xs sm:text-sm font-medium hover:bg-opacity-90 transition-all flex items-center justify-center gap-2"
           >
             +
             {t("horses.addNew")}
@@ -215,8 +215,8 @@ export default function HorsesPage() {
         </div>
       </div>
 
-      <div className="p-6">
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+      <div className="p-4 sm:p-6">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6">
           {filteredHorses.map((horse) => (
             <HorseCard key={horse.id} horse={horse} />
           ))}
@@ -224,55 +224,53 @@ export default function HorsesPage() {
       </div>
 
       {isStudbookOpen && (
-        <div className="fixed inset-0 bg-black/40 z-50 flex items-center justify-center p-6">
+        <div className="fixed inset-0 bg-black/40 z-50 flex items-center justify-center p-4">
           <div
             dir={'ltr'}
-            className="w-full max-w-6xl bg-[#faf5f2] rounded-[28px] shadow-xl overflow-hidden"
+            className="w-full max-w-2xl sm:max-w-4xl lg:max-w-6xl bg-[#faf5f2] rounded-[16px] sm:rounded-[28px] shadow-xl overflow-hidden max-h-[90vh] overflow-y-auto"
           >
-            <div className="flex items-center justify-between px-8 py-6 border-b border-[#eadfd9]">
-              <div className="flex items-center gap-4">
-                <button
-                  onClick={handleOpenManual}
-                  className="rounded-full border border-[#eadfd9] bg-white px-6 py-2 text-sm font-medium text-text-dark hover:bg-[#f3e8e3] transition"
+            <div className="flex flex-col gap-3 sm:gap-0 sm:flex-row sm:items-center sm:justify-between px-4 sm:px-8 py-4 sm:py-6 border-b border-[#eadfd9]">
+              <button
+                onClick={handleOpenManual}
+                className="rounded-full border border-[#eadfd9] bg-white px-4 sm:px-6 py-2 text-xs sm:text-sm font-medium text-text-dark hover:bg-[#f3e8e3] transition"
+              >
+                {t("horses.addManually")}
+              </button>
+
+              <div className="relative w-full sm:flex-1 sm:max-w-[360px] sm:mx-4">
+                <input
+                  type="search"
+                  value={studbookSearchQuery}
+                  onChange={(e) => setStudbookSearchQuery(e.target.value)}
+                  placeholder={t("common.search")}
+                  className={`h-10 sm:h-11 w-full rounded-lg sm:rounded-full border border-[#eadfd9] bg-white text-xs sm:text-sm outline-none focus:border-[#5a3b25] focus:ring-2 focus:ring-[#5a3b25]/10 ${
+                    isRTL ? "pr-10 sm:pr-12 text-right" : "pl-10 sm:pl-12 text-left"
+                  }`}
+                />
+
+                <span
+                  className={`absolute top-1/2 -translate-y-1/2 text-[#5a473d] ${
+                    isRTL ? "right-3 sm:right-4" : "left-3 sm:left-4"
+                  }`}
                 >
-                  {t("horses.addManually")}
-                </button>
-
-                <div className="relative w-[360px]">
-                  <input
-                    type="search"
-                    value={studbookSearchQuery}
-                    onChange={(e) => setStudbookSearchQuery(e.target.value)}
-                    placeholder={t("common.search")}
-                    className={`h-11 w-full rounded-full border border-[#eadfd9] bg-white text-sm outline-none focus:border-[#5a3b25] focus:ring-2 focus:ring-[#5a3b25]/10 ${
-                      isRTL ? "pr-12 text-right" : "pl-12 text-left"
-                    }`}
-                  />
-
-                  <span
-                    className={`absolute top-1/2 -translate-y-1/2 text-[#5a473d] ${
-                      isRTL ? "right-4" : "left-4"
-                    }`}
+                  <svg
+                    className="h-5 w-5"
+                    fill="none"
+                    stroke="currentColor"
+                    viewBox="0 0 24 24"
                   >
-                    <svg
-                      className="h-5 w-5"
-                      fill="none"
-                      stroke="currentColor"
-                      viewBox="0 0 24 24"
-                    >
-                      <path
-                        strokeLinecap="round"
-                        strokeLinejoin="round"
-                        strokeWidth={2}
-                        d="M21 21l-4.35-4.35m0 0A7.5 7.5 0 104.5 10.5a7.5 7.5 0 0012.15 6.15z"
-                      />
-                    </svg>
-                  </span>
-                </div>
+                    <path
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                      strokeWidth={2}
+                      d="M21 21l-4.35-4.35m0 0A7.5 7.5 0 104.5 10.5a7.5 7.5 0 0012.15 6.15z"
+                    />
+                  </svg>
+                </span>
               </div>
 
-              <div className={`flex  items-center gap-4 `}>
-                <h2 className="text-xl font-semibold text-text-dark">
+              <div className={`flex w-full sm:w-auto items-center justify-between sm:justify-start sm:gap-4 `}>
+                <h2 className="text-base sm:text-xl font-semibold text-text-dark">
                   {t("horses.addFromStudbook")}
                 </h2>
 
@@ -281,7 +279,7 @@ export default function HorsesPage() {
                   className="text-gray-500 hover:text-black transition"
                 >
                   <svg
-                    className="w-7 h-7"
+                    className="w-6 h-6 sm:w-7 sm:h-7"
                     fill="none"
                     stroke="currentColor"
                     viewBox="0 0 24 24"
@@ -297,18 +295,18 @@ export default function HorsesPage() {
               </div>
             </div>
 
-            <div className="px-8 py-6">
-              <p className="text-center text-sm text-[#8a7b70] mb-6">
+            <div className="px-4 sm:px-8 py-4 sm:py-6">
+              <p className="text-center text-xs sm:text-sm text-[#8a7b70] mb-4 sm:mb-6">
                 {t("horses.studbookInstruction") ||
                   "إضغط على بطاقة الخيل للتحديد"}
               </p>
 
-              <div className="grid grid-cols-3 gap-6">
+              <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6">
                 {filteredStudbookHorses.map((horse) => (
                   <div
                     key={horse.id}
                     onClick={() => handleSelectStudbookHorse(horse)}
-                    className={`rounded-2xl border bg-white p-4 cursor-pointer transition ${
+                    className={`rounded-lg sm:rounded-2xl border bg-white p-3 sm:p-4 cursor-pointer transition ${
                       selectedStudbookHorse?.id === horse.id
                         ? "border-[#5a3b25] ring-2 ring-[#5a3b25]/20"
                         : "border-[#eadfd9]"
@@ -317,18 +315,18 @@ export default function HorsesPage() {
                     <img
                       src={horse.image}
                       alt={horse.nameEn}
-                      className="h-40 w-full object-cover rounded-xl"
+                      className="h-32 sm:h-40 w-full object-cover rounded-lg sm:rounded-xl"
                     />
 
-                    <div className="mt-4 text-center">
-                      <div className="font-semibold text-[#3a2c24]">
+                    <div className="mt-3 sm:mt-4 text-center">
+                      <div className="text-sm sm:text-base font-semibold text-[#3a2c24]">
                         {horse.nameAr}
                       </div>
-                      <div className="text-sm text-[#8a7b70]">
+                      <div className="text-xs sm:text-sm text-[#8a7b70]">
                         {horse.nameEn}
                       </div>
 
-                      <div className="mt-3 flex justify-between text-xs text-[#7a6c63]">
+                      <div className="mt-2 sm:mt-3 flex flex-col sm:flex-row justify-between gap-1 sm:gap-0 text-xs text-[#7a6c63]">
                         <div>
                           {t("horses.birthDate")}: {horse.birthDate}
                         </div>
@@ -342,8 +340,8 @@ export default function HorsesPage() {
               </div>
 
               <div
-                className={`mt-8 flex gap-4 ${
-                  isRTL ? "flex-row-reverse justify-start" : "justify-end"
+                className={`mt-6 sm:mt-8 flex flex-col-reverse sm:flex-row gap-3 sm:gap-4 ${
+                  isRTL ? "sm:flex-row-reverse sm:justify-start" : "sm:justify-end"
                 }`}
               >
                 <button

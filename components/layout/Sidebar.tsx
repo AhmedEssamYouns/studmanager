@@ -96,7 +96,7 @@ function SidebarItem({ item, isActive, href }: SidebarItemProps) {
             : 'text-[#2b2330] hover:bg-[#f8efe7]'
         }`}
       >
-        <span className="text-[1.02rem] font-semibold">
+        <span className="text-sm font-semibold sm:text-[1.02rem]">
           {t(`sidebar.${item.key}`)}
         </span>
         <span>{renderIcon()}</span>
@@ -105,18 +105,29 @@ function SidebarItem({ item, isActive, href }: SidebarItemProps) {
   );
 }
 
-export function Sidebar() {
+interface SidebarProps {
+  open?: boolean;
+  onClose?: () => void;
+}
+
+export function Sidebar({ open = true, onClose }: SidebarProps) {
   const { locale, direction } = useLocale();
   const pathname = usePathname();
 
   return (
     <aside
-      className={`fixed top-8 z-20 h-[calc(100vh-4rem)] w-[17.5rem] overflow-y-auto rounded-[28px] bg-white px-5 py-6 shadow-[0_20px_40px_rgba(96,56,23,0.08)] ${
-        direction === 'rtl' ? 'right-10' : 'left-10'
-      }`}
+      className={`fixed top-16 z-20 h-[calc(100vh-4rem)] w-[17.5rem] overflow-y-auto rounded-[28px] bg-white px-4 py-6 shadow-[0_20px_40px_rgba(96,56,23,0.08)] transition-all duration-300 md:top-8 md:px-5 ${
+        direction === 'rtl'
+          ? open
+            ? 'right-0 md:right-10'
+            : '-right-[19.5rem] md:right-10'
+          : open
+            ? 'left-0 md:left-10'
+            : '-left-[19.5rem] md:left-10'
+      } md:translate-x-0`}
     >
       <div className="mb-8 flex justify-center">
-        <img src="/brand/logo.svg" alt="StudManager" className="h-16 w-auto object-contain" />
+        <img src="/brand/logo.svg" alt="StudManager" className="h-12 w-auto object-contain sm:h-16" />
       </div>
 
       <nav className="space-y-2">
@@ -124,12 +135,13 @@ export function Sidebar() {
           const href = `/${locale}/${item.key}`;
           const isActive = pathname === href || pathname === `/${locale}/${item.key}/`;
           return (
-            <SidebarItem
-              key={item.key}
-              item={item}
-              isActive={isActive}
-              href={href}
-            />
+            <div key={item.key} onClick={onClose}>
+              <SidebarItem
+                item={item}
+                isActive={isActive}
+                href={href}
+              />
+            </div>
           );
         })}
       </nav>
