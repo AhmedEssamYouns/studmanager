@@ -8,6 +8,8 @@ interface MainLayoutProps {
   children: ReactNode;
 }
 
+import { TopBar } from './TopBar';
+
 export function MainLayout({ children }: MainLayoutProps) {
   const { direction } = useLocale();
 
@@ -20,7 +22,10 @@ export function MainLayout({ children }: MainLayoutProps) {
           direction === 'rtl' ? 'mr-[19.25rem] ml-10' : 'ml-[19.25rem] mr-10'
         }`}
       >
-        <div>{children}</div>
+        <div className="space-y-6">
+          <TopBar />
+          <div>{children}</div>
+        </div>
       </main>
     </div>
   );

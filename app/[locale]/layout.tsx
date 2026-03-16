@@ -1,7 +1,9 @@
+
 import { ReactNode } from 'react';
 import { Locale, locales, isValidLocale, getDirection } from '@/lib/i18n';
 import { LocaleProvider } from '@/lib/locale-context';
 import { DocumentLocale } from '@/components/common/DocumentLocale';
+
 
 const loadMessages = async (locale: Locale) => {
   const messages = await import(`@/public/locales/${locale}.json`);

@@ -2,7 +2,6 @@
 
 import { useMemo, useState } from 'react';
 import { PlusCircleIcon, SearchIcon } from '@/components/layout/AppIcons';
-import { TopBar } from '@/components/layout/TopBar';
 import { useLocale } from '@/lib/locale-context';
 import { TeamMemberModal } from './TeamMemberModal';
 import { TeamMembersTable } from './TeamMembersTable';
@@ -64,8 +63,6 @@ export function TeamPageContent() {
 
   return (
     <div className="space-y-7">
-      <TopBar />
-
       <section className="space-y-5">
         <div className="flex items-center justify-between">
           <h1 className="text-[2.1rem] font-bold text-[#27304a]">إدارة الأعضاء</h1>

@@ -6,6 +6,7 @@
     "edit": "Edit",
     "add": "Add",
     "back": "Back",
+    "next": "Next",
     "search": "Search",
     "loading": "Loading...",
     "error": "Error occurred",
@@ -40,6 +41,16 @@
     "accountHolder": "Account Holder",
     "userName": "Mohamed Saleh"
   },
+  "home": {
+    "welcome": "Welcome back!",
+    "subtitle": "Manage your stable easily and effectively.",
+    "getStarted": "Get Started"
+  },
+  "notFound": {
+    "title": "Page not found",
+    "subtitle": "The page you are looking for doesn't exist.",
+    "backHome": "Back to dashboard"
+  },
   "invoices": {
     "title": "Invoices",
     "addNew": "Add New Invoice",
@@ -71,11 +82,18 @@
     "gender": "Gender",
     "birthDate": "Birth Date",
     "features": "Features",
+    "description": "Description",
     "image": "Image",
     "addFromStudbook": "Add from Studbook",
     "addManually": "Add Manually",
     "dragDropImage": "Drag image or click to upload",
     "viewDetails": "View Details",
+    "selectFromStudbook": "Pick a horse from the Studbook, then press Add.",
+    "studbookInstruction": "Click on a horse card to select it.",
+    "step1": "Horse Name",
+    "step2": "Horse Details",
+    "step3": "Identification",
+    "step4": "Upload Images",
     "male": "Male",
     "female": "Female",
     "editHorse": "Edit Horse"

@@ -1,10 +1,10 @@
 'use client';
 
 import Link from 'next/link';
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { useLocale } from '@/lib/locale-context';
 import { MainLayout } from '@/components/layout/MainLayout';
-import { TopBar } from '@/components/layout/TopBar';
+import { SplashScreen } from '@/components/common/SplashScreen';
 
 const stats = [
   {
@@ -62,20 +62,22 @@ const events = [
 
 export default function DashboardPage() {
   const { locale, direction } = useLocale();
+
+  const [activeView, setActiveView] = React.useState<'day' | 'week' | 'month'>('month');
+
+  
+
   const viewTabs = [
     { key: 'day', label: 'يوم' },
     { key: 'week', label: 'أسبوع' },
     { key: 'month', label: 'شهر' },
   ] as const;
-  const [activeView, setActiveView] = React.useState<(typeof viewTabs)[number]['key']>('month');
   const tabIndex = viewTabs.findIndex((tab) => tab.key === activeView);
   const sliderStyle = direction === 'rtl' ? { right: `${tabIndex * 33.333}%` } : { left: `${tabIndex * 33.333}%` };
 
   return (
     <MainLayout>
       <div className="space-y-7">
-        <TopBar />
-
         <section className="grid grid-cols-4 gap-5 [direction:rtl]">
           {stats.map((stat) => (
             <article key={stat.label} className="flex flex-row-reverse items-center justify-between rounded-[24px] bg-white px-7 py-6">
