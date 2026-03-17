@@ -65,7 +65,7 @@ export function AIInteractionLayer() {
 
       {/* Mobile Button */}
       <div
-        className={`fixed bottom-24 z-50 md:hidden cursor-pointer active:scale-90 transition-transform ${isRTL ? 'right-6' : 'left-6'
+        className={`fixed bottom-24 z-50 md:hidden cursor-pointer active:scale-90 transition-transform ${false ? 'right-6' : 'left-6'
           }`}
         onClick={handleOpen}
       >
