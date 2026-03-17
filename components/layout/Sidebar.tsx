@@ -134,7 +134,6 @@ interface SidebarProps {
 export function Sidebar({ open = true, onClose }: SidebarProps) {
   const { locale, direction } = useLocale();
   const pathname = usePathname();
-
   const isRTL = direction === 'rtl';
 
   return (
@@ -148,7 +147,7 @@ export function Sidebar({ open = true, onClose }: SidebarProps) {
     >
       <div className="mb-6 md:mb-8 flex justify-center">
         <Link href={`/${locale}/dashboard`}>
-          <img src="/brand/logo.svg" alt="StudManager" className="h-10 w-auto object-contain sm:h-12 md:h-16 cursor-pointer" />
+          <img src="/brand/logo.png" alt="StudManager" className="h-10 w-auto object-contain sm:h-12 md:h-16 cursor-pointer" />
         </Link>
       </div>
 

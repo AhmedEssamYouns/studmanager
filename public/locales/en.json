@@ -15,6 +15,7 @@
     "english": "English",
     "arabic": "العربية",
     "actions": "Actions",
+    "select_language": "Select Language",
     "addNewRecord": "Add New Record",
     "deleteRecord": "Delete Record?",
     "deleteRecordMsg": "You will not be able to recover this record",

@@ -43,9 +43,9 @@ export function TopBar({
       <div className="flex flex-1 justify-center sm:hidden">
         <Link href={`/${locale}/dashboard`}>
           <img
-            src="/brand/logo-trans.svg"
+            src="/brand/logo.png"
             alt="StudManager"
-            className="h-8 w-auto object-contain"
+            className="h-8 w-auto object-contain pr-5"
           />
         </Link>
       </div>

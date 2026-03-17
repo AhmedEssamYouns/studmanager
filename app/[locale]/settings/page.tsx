@@ -24,15 +24,13 @@ export default function SettingsPage() {
         <div className={`flex flex-col lg:flex-row gap-6 ${isRTL ? 'lg:flex-row-reverse' : ''}`}>
           {/* Main Controls Area */}
           <div className="flex-1 flex flex-col gap-6">
-            <div className={`flex flex-col lg:flex-row gap-0 rounded-3xl overflow-hidden border border-gray-100 shadow-sm ${
-          isRTL ? 'lg:flex-row' : ''
-        }`}>
+        <div className={`flex flex-col lg:flex-row gap-0 rounded-3xl overflow-hidden border border-gray-100 shadow-sm`}>
           {/* Main Area: Form and Tabs */}
           <div className="flex-1 flex flex-col lg:flex-row min-h-[400px]">
             {isRTL ? (
               <>
-                <SettingsForm activeTab={activeTab} />
                 <SettingsTabs activeTab={activeTab} onTabChange={setActiveTab} />
+                <SettingsForm activeTab={activeTab} />
               </>
             ) : (
               <>

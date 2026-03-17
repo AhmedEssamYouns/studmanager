@@ -4,7 +4,7 @@ import { useEffect, useRef, useState } from 'react';
 import { createPortal } from 'react-dom';
 import { usePathname, useRouter } from 'next/navigation';
 import { getOppositeLocale, locales, type Locale } from '@/lib/i18n';
-import { useLocale } from '@/lib/locale-context';
+import { useLocale, useTranslation } from '@/lib/locale-context';
 
 import { GlobalsIcon } from '../layout/AppIcons';
 
@@ -23,6 +23,7 @@ interface LocaleMenuProps {
 
 export function LocaleMenu({ variant = 'desktop' }: LocaleMenuProps) {
   const { locale, direction } = useLocale();
+  const { t } = useTranslation();
   const pathname = usePathname();
   const router = useRouter();
   const [open, setOpen] = useState(false);
@@ -64,7 +65,7 @@ export function LocaleMenu({ variant = 'desktop' }: LocaleMenuProps) {
             >
               <div className="px-5 py-4 border-b border-gray-50 flex items-center justify-between">
                 <span className="font-bold text-[#2b2330]">
-                  {locale === 'ar' ? 'اختر اللغة' : 'Select Language'}
+                  {t('common.select_language')}
                 </span>
                 <button 
                   onClick={() => setOpen(false)}

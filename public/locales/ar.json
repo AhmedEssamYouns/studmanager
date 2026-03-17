@@ -15,6 +15,7 @@
     "english": "English",
     "arabic": "العربية",
     "actions": "الإجراءات",
+    "select_language": "اختر اللغة",
     "addNewRecord": "إضافة سجل جديد",
     "deleteRecord": "حذف السجل؟",
     "deleteRecordMsg": "لن تتمكن من استعادة هذا السجل",
@@ -202,5 +203,26 @@
     "invalidEmail": "بريد إلكتروني غير صحيح",
     "minLength": "الحد الأدنى للطول هو {min}",
     "maxLength": "الحد الأقصى للطول هو {max}"
+  },
+  "settings": {
+    "title": "الإعدادات الأساسية",
+    "housing": "الإيواء",
+    "bloodTest": "تحليل الدم",
+    "wormDose": "جرعة الديدان",
+    "hoofLegCare": "العناية بالحافر و الساق",
+    "injuries": "الإصابات",
+    "medicalCare": "الرعاية الطبية",
+    "numPlaces": "عدد الأماكن",
+    "numHorses": "عدد الخيول",
+    "labName": "اسم المختبر",
+    "sampleReason": "سبب العينة",
+    "followUpNumber": "رقم المتابعة",
+    "doseType": "نوع الجرعة",
+    "doseResponsible": "المسؤول عن الجرعة",
+    "farrierName": "اسم البيطار",
+    "shoeingType": "نوع التحدية / العلف",
+    "injuryName": "اسم الإصابة",
+    "conditionName": "اسم الحالة",
+    "careType": "نوع الرعاية"
   }
 }
