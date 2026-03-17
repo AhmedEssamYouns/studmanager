@@ -3,15 +3,7 @@
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import { useLocale, useTranslation } from '@/lib/locale-context';
-import {
-  CalendarIcon,
-  ContactsIcon,
-  DashboardIcon,
-  DatabaseIcon,
-  ExpensesIcon,
-  NewsIcon,
-  RevenueIcon,
-} from './AppIcons';
+import { DashboardIcon } from './AppIcons';
 import { LocaleMenu } from '@/components/common/LocaleMenu';
 
 const sidebarItems = [
@@ -85,23 +77,75 @@ function SidebarItem({ item, isActive, href }: SidebarItemProps) {
       case 'performance':
         return (
           <img
-            src={isActive ? '/performance/activeicontabsidebar.svg' : '/performance/notacitve.svg'}
+            src={isActive ? '/sidebar/الأداء-active.svg' : '/sidebar/الأداء.svg'}
+            alt=""
+            className="h-5 w-5 flex-shrink-0"
+          />
+        );
+      case 'settings':
+        return (
+          <img
+            src={isActive ? '/sidebar/الإعدادات الأساسية-active.svg' : '/sidebar/الإعدادات الأساسية.svg'}
             alt=""
             className="h-5 w-5 flex-shrink-0"
           />
         );
       case 'expenses':
-        return <ExpensesIcon className={iconClassName} />;
+        return (
+          <img
+            src="/sidebar/المصروفات.svg"
+            alt=""
+            className="h-5 w-5 flex-shrink-0"
+          />
+        );
       case 'reports':
-        return <RevenueIcon className={iconClassName} />;
+        return (
+          <img
+            src="/sidebar/التقارير.svg"
+            alt=""
+            className="h-5 w-5 flex-shrink-0"
+          />
+        );
       case 'contacts':
-        return <ContactsIcon className={iconClassName} />;
+        return (
+          <img
+            src="/sidebar/جهات الإتصال.svg"
+            alt=""
+            className="h-5 w-5 flex-shrink-0"
+          />
+        );
       case 'news':
-        return <NewsIcon className={iconClassName} />;
+        return (
+          <img
+            src="/sidebar/الأخبار.svg"
+            alt=""
+            className="h-5 w-5 flex-shrink-0"
+          />
+        );
       case 'evaluations':
-        return <CalendarIcon className={iconClassName} />;
-      case 'assessments':
-        return <DatabaseIcon className={iconClassName} />;
+        return (
+          <img
+            src="/sidebar/التقويم%20و%20الأحداث.svg"
+            alt=""
+            className="h-5 w-5 flex-shrink-0"
+          />
+        );
+      case 'reproduction':
+        return (
+          <img
+            src={isActive ? '/sidebar/التناسليات-active.svg' : '/sidebar/التناسليات.svg'}
+            alt=""
+            className="h-5 w-5 flex-shrink-0"
+          />
+        );
+      case 'database':
+        return (
+          <img
+            src="/sidebar/قاعدة البيانات.svg"
+            alt=""
+            className="h-5 w-5 flex-shrink-0"
+          />
+        );
       default:
         return <DashboardIcon className={iconClassName} />;
     }
