@@ -42,6 +42,29 @@
     "database": "قاعدة البيانات",
     "revenue": "الإيرادات"
   },
+  "months": {
+    "january": "يناير",
+    "february": "فبراير",
+    "march": "مارس",
+    "april": "ابريل",
+    "may": "مايو",
+    "jun": "يونيو",
+    "july": "يوليو",
+    "august": "أغسطس",
+    "september": "سبتمبر",
+    "october": "أكتوبر",
+    "november": "نوفمبر",
+    "december": "ديسمبر"
+  },
+  "days": {
+    "saturday": "السبت",
+    "sunday": "الأحد",
+    "monday": "الإثنين",
+    "tuesday": "الثلاثاء",
+    "wednesday": "الأربعاء",
+    "thursday": "الخميس",
+    "friday": "الجمعة"
+  },
   "dashboard": {
     "title": "لوحة التحكم",
     "recentInvoices": "الفواتير الأخيرة",
@@ -49,10 +72,20 @@
     "totalBudget": "الميزانية",
     "totalExpenses": "المصروفات",
     "totalSales": "المبيعات",
+    "profit": "أرباح",
     "addNewInvoice": "إضافة فاتورة جديدة",
     "aiAssistant": "مساعد ذكي",
     "accountHolder": "صاحب الحساب",
-    "userName": "محمد صالح"
+    "userName": "محمد صالح",
+    "invoices": "الفواتير",
+    "product": "المنتج",
+    "clientName": "اسم العميل",
+    "invoiceNumber": "رقم الفاتورة",
+    "status": "الحالة",
+    "category": "الفئة",
+    "cost": "التكلفة",
+    "event": "الحدث",
+    "dragAndDrop": "سحب و إفلات"
   },
   "home": {
     "welcome": "مرحبا بعودتك!",
@@ -78,6 +111,18 @@
     "project": "المشروع",
     "teamGroup": "الفريق"
   },
+  "team": {
+    "title": "إدارة الأعضاء",
+    "user": "المستخدم",
+    "role": "الدور",
+    "username": "اسم المستخدم",
+    "password": "كلمة السر",
+    "actions": "الإجراءات",
+    "addUser": "إضافة مستخدم",
+    "tasks": "المهام",
+    "addNewMember": "إضافة عضو جديد",
+    "editMember": "تعديل عضو"
+  },
   "news": {
     "title": "الأخبار",
     "addFarm": "اضافة مزرعة جديدة",
@@ -89,7 +134,10 @@
     "month": "شهر",
     "week": "أسبوع",
     "day": "يوم",
-    "eventName": "اسم العنصر"
+    "eventName": "اسم العنصر",
+    "viewDay": "يوم",
+    "viewWeek": "أسبوع",
+    "viewMonth": "شهر"
   },
   "reports": {
     "title": "التقارير",
@@ -110,7 +158,11 @@
     "colts": "المهر",
     "fillies": "المهرة",
     "pregnantMares": "عدد القهرة العشر",
-    "nonPregnantMares": "عدد القهرة غير عشر"
+    "nonPregnantMares": "عدد القهرة غير عشر",
+    "naturalBreeding": "الطلاق الطبيعية",
+    "frozenSemen": "سايل متوجمجمد",
+    "freshSemen": "سايل متوجحديث",
+    "embryoTransfer": "نقل الأجنة"
   },
   "performance": {
     "title": "الأداء",

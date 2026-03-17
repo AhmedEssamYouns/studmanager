@@ -51,28 +51,6 @@ export default function ContactsPage() {
               <button className="p-2 sm:p-2.5 bg-gray-100 rounded-xl hover:bg-gray-200 transition-colors"><Download className="w-4 h-4 sm:w-5 sm:h-5 text-gray-600" /></button>
             </div>
           </div>
-
-          {/* Table */}
-          <div className="overflow-x-auto">
-            <table className="w-full min-w-[700px]">
-              <thead>
-                <tr className="bg-[#4b2f1a] text-white text-sm">
-                  <th className="py-4 px-4 font-semibold text-right rounded-r-xl w-12"><input type="checkbox" className="w-4 h-4" /></th>
-                  <th className="py-4 px-4 font-semibold text-right">الاسم</th>
-                  <th className="py-4 px-4 font-semibold text-right">رقم الهاتف</th>
-                  <th className="py-4 px-4 font-semibold text-right">الحساب</th>
-                  <th className="py-4 px-4 font-semibold text-right">المجموعة</th>
-                  <th className="py-4 px-4 font-semibold text-center rounded-l-xl">الإجراءات</th>
-                </tr>
-              </thead>
-              <tbody>
-                {MOCK_CONTACTS.map((row, index) => (
-                  <tr key={row.id} className={`border-b border-gray-100 last:border-0 hover:bg-gray-50 transition-colors ${index % 2 === 0 ? "bg-white" : "bg-[#fdfbf7]"}`}>
-                    <td className="py-4 px-4"><input type="checkbox" className="w-4 h-4" /></td>
-                    <td className="py-4 px-4 text-[#3b2b20] font-medium">{row.name}</td>
-                    <td className="py-4 px-4 text-gray-600">{row.phone}</td>
-                    <td className="py-4 px-4 text-gray-600">{row.email}</td>
-                    <td className={`py-4 px-4 font-semibold ${GROUP_COLORS[row.group] || "text-gray-600"}`}>{row.group}</td>
                     <td className="py-4 px-4 text-center">
                       <div className="flex items-center justify-center gap-2">
                         <button onClick={() => openModal("edit", row)} className="p-1.5 text-gray-400 hover:bg-gray-100 rounded-lg transition-colors border border-gray-200"><Edit className="w-4 h-4" /></button>

@@ -42,6 +42,29 @@
     "database": "Database",
     "revenue": "Revenue"
   },
+  "months": {
+    "january": "January",
+    "february": "February",
+    "march": "March",
+    "april": "April",
+    "may": "May",
+    "jun": "June",
+    "july": "July",
+    "august": "August",
+    "september": "September",
+    "october": "October",
+    "november": "November",
+    "december": "December"
+  },
+  "days": {
+    "saturday": "Saturday",
+    "sunday": "Sunday",
+    "monday": "Monday",
+    "tuesday": "Tuesday",
+    "wednesday": "Wednesday",
+    "thursday": "Thursday",
+    "friday": "Friday"
+  },
   "dashboard": {
     "title": "Dashboard",
     "recentInvoices": "Recent Invoices",
@@ -49,10 +72,20 @@
     "totalBudget": "Total Budget",
     "totalExpenses": "Total Expenses",
     "totalSales": "Total Sales",
+    "profit": "Profit",
     "addNewInvoice": "Add New Invoice",
     "aiAssistant": "AI Assistant",
     "accountHolder": "Account Holder",
-    "userName": "Mohamed Saleh"
+    "userName": "Mohamed Saleh",
+    "invoices": "Invoices",
+    "product": "Product",
+    "clientName": "Client Name",
+    "invoiceNumber": "Invoice Number",
+    "status": "Status",
+    "category": "Category",
+    "cost": "Cost",
+    "event": "Event",
+    "dragAndDrop": "Drag & Drop"
   },
   "home": {
     "welcome": "Welcome back!",
@@ -78,6 +111,18 @@
     "project": "Project",
     "teamGroup": "Team"
   },
+  "team": {
+    "title": "Team Management",
+    "user": "User",
+    "role": "Role",
+    "username": "Username",
+    "password": "Password",
+    "actions": "Actions",
+    "addUser": "Add User",
+    "tasks": "Tasks",
+    "addNewMember": "Add New Member",
+    "editMember": "Edit Member"
+  },
   "news": {
     "title": "News",
     "addFarm": "New Farm Added",
@@ -89,7 +134,10 @@
     "month": "Month",
     "week": "Week",
     "day": "Day",
-    "eventName": "Event Name"
+    "eventName": "Event Name",
+    "viewDay": "Day",
+    "viewWeek": "Week",
+    "viewMonth": "Month"
   },
   "reports": {
     "title": "Reports",
@@ -110,7 +158,11 @@
     "colts": "Colts",
     "fillies": "Fillies",
     "pregnantMares": "Pregnant Mares",
-    "nonPregnantMares": "Non-Pregnant Mares"
+    "nonPregnantMares": "Non-Pregnant Mares",
+    "naturalBreeding": "Natural Breeding",
+    "frozenSemen": "Frozen Semen",
+    "freshSemen": "Fresh Semen",
+    "embryoTransfer": "Embryo Transfer"
   },
   "performance": {
     "title": "Performance",
