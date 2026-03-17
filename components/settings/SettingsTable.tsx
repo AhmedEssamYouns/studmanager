@@ -29,11 +29,12 @@ export function SettingsTable({ activeTab }: SettingsTableProps) {
     ],
     hoofLegCare: [
       { key: 'farrierName', label: t('settings.farrierName') },
-      { key: 'shoeingType', label: t('settings.shoeingType') },
+      { key: 'farrierNumber', label: t('settings.farrierNumber') },
+      { key: 'trimmingType', label: t('settings.trimmingType') },
     ],
     injuries: [
-      { key: 'injuryName', label: t('settings.injuryName') },
-      { key: 'conditionName', label: t('settings.conditionName') },
+      { key: 'practitionerName', label: t('settings.practitionerName') },
+      { key: 'farrierNumber', label: t('settings.farrierNumber') },
     ],
     medicalCare: [
       { key: 'careType', label: t('settings.careType') },
@@ -43,20 +44,41 @@ export function SettingsTable({ activeTab }: SettingsTableProps) {
 
   const activeCols = columns[activeTab] || [];
 
-  // Mock data
-  const data = [
-    { id: 1, val1: t('settings.labName'), val2: t('settings.sampleReason'), val3: '01010101010' },
-    { id: 2, val1: t('settings.labName'), val2: t('settings.sampleReason'), val3: '01010101010' },
-    { id: 3, val1: t('settings.labName'), val2: t('settings.sampleReason'), val3: '01010101010' },
-    { id: 4, val1: t('settings.labName'), val2: t('settings.sampleReason'), val3: '01010101010' },
-  ];
+  // Dynamic mock data generator based on activeTab
+  const generateMockData = () => {
+    const base = [
+      { id: 1, val1: 'Value 1', val2: 'Value 2', val3: '01010101010' },
+      { id: 2, val1: 'Value 1', val2: 'Value 2', val3: '01010101010' },
+      { id: 3, val1: 'Value 1', val2: 'Value 2', val3: '01010101010' },
+      { id: 4, val1: 'Value 1', val2: 'Value 2', val3: '01010101010' },
+    ];
+
+    switch (activeTab) {
+      case 'housing':
+        return base.map(row => ({ ...row, val1: '100', val2: '50' }));
+      case 'bloodTest':
+        return base.map(row => ({ ...row, val1: t('settings.labName'), val2: t('settings.sampleReason'), val3: '01010101010' }));
+      case 'wormDose':
+        return base.map(row => ({ ...row, val1: t('settings.doseType'), val2: t('settings.doseResponsible') }));
+      case 'hoofLegCare':
+        return base.map(row => ({ ...row, val1: t('settings.farrierName'), val2: '01010101010', val3: t('settings.trimmingType') }));
+      case 'injuries':
+        return base.map(row => ({ ...row, val1: t('settings.practitionerName'), val2: '01010101010' }));
+      case 'medicalCare':
+        return base.map(row => ({ ...row, val1: t('settings.careType'), val2: '01010101010' }));
+      default:
+        return base;
+    }
+  };
+
+  const data = generateMockData();
 
   return (
     <div className="bg-white rounded-3xl shadow-sm border border-gray-100 overflow-hidden">
       <div className="overflow-x-auto">
         <table className="w-full border-collapse">
           <thead>
-            <tr className="bg-[#311C11] text-white">
+            <tr className="bg-[#3B2B20] text-white">
               {activeCols.map((col) => (
                 <th
                   key={col.key}
@@ -70,9 +92,9 @@ export function SettingsTable({ activeTab }: SettingsTableProps) {
               </th>
             </tr>
           </thead>
-          <tbody>
-            {data.map((row, idx) => (
-              <tr key={row.id} className={idx % 2 === 0 ? 'bg-white' : 'bg-gray-50'}>
+          <tbody className="text-[1.05rem] text-[#20203C] hover:[&_tr]:bg-gray-50 transition-colors">
+            {data.map((row) => (
+              <tr key={row.id} className="border-b border-gray-50 last:border-0 transition-colors">
                 {activeCols.map((_, colIdx) => (
                   <td key={colIdx} className={`py-4 px-6 text-sm text-[#20203C] font-medium ${isRTL ? 'text-right' : 'text-left'}`}>
                     {colIdx === 0 ? row.val1 : colIdx === 1 ? row.val2 : row.val3}
@@ -80,11 +102,11 @@ export function SettingsTable({ activeTab }: SettingsTableProps) {
                 ))}
                 <td className="py-4 px-6">
                   <div className="flex items-center justify-center gap-3">
-                    <button className="p-2 text-gray-500 hover:text-red-600 transition-colors">
+                    <button className="p-2 text-[#E53E3E] hover:bg-red-50 rounded-lg transition-colors">
                       <Trash2 size={18} />
                     </button>
                     <span className="w-px h-6 bg-gray-200" />
-                    <button className="p-2 text-gray-400 hover:text-blue-600 transition-colors">
+                    <button className="p-2 text-gray-400 hover:bg-gray-50 rounded-lg transition-colors">
                       <Edit2 size={18} />
                     </button>
                   </div>

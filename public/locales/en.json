@@ -275,6 +275,21 @@
     "shoeingType": "Shoeing/Feed Type",
     "injuryName": "Injury Name",
     "conditionName": "Condition Name",
-    "careType": "Care Type"
+    "careType": "Care Type",
+    "trimmingType": "Trimming Type",
+    "farrierNumber": "Farrier Number",
+    "practitionerName": "Practitioner Name"
+  },
+  "database": {
+    "title": "Database",
+    "pedigreeTab": "Pedigree Certificate",
+    "matingTab": "Mating Test",
+    "pedigreeNote": "Please note that the horse must be registered in our database.",
+    "matingNoteHeader": "Here you can choose father and mother for a theoretical mating test.",
+    "matingNoteSub": "Please note that both parents must be registered in our database before using them in the mating test.",
+    "selectHorse": "Select Horse",
+    "fatherName": "Father's Name",
+    "motherName": "Mother's Name",
+    "matingResult": "Mating Test"
   }
 }

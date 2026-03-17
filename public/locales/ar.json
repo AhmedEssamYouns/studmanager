@@ -275,6 +275,21 @@
     "shoeingType": "نوع التحدية / العلف",
     "injuryName": "اسم الإصابة",
     "conditionName": "اسم الحالة",
-    "careType": "نوع الرعاية"
+    "careType": "نوع الرعاية",
+    "trimmingType": "نوع التقليم",
+    "farrierNumber": "رقم البيطار",
+    "practitionerName": "اسم المعالج"
+  },
+  "database": {
+    "title": "قاعدة البيانات",
+    "pedigreeTab": "شهادة النسب",
+    "matingTab": "اختبار التزاوج",
+    "pedigreeNote": "يرجى العلم أنه يجب أن يكون الخيل مسجل في قاعدة بياناتنا",
+    "matingNoteHeader": "هنا يمكنك اختيار الأب والأم وتجربة تزاوج نظري.",
+    "matingNoteSub": "يرجى العلم أنه يجب أن يكون الأب والأم مسجلين في قاعدة بياناتنا قبل استخدامهما في اختبار التزاوج.",
+    "selectHorse": "اختر الخيل",
+    "fatherName": "اسم الأب",
+    "motherName": "اسم الأم",
+    "matingResult": "إختبار التزاوج"
   }
 }
