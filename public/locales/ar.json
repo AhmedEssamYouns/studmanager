@@ -18,16 +18,21 @@
   "sidebar": {
     "dashboard": "لوحة التحكم",
     "invoices": "الفواتير",
-    "horses": "الخيول",
+    "horses": "الخيل",
     "nutrition": "التغذية",
     "health": "الرعاية الطبية",
-    "team": "إدارة الاعضاء",
+    "team": "إدارة الأعضاء",
+    "settings": "الإعدادات الأساسية",
+    "performance": "الأداء",
+    "reproduction": "التناسليات",
     "expenses": "المصروفات",
-    "reports": "البيانات",
-    "assessments": "التقييمات",
-    "contacts": "جهات الاتصال",
-    "news": "الاخبار",
-    "evaluations": "التقويم والاحداث"
+    "reports": "التقارير",
+    "assessments": "قاعدة البيانات",
+    "contacts": "جهات الإتصال",
+    "news": "الأخبار",
+    "evaluations": "التقويم و الأحداث",
+    "database": "قاعدة البيانات",
+    "revenue": "الإيرادات"
   },
   "dashboard": {
     "title": "لوحة التحكم",

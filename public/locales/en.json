@@ -22,12 +22,17 @@
     "nutrition": "Nutrition",
     "health": "Health Care",
     "team": "Team Management",
+    "settings": "Basic Settings",
+    "performance": "Performance",
+    "reproduction": "Reproduction",
     "expenses": "Expenses",
     "reports": "Reports",
-    "assessments": "Assessments",
+    "assessments": "Database",
     "contacts": "Contacts",
     "news": "News",
-    "evaluations": "Evaluations"
+    "evaluations": "Calendar & Events",
+    "database": "Database",
+    "revenue": "Revenue"
   },
   "dashboard": {
     "title": "Dashboard",

@@ -16,15 +16,19 @@ import {
 const sidebarItems = [
   { key: 'dashboard' },
   { key: 'team' },
+  { key: 'settings', route: 'settings' },
   { key: 'horses' },
   { key: 'health' },
   { key: 'nutrition' },
+  { key: 'performance' },
+  { key: 'reproduction', route: 'reproduction' },
   { key: 'expenses' },
-  { key: 'reports' },
+  { key: 'reports', route: 'reports' },
   { key: 'contacts' },
   { key: 'news' },
-  { key: 'evaluations' },
-  { key: 'assessments' },
+  { key: 'evaluations', route: 'calendar' },
+  { key: 'assessments', route: 'assessments' },
+  { key: 'database', route: 'database' },
 ];
 
 interface SidebarItemProps {
@@ -78,6 +82,14 @@ function SidebarItem({ item, isActive, href }: SidebarItemProps) {
             className="h-5 w-5 flex-shrink-0"
           />
         );
+      case 'performance':
+        return (
+          <img
+            src={isActive ? '/performance/activeicontabsidebar.svg' : '/performance/notacitve.svg'}
+            alt=""
+            className="h-5 w-5 flex-shrink-0"
+          />
+        );
       case 'expenses':
         return <ExpensesIcon className={iconClassName} />;
       case 'reports':
@@ -98,7 +110,7 @@ function SidebarItem({ item, isActive, href }: SidebarItemProps) {
   return (
     <Link href={href} className="block">
       <div
-        className={`relative flex items-center gap-4 rounded-2xl px-4 py-3.5 transition-all duration-300 ${direction === 'rtl'
+        className={`relative flex items-center gap-3 rounded-xl px-3 py-2.5 transition-all duration-300 ${direction === 'rtl'
             ? 'flex-row-reverse justify-end text-right'
             : 'flex-row justify-start text-left'
           } ${isActive
@@ -108,7 +120,7 @@ function SidebarItem({ item, isActive, href }: SidebarItemProps) {
       >
         {direction !== 'rtl' && <span>{renderIcon()}</span>}
 
-        <span className="text-sm font-semibold sm:text-[1.02rem]">
+        <span className="text-[0.82rem] font-semibold leading-tight">
           {t(`sidebar.${item.key}`)}
         </span>
 
@@ -142,10 +154,11 @@ export function Sidebar({ open = true, onClose }: SidebarProps) {
         <img src="/brand/logo.svg" alt="StudManager" className="h-12 w-auto object-contain sm:h-16" />
       </div>
 
-      <nav className="space-y-2">
+      <nav className="space-y-1">
         {sidebarItems.map((item) => {
-          const href = `/${locale}/${item.key}`;
-          const isActive = pathname === href || pathname === `/${locale}/${item.key}/`;
+          const route = item.route || item.key;
+          const href = `/${locale}/${route}`;
+          const isActive = pathname.startsWith(href);
           return (
             <div key={item.key} onClick={onClose}>
               <SidebarItem item={item} isActive={isActive} href={href} />
