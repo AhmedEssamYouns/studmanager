@@ -43,7 +43,7 @@ export function TopBar({
       <div className="flex flex-1 justify-center sm:hidden">
         <Link href={`/${locale}/dashboard`}>
           <img
-            src="/brand/logo.svg"
+            src="/brand/logo-trans.svg"
             alt="StudManager"
             className="h-8 w-auto object-contain"
           />

@@ -31,7 +31,7 @@ export async function generateMetadata(props: LocaleLayoutProps) {
   return {
     title: 'StudManager - ' + messages.dashboard.title,
     icons: {
-      icon: '/brand/image copy.png',
+      icon: '/brand/logo-trans.svg',
     },
   };
 }
