@@ -5,6 +5,7 @@ import { Sidebar } from './Sidebar';
 import { useLocale } from '@/lib/locale-context';
 import { TopBar } from './TopBar';
 import { BottomTab } from './BottomTab';
+import { AIInteractionLayer } from './AIInteractionLayer';
 
 interface MainLayoutProps {
   children: ReactNode;
@@ -43,6 +44,9 @@ export function MainLayout({ children }: MainLayoutProps) {
 
       {/* Bottom Navigation for mobile */}
       <BottomTab />
+
+      {/* AI Interaction Layer */}
+      <AIInteractionLayer />
     </div>
   );
 }

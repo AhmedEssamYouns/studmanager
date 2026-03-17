@@ -25,8 +25,8 @@ export function TeamMemberModal({
   useBodyScrollLock(true);
 
   return (
-    <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/45 p-6">
-      <div className="w-full max-w-5xl rounded-[24px] bg-white px-8 py-6 shadow-2xl" dir="rtl">
+    <div className="fixed inset-0 z-50 flex items-center justify-center">
+      <div className="w-full max-w-5xl rounded-[24px] bg-white px-8 py-6 shadow-2xl mx-4" dir="rtl">
         <div className="mb-10 flex items-start justify-between">
           <div className="flex items-center gap-3">
             <img src={iconSrc} alt="" className="h-8 w-8" />

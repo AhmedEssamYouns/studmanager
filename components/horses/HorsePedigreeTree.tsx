@@ -17,7 +17,7 @@ export const HorsePedigreeTree: FC<HorsePedigreeTreeProps> = ({ horse: _horse })
   const isRTL = direction === "rtl";
 
   return (
-    <div className="mb-12" dir={isRTL ? "rtl" : "ltr"}>
+    <div className="mb-12 max-w-[1200px] mx-auto" dir={isRTL ? "rtl" : "ltr"}>
       <div className={`flex items-center justify-between mb-4 px-2`}>
         <h2 className="text-2xl font-bold text-[#2a2a2a]">
           {isRTL ? "شهادة النسب" : "Pedigree Certificate"}
