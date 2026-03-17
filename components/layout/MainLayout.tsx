@@ -22,7 +22,7 @@ export function MainLayout({ children }: MainLayoutProps) {
       {/* Overlay for mobile sidebar */}
       {sidebarOpen && (
         <div
-          className="fixed inset-0 z-30 bg-black/40 backdrop-blur-[1px] md:hidden transition-opacity"
+          className="fixed inset-0 z-40 bg-black/40 backdrop-blur-[1px] md:hidden transition-opacity"
           onClick={() => setSidebarOpen(false)}
         />
       )}

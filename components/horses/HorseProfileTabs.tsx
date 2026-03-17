@@ -23,7 +23,7 @@ export const HorseProfileTabs: FC<HorseProfileTabsProps> = ({ activeTab, onTabCh
   const { locale } = useLocale();
 
   return (
-    <div className="flex flex-wrap gap-2 mb-8 justify-start">
+    <div className="flex overflow-x-auto items-center gap-2 mb-8 pb-2 hide-scrollbar scroll-smooth sm:flex-wrap sm:overflow-visible sm:pb-0">
       {TABS.map((tab) => {
         const isActive = activeTab === tab.id;
         const label = locale === "ar" ? tab.labelAr : tab.labelEn;
@@ -33,7 +33,7 @@ export const HorseProfileTabs: FC<HorseProfileTabsProps> = ({ activeTab, onTabCh
           <button
             key={tab.id}
             onClick={() => onTabChange(tab.id)}
-            className={`flex items-center gap-2 px-6 py-3 rounded-xl font-semibold transition-colors
+            className={`flex flex-shrink-0 items-center gap-2 px-6 py-3 rounded-xl font-semibold transition-colors
               ${isActive 
                 ? "bg-[#3d2a1b] text-white" 
                 : "bg-white text-gray-700 hover:bg-gray-50 border border-gray-100"

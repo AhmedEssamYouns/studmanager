@@ -20,7 +20,7 @@ export function TopBar({
   const { locale, direction } = useLocale();
 
   return (
-    <div className="fixed top-2 left-2 right-2 z-40 flex items-center justify-between rounded-[20px] bg-white px-4 py-3 shadow-[0_4px_20px_rgba(0,0,0,0.08)] border border-gray-100 sm:relative sm:top-0 sm:left-0 sm:right-0 sm:z-30 sm:rounded-[26px] sm:px-6 sm:py-4 lg:px-8 sm:border-none sm:shadow-[0_10px_35px_rgba(94,56,23,0.06)]">
+    <div className="fixed top-2 left-2 right-2 z-30 flex items-center justify-between rounded-[20px] bg-white px-4 py-3 shadow-[0_4px_20px_rgba(0,0,0,0.08)] border border-gray-100 sm:relative sm:top-0 sm:left-0 sm:right-0 sm:z-30 sm:rounded-[26px] sm:px-6 sm:py-4 lg:px-8 sm:border-none sm:shadow-[0_10px_35px_rgba(94,56,23,0.06)]">
 
       {/* Notifications - Mobile left */}
       <div className="flex items-center md:hidden">

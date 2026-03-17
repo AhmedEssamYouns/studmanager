@@ -139,7 +139,7 @@ export function Sidebar({ open = true, onClose }: SidebarProps) {
 
   return (
     <aside
-      className={`fixed z-40 h-full w-[17rem] overflow-y-auto rounded-none bg-white px-4 py-5 shadow-[0_20px_40px_rgba(96,56,23,0.08)] transition-transform duration-300 ease-in-out
+      className={`fixed z-50 h-full w-[17rem] overflow-y-auto rounded-none bg-white px-4 py-5 shadow-[0_20px_40px_rgba(96,56,23,0.08)] transition-transform duration-300 ease-in-out
         md:top-8 md:z-20 md:h-[calc(100vh-4rem)] md:w-[17.5rem] md:rounded-[28px] md:px-5 md:py-6 md:translate-x-0
         ${isRTL
           ? `top-0 right-0 md:right-10 ${open ? 'translate-x-0' : 'translate-x-full md:translate-x-0'}`
@@ -166,7 +166,7 @@ export function Sidebar({ open = true, onClose }: SidebarProps) {
 
         {/* Mobile-only language toggle */}
         <div className="md:hidden mt-6 pt-6 border-t border-gray-100 flex justify-center">
-          <LocaleMenu />
+          <LocaleMenu variant="mobile" />
         </div>
       </nav>
     </aside>

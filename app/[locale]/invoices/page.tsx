@@ -72,11 +72,11 @@ export default function InvoicesPage() {
       <div className="space-y-7">
 
         <section className="space-y-6">
-          <div className="flex items-center justify-between">
-            <h1 className="text-[2.5rem] font-bold text-[#22203b]">{t('invoices.title')}</h1>
+          <div className="flex flex-col gap-6 lg:flex-row lg:items-center lg:justify-between">
+            <h1 className="text-3xl font-bold text-[#22203b] sm:text-[2.5rem]">{t('invoices.title')}</h1>
 
-            <div className="flex items-center gap-4">
-              <div className="relative w-[25.5rem] max-w-full">
+            <div className="flex flex-col gap-4 sm:flex-row sm:items-center">
+              <div className="relative w-full sm:w-[25.5rem]">
                 <SearchIcon
                   className={`absolute top-1/2 h-5 w-5 -translate-y-1/2 text-[#5a473d] ${
                     direction === 'rtl' ? 'right-4' : 'left-4'
@@ -91,25 +91,27 @@ export default function InvoicesPage() {
                 />
               </div>
 
-              <button
-                onClick={() => setIsAddModalOpen(true)}
-                className="flex items-center gap-2 rounded-[18px] bg-[#4b2f1a] px-6 py-3 text-[1.05rem] font-bold text-white"
-              >
-                <PlusCircleIcon className="h-5 w-5" />
-                <span>{t('invoices.addNew')}</span>
-              </button>
+              <div className="flex items-center gap-3">
+                <button
+                  onClick={() => setIsAddModalOpen(true)}
+                  className="flex flex-1 items-center justify-center gap-2 rounded-[18px] bg-[#4b2f1a] px-5 py-3 text-sm font-bold text-white sm:text-[1.05rem] sm:px-6"
+                >
+                  <PlusCircleIcon className="h-5 w-5" />
+                  <span>{t('invoices.addNew')}</span>
+                </button>
 
-              <button
-                onClick={() => router.push(`/${locale}/dashboard`)}
-                className="rounded-full text-[#4b2f1a] transition hover:text-[#2d1a12]"
-                aria-label="Back"
-              >
-                <ArrowLeftCircleIcon className="h-11 w-11" />
-              </button>
+                <button
+                  onClick={() => router.push(`/${locale}/dashboard`)}
+                  className="rounded-full text-[#4b2f1a] transition hover:text-[#2d1a12]"
+                  aria-label="Back"
+                >
+                  <ArrowLeftCircleIcon className="h-10 w-10 sm:h-11 sm:w-11" />
+                </button>
+              </div>
             </div>
           </div>
 
-          <div className="grid grid-cols-4 gap-5">
+          <div className="grid grid-cols-1 gap-5 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
             {mockInvoices.concat(mockInvoices).map((invoice, index) => (
               <article
                 key={`${invoice.id}-${index}`}
@@ -128,7 +130,7 @@ export default function InvoicesPage() {
                   </button>
                 </div>
 
-                <h2 className="mb-5 text-center text-[2rem] font-bold text-[#4a2f1e]">{invoice.productName}</h2>
+                <h2 className="mb-5 text-center text-2xl font-bold text-[#4a2f1e] sm:text-[2rem]">{invoice.productName}</h2>
 
                 <div className="space-y-4 text-[1.05rem] text-[#3b2a24]">
                   {[

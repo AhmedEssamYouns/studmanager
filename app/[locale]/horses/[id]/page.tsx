@@ -45,22 +45,24 @@ export default function HorseProfilePage({
     <MainLayout>
       <div className={`min-h-screen pb-12 ${isRTL ? "text-right" : "text-left"}`}>
         {/* Back Button */}
-        <Link
-          href={`/horses`}
-          className="inline-flex items-center gap-2 mb-6 text-amber-900 hover:text-amber-800 transition-colors"
-        >
-          {isRTL ? (
-            <>
-              {t("common.back")}
-              <ChevronRight className="w-5 h-5" />
-            </>
-          ) : (
-            <>
-              <ChevronLeft className="w-5 h-5" />
-              {t("common.back")}
-            </>
-          )}
-        </Link>
+        <div className="px-2 sm:px-0">
+          <Link
+            href={`/horses`}
+            className="inline-flex items-center gap-2 mb-6 text-amber-900 hover:text-amber-800 transition-colors"
+          >
+            {isRTL ? (
+              <>
+                {t("common.back")}
+                <ChevronRight className="w-5 h-5" />
+              </>
+            ) : (
+              <>
+                <ChevronLeft className="w-5 h-5" />
+                {t("common.back")}
+              </>
+            )}
+          </Link>
+        </div>
 
         {/* Profile Header */}
         <HorseProfileHeader horse={mockHorseDetail} />
