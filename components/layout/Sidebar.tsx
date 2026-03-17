@@ -9,9 +9,7 @@ import {
   DashboardIcon,
   DatabaseIcon,
   ExpensesIcon,
-  MedicalIcon,
   NewsIcon,
-  NutritionIcon,
   RevenueIcon,
 } from './AppIcons';
 
@@ -65,9 +63,21 @@ function SidebarItem({ item, isActive, href }: SidebarItemProps) {
           />
         );
       case 'health':
-        return <MedicalIcon className={iconClassName} />;
+        return (
+          <img
+            src={isActive ? '/health/active-tab.svg' : '/health/tab.svg'}
+            alt=""
+            className="h-5 w-5 flex-shrink-0"
+          />
+        );
       case 'nutrition':
-        return <NutritionIcon className={iconClassName} />;
+        return (
+          <img
+            src={isActive ? '/nutrition/acitve.svg' : '/nutrition/not-active.svg'}
+            alt=""
+            className="h-5 w-5 flex-shrink-0"
+          />
+        );
       case 'expenses':
         return <ExpensesIcon className={iconClassName} />;
       case 'reports':
@@ -88,18 +98,21 @@ function SidebarItem({ item, isActive, href }: SidebarItemProps) {
   return (
     <Link href={href} className="block">
       <div
-        className={`relative flex items-center gap-4 rounded-2xl px-4 py-3.5 transition-all duration-300 ${
-          direction === 'rtl' ? 'flex-row-reverse justify-end text-right' : 'justify-start'
-        } ${
-          isActive
+        className={`relative flex items-center gap-4 rounded-2xl px-4 py-3.5 transition-all duration-300 ${direction === 'rtl'
+            ? 'flex-row-reverse justify-end text-right'
+            : 'flex-row justify-start text-left'
+          } ${isActive
             ? 'bg-[#f5efbb] text-[#241a17] shadow-[0_10px_24px_rgba(107,77,41,0.08)]'
             : 'text-[#2b2330] hover:bg-[#f8efe7]'
-        }`}
+          }`}
       >
+        {direction !== 'rtl' && <span>{renderIcon()}</span>}
+
         <span className="text-sm font-semibold sm:text-[1.02rem]">
           {t(`sidebar.${item.key}`)}
         </span>
-        <span>{renderIcon()}</span>
+
+        {direction === 'rtl' && <span>{renderIcon()}</span>}
       </div>
     </Link>
   );
@@ -116,15 +129,14 @@ export function Sidebar({ open = true, onClose }: SidebarProps) {
 
   return (
     <aside
-      className={`fixed top-16 z-20 h-[calc(100vh-4rem)] w-[17.5rem] overflow-y-auto rounded-[28px] bg-white px-4 py-6 shadow-[0_20px_40px_rgba(96,56,23,0.08)] transition-all duration-300 md:top-8 md:px-5 ${
-        direction === 'rtl'
+      className={`fixed top-16 z-20 h-[calc(100vh-4rem)] w-[17.5rem] overflow-y-auto rounded-[28px] bg-white px-4 py-6 shadow-[0_20px_40px_rgba(96,56,23,0.08)] transition-all duration-300 md:top-8 md:px-5 ${direction === 'rtl'
           ? open
             ? 'right-0 md:right-10'
             : '-right-[19.5rem] md:right-10'
           : open
             ? 'left-0 md:left-10'
             : '-left-[19.5rem] md:left-10'
-      } md:translate-x-0`}
+        } md:translate-x-0`}
     >
       <div className="mb-8 flex justify-center">
         <img src="/brand/logo.svg" alt="StudManager" className="h-12 w-auto object-contain sm:h-16" />
@@ -136,11 +148,7 @@ export function Sidebar({ open = true, onClose }: SidebarProps) {
           const isActive = pathname === href || pathname === `/${locale}/${item.key}/`;
           return (
             <div key={item.key} onClick={onClose}>
-              <SidebarItem
-                item={item}
-                isActive={isActive}
-                href={href}
-              />
+              <SidebarItem item={item} isActive={isActive} href={href} />
             </div>
           );
         })}

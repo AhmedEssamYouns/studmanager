@@ -6,6 +6,7 @@ import { useLocale } from '@/lib/locale-context';
 import { TeamMemberModal } from './TeamMemberModal';
 import { TeamMembersTable } from './TeamMembersTable';
 import { emptyMemberForm, initialMembers, type Member, type MemberFormState } from './types';
+import { ListCheck } from 'lucide-react';
 
 export function TeamPageContent() {
   const { direction } = useLocale();
@@ -70,18 +71,16 @@ export function TeamPageContent() {
           <div className="flex items-center gap-5">
             <div className="relative w-[24rem] max-w-full">
               <SearchIcon
-                className={`absolute top-1/2 h-5 w-5 -translate-y-1/2 text-[#5a473d] ${
-                  direction === 'rtl' ? 'right-4' : 'left-4'
-                }`}
+                className={`absolute top-1/2 h-5 w-5 -translate-y-1/2 text-[#5a473d] ${direction === 'rtl' ? 'right-4' : 'left-4'
+                  }`}
               />
               <input
                 type="search"
                 value={query}
                 onChange={(e) => setQuery(e.target.value)}
                 placeholder="البحث"
-                className={`h-11 w-full rounded-2xl border border-[#ece2da] bg-white text-sm text-[#2c2330] outline-none transition placeholder:text-[#d9cfc5] focus:border-[#5a3b25] focus:ring-2 focus:ring-[#5a3b25]/10 ${
-                  direction === 'rtl' ? 'pr-12 text-right' : 'pl-12 text-left'
-                }`}
+                className={`h-11 w-full rounded-2xl border border-[#ece2da] bg-white text-sm text-[#2c2330] outline-none transition placeholder:text-[#d9cfc5] focus:border-[#5a3b25] focus:ring-2 focus:ring-[#5a3b25]/10 ${direction === 'rtl' ? 'pr-12 text-right' : 'pl-12 text-left'
+                  }`}
               />
             </div>
 
@@ -94,7 +93,7 @@ export function TeamPageContent() {
             </button>
 
             <button className="flex items-center gap-2 rounded-[18px] bg-[#4b2f1a] px-6 py-3 text-[1.05rem] font-bold text-white">
-              <img src="/svgs/copy.svg" alt="" className="h-5 w-5" />
+              <ListCheck className="h-5 w-5" />
               <span>المهام</span>
             </button>
           </div>

@@ -2,6 +2,7 @@
 
 import { FC } from 'react';
 import Image from 'next/image';
+import Link from 'next/link';
 import { useLocale, useTranslation } from '@/lib/locale-context';
 
 interface Horse {
@@ -85,12 +86,12 @@ export const HorseCard: FC<HorseCardProps> = ({
         </div>
 
         {/* Button */}
-        <button
-          onClick={() => onViewDetails?.(horse.id)}
-          className="w-full border-2 border-[#3b2314] text-[#3b2314] py-3 rounded-full font-semibold hover:bg-[#3b2314] hover:text-white transition-all duration-300"
+        <Link
+          href={`/${locale}/horses/${horse.id}`}
+          className="block w-full border-2 border-[#3b2314] text-[#3b2314] py-3 rounded-full font-semibold hover:bg-[#3b2314] hover:text-white transition-all duration-300 text-center"
         >
           {t('horses.viewDetails')}
-        </button>
+        </Link>
       </div>
     </div>
   );

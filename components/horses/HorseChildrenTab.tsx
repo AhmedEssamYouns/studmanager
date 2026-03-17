@@ -1,0 +1,101 @@
+"use client";
+
+import { FC, useState } from "react";
+import { useLocale } from "@/lib/locale-context";
+
+interface HorseChildrenTabProps {
+  horse?: any;
+}
+
+const DUMMY_CHILDREN = Array.from({ length: 15 }).map((_, i) => ({
+  id: i,
+  name: "اسم الخيل",
+  birthDate: "19/9/1999",
+  type: i % 3 === 0 ? "أنثى" : "ذكر",
+  father: "اسم الأب",
+  mother: "اسم الأم",
+}));
+
+export const HorseChildrenTab: FC<HorseChildrenTabProps> = () => {
+  const { direction } = useLocale();
+  const isRTL = direction === "rtl";
+  const [currentPage, setCurrentPage] = useState(1);
+
+  return (
+    <div className={`mb-12 ${isRTL ? "text-right" : "text-left"}`}>
+      
+      <div className={`flex justify-between items-center mb-6`}>
+        <h2 className="text-2xl font-bold text-[#2a2a2a]">
+          {isRTL ? "الأبناء" : "Children"}
+        </h2>
+      </div>
+      
+      {/* Search Bar */}
+      <div className={`flex ${isRTL ? "justify-end" : "justify-start"} mb-6`}>
+        <div className="relative w-full max-w-sm">
+          <input 
+            type="text" 
+            className={`w-full border border-gray-200 rounded-xl py-2 px-4 outline-none focus:border-amber-900 ${isRTL ? "pl-10" : "pr-10"}`}
+            placeholder={isRTL ? "البحث" : "Search"}
+          />
+          <div className={`absolute top-1/2 -translate-y-1/2 ${isRTL ? "left-3" : "right-3"}`}>
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="gray" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+              <circle cx="11" cy="11" r="8" />
+              <line x1="21" y1="21" x2="16.65" y2="16.65" />
+            </svg>
+          </div>
+        </div>
+      </div>
+
+      {/* Table */}
+      <div className="bg-white rounded-2xl shadow-sm border border-gray-100 overflow-hidden">
+        <div className="overflow-x-auto">
+          <table className="w-full text-sm text-center">
+            <thead className="bg-[#3d2a1b] text-white">
+              <tr>
+                <th className="py-4 px-6 font-semibold">{isRTL ? "الإسم" : "Name"}</th>
+                <th className="py-4 px-6 font-semibold">{isRTL ? "تاريخ الميلاد" : "Birth Date"}</th>
+                <th className="py-4 px-6 font-semibold">{isRTL ? "النوع" : "Gender"}</th>
+                <th className="py-4 px-6 font-semibold">{isRTL ? "الأب" : "Father"}</th>
+                <th className="py-4 px-6 font-semibold">{isRTL ? "الأم" : "Mother"}</th>
+              </tr>
+            </thead>
+            <tbody>
+              {DUMMY_CHILDREN.map((child, idx) => (
+                <tr key={child.id} className={idx % 2 === 0 ? "bg-white" : "bg-gray-50/50"}>
+                  <td className="py-4 px-6 border-b border-gray-100">{child.name}</td>
+                  <td className="py-4 px-6 border-b border-gray-100">{child.birthDate}</td>
+                  <td className="py-4 px-6 border-b border-gray-100">{child.type}</td>
+                  <td className="py-4 px-6 border-b border-gray-100">{child.father}</td>
+                  <td className="py-4 px-6 border-b border-gray-100">{child.mother}</td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+      {/* Pagination */}
+      <div className="flex justify-center mt-8 gap-2">
+        <button className="w-8 h-8 flex items-center justify-center rounded-full border border-gray-300 text-gray-500 hover:bg-gray-50">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className={isRTL ? "rotate-180" : ""}>
+            <polyline points="15 18 9 12 15 6" />
+          </svg>
+        </button>
+        <button className="w-8 h-8 flex items-center justify-center rounded-full bg-[#3d2a1b] text-white">1</button>
+        <button className="w-8 h-8 flex items-center justify-center rounded-full border border-gray-300 text-gray-700 hover:bg-gray-50">2</button>
+        <button className="w-8 h-8 flex items-center justify-center rounded-full border border-gray-300 text-gray-700 hover:bg-gray-50">3</button>
+        <button className="w-8 h-8 flex items-center justify-center rounded-full border border-gray-300 text-gray-700 hover:bg-gray-50">4</button>
+        <button className="w-8 h-8 flex items-center justify-center rounded-full border border-gray-300 text-gray-700 hover:bg-gray-50">5</button>
+        <span className="flex items-center justify-center w-8 h-8 text-gray-500">...</span>
+        <button className="w-8 h-8 flex items-center justify-center rounded-full border border-gray-300 text-gray-700 hover:bg-gray-50">32</button>
+        <button className="w-8 h-8 flex items-center justify-center rounded-full border border-gray-300 text-gray-500 hover:bg-gray-50">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className={isRTL ? "rotate-180" : ""}>
+            <polyline points="9 18 15 12 9 6" />
+          </svg>
+        </button>
+      </div>
+
+    </div>
+  );
+};

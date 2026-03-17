@@ -1,7 +1,7 @@
 'use client';
 
 import Link from 'next/link';
-import React, { useEffect, useState } from 'react';
+import React from 'react';
 import { useLocale } from '@/lib/locale-context';
 import { MainLayout } from '@/components/layout/MainLayout';
 import { SplashScreen } from '@/components/common/SplashScreen';
@@ -186,10 +186,10 @@ export default function DashboardPage() {
 
               <div className="flex items-center gap-2 text-[#4b2f1a] sm:gap-3">
                 <button className="flex h-7 w-7 items-center justify-center rounded-full border border-[#4b2f1a] text-lg sm:h-9 sm:w-9 sm:text-xl">
-                  ›
+                  {direction === 'rtl' ? '‹':'›'}
                 </button>
                 <button className="flex h-7 w-7 items-center justify-center rounded-full border border-[#4b2f1a] text-lg sm:h-9 sm:w-9 sm:text-xl">
-                  ‹
+                                  {direction === 'rtl' ? '›':'‹'}
                 </button>
               </div>
             </div>
