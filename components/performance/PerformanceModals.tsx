@@ -14,7 +14,7 @@ interface PerformanceModalsProps {
   categoryTitle?: string;
 }
 
-export const PerformanceModals = ({ isOpen, type, onClose, recordData, categoryTitle }: PerformanceModalsProps) => {
+export const PerformanceModals = ({ isOpen, type, onClose, recordData: _recordData, categoryTitle }: PerformanceModalsProps) => {
   const { direction } = useLocale();
 
   if (!isOpen || !type) return null;

@@ -13,7 +13,14 @@
     "success": "Successful",
     "language": "Language",
     "english": "English",
-    "arabic": "العربية"
+    "arabic": "العربية",
+    "actions": "Actions",
+    "addNewRecord": "Add New Record",
+    "deleteRecord": "Delete Record?",
+    "deleteRecordMsg": "You will not be able to recover this record",
+    "deleteSelected": "Delete Selected Items?",
+    "deleteSelectedMsg": "You will not be able to recover the deleted data",
+    "dragAndDrop": "Drag & Drop"
   },
   "sidebar": {
     "dashboard": "Dashboard",
@@ -55,6 +62,72 @@
     "title": "Page not found",
     "subtitle": "The page you are looking for doesn't exist.",
     "backHome": "Back to dashboard"
+  },
+  "contacts": {
+    "title": "Contacts",
+    "addNew": "Add New Contact",
+    "name": "Name",
+    "phone": "Phone Number",
+    "account": "Account",
+    "group": "Group",
+    "username": "Username",
+    "editUser": "Edit User",
+    "friends": "Friends",
+    "clients": "Clients",
+    "project": "Project",
+    "teamGroup": "Team"
+  },
+  "news": {
+    "title": "News",
+    "addFarm": "New Farm Added",
+    "newFestival": "New Festival"
+  },
+  "calendar": {
+    "title": "Calendar & Events",
+    "event": "Event",
+    "month": "Month",
+    "week": "Week",
+    "day": "Day",
+    "eventName": "Event Name"
+  },
+  "reports": {
+    "title": "Reports",
+    "horses": "Horses",
+    "housing": "Housing",
+    "total": "Total",
+    "available": "Available",
+    "occupied": "Occupied",
+    "healthCare": "Health Care",
+    "underTreatment": "Under Treatment",
+    "healthy": "Healthy",
+    "reproduction": "Reproduction",
+    "successRate": "Success Rate",
+    "revenue": "Revenue",
+    "expenses": "Expenses",
+    "stallions": "Stallions",
+    "mares": "Mares",
+    "colts": "Colts",
+    "fillies": "Fillies",
+    "pregnantMares": "Pregnant Mares",
+    "nonPregnantMares": "Non-Pregnant Mares"
+  },
+  "performance": {
+    "title": "Performance",
+    "trainings": "Trainings",
+    "competitions": "Competitions",
+    "haircut": "Haircut",
+    "horseName": "Horse Name",
+    "trainerName": "Trainer Name",
+    "trainerNumber": "Trainer Number",
+    "trainingType": "Training Type",
+    "duration": "Training Duration",
+    "date": "Training Date",
+    "cost": "Cost",
+    "addTrainingRecord": "Add New Training Record",
+    "editTrainingRecord": "Edit Training Record",
+    "selectHorse": "Select Horse",
+    "followUpNumber": "Follow-up Number",
+    "notifyMe": "Notify Me On"
   },
   "invoices": {
     "title": "Invoices",
@@ -129,5 +202,26 @@
     "invalidEmail": "Invalid email address",
     "minLength": "Minimum length is {min}",
     "maxLength": "Maximum length is {max}"
+  },
+  "settings": {
+    "title": "Basic Settings",
+    "housing": "Housing",
+    "bloodTest": "Blood Test",
+    "wormDose": "Worm Dose",
+    "hoofLegCare": "Hoof & Leg Care",
+    "injuries": "Injuries",
+    "medicalCare": "Medical Care",
+    "numPlaces": "Number of Places",
+    "numHorses": "Number of Horses",
+    "labName": "Lab Name",
+    "sampleReason": "Sample Reason",
+    "followUpNumber": "Follow-up Number",
+    "doseType": "Dose Type",
+    "doseResponsible": "Responsible Person",
+    "farrierName": "Farrier Name",
+    "shoeingType": "Shoeing/Feed Type",
+    "injuryName": "Injury Name",
+    "conditionName": "Condition Name",
+    "careType": "Care Type"
   }
 }

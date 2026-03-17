@@ -1,7 +1,6 @@
 "use client";
 
 import { FC } from "react";
-import Image from "next/image";
 import { useLocale } from "@/lib/locale-context";
 
 interface HorsePhotosTabProps {

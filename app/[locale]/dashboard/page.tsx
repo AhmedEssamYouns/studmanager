@@ -4,7 +4,6 @@ import Link from 'next/link';
 import React from 'react';
 import { useLocale } from '@/lib/locale-context';
 import { MainLayout } from '@/components/layout/MainLayout';
-import { SplashScreen } from '@/components/common/SplashScreen';
 
 const stats = [
   {
@@ -65,15 +64,11 @@ export default function DashboardPage() {
 
   const [activeView, setActiveView] = React.useState<'day' | 'week' | 'month'>('month');
 
-  
-
   const viewTabs = [
     { key: 'day', label: 'يوم' },
     { key: 'week', label: 'أسبوع' },
     { key: 'month', label: 'شهر' },
   ] as const;
-  const tabIndex = viewTabs.findIndex((tab) => tab.key === activeView);
-  const sliderStyle = direction === 'rtl' ? { right: `${tabIndex * 33.333}%` } : { left: `${tabIndex * 33.333}%` };
 
   return (
     <MainLayout>
@@ -159,17 +154,13 @@ export default function DashboardPage() {
 
           <article className="order-1 rounded-[16px] bg-white p-4 shadow-[0_16px_36px_rgba(94,56,23,0.05)] sm:rounded-[28px] sm:p-6 lg:order-2">
             <div className="mb-4 flex flex-col gap-3 sm:mb-5 sm:flex-row sm:items-center sm:justify-between">
-              <div className="relative flex items-center gap-1 rounded-xl border border-[#4b2f1a] p-0.5 text-xs font-semibold text-[#4b2f1a] sm:gap-0 sm:text-sm">
-                <span
-                  className="absolute top-0.5 bottom-0.5 w-[calc(33.333%-2px)] rounded-[10px] bg-[#4b2f1a] transition-all duration-300 ease-out"
-                  style={sliderStyle}
-                />
+              <div className="flex items-center rounded-xl border border-[#4b2f1a] overflow-hidden text-xs font-semibold sm:text-sm">
                 {viewTabs.map((tab) => (
                   <button
                     key={tab.key}
                     onClick={() => setActiveView(tab.key)}
-                    className={`relative z-10 min-w-[3rem] px-2 py-1 transition-colors duration-300 sm:min-w-[4.35rem] sm:px-4 sm:py-1.5 ${
-                      activeView === tab.key ? 'text-white' : 'text-[#4b2f1a]'
+                    className={`min-w-[3rem] px-2 py-1.5 sm:min-w-[4.35rem] sm:px-4 sm:py-2 ${
+                      activeView === tab.key ? 'bg-[#4b2f1a] text-white' : 'text-[#4b2f1a] hover:bg-[#f5efbb]'
                     }`}
                   >
                     {tab.label}

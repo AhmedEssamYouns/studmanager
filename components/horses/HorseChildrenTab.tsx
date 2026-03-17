@@ -1,6 +1,6 @@
 "use client";
 
-import { FC, useState } from "react";
+import { FC } from "react";
 import { useLocale } from "@/lib/locale-context";
 
 interface HorseChildrenTabProps {
@@ -19,7 +19,6 @@ const DUMMY_CHILDREN = Array.from({ length: 15 }).map((_, i) => ({
 export const HorseChildrenTab: FC<HorseChildrenTabProps> = () => {
   const { direction } = useLocale();
   const isRTL = direction === "rtl";
-  const [currentPage, setCurrentPage] = useState(1);
 
   return (
     <div className={`mb-12 ${isRTL ? "text-right" : "text-left"}`}>

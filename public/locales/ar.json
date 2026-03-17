@@ -13,7 +13,14 @@
     "success": "تم بنجاح",
     "language": "اللغة",
     "english": "English",
-    "arabic": "العربية"
+    "arabic": "العربية",
+    "actions": "الإجراءات",
+    "addNewRecord": "إضافة سجل جديد",
+    "deleteRecord": "حذف السجل؟",
+    "deleteRecordMsg": "لن تتمكن من استعادة هذا السجل",
+    "deleteSelected": "حذف العناصر المحددة؟",
+    "deleteSelectedMsg": "لن تتمكن من استعادة البيانات المحذوفة",
+    "dragAndDrop": "اسحب و أفلت"
   },
   "sidebar": {
     "dashboard": "لوحة التحكم",
@@ -55,6 +62,72 @@
     "title": "الصفحة غير موجودة",
     "subtitle": "الصفحة التي تبحث عنها غير موجودة.",
     "backHome": "العودة إلى لوحة التحكم"
+  },
+  "contacts": {
+    "title": "جهات الاتصال",
+    "addNew": "إضافة جهة اتصال جديدة",
+    "name": "الاسم",
+    "phone": "رقم الهاتف",
+    "account": "الحساب",
+    "group": "المجموعة",
+    "username": "اسم المستخدم",
+    "editUser": "تعديل المستخدم",
+    "friends": "الأصدقاء",
+    "clients": "العملاء",
+    "project": "المشروع",
+    "teamGroup": "الفريق"
+  },
+  "news": {
+    "title": "الأخبار",
+    "addFarm": "اضافة مزرعة جديدة",
+    "newFestival": "مهرجان جديد"
+  },
+  "calendar": {
+    "title": "التقويم و الأحداث",
+    "event": "الحدث",
+    "month": "شهر",
+    "week": "أسبوع",
+    "day": "يوم",
+    "eventName": "اسم العنصر"
+  },
+  "reports": {
+    "title": "التقارير",
+    "horses": "الخيل",
+    "housing": "الإيواء",
+    "total": "الإجمالي",
+    "available": "متاح",
+    "occupied": "مشغول",
+    "healthCare": "الرعاية الطبية",
+    "underTreatment": "يتلقى العلاج",
+    "healthy": "سليم",
+    "reproduction": "التناسليات",
+    "successRate": "نسبة النجاح",
+    "revenue": "الإيرادات",
+    "expenses": "المصروفات",
+    "stallions": "الفحول",
+    "mares": "الأفراس",
+    "colts": "المهر",
+    "fillies": "المهرة",
+    "pregnantMares": "عدد القهرة العشر",
+    "nonPregnantMares": "عدد القهرة غير عشر"
+  },
+  "performance": {
+    "title": "الأداء",
+    "trainings": "التدريبات",
+    "competitions": "المسابقات",
+    "haircut": "قص الشعر",
+    "horseName": "اسم الخيل",
+    "trainerName": "اسم المدرب",
+    "trainerNumber": "رقم المدرب",
+    "trainingType": "نوع التدريب",
+    "duration": "مدة التدريب",
+    "date": "تاريخ التدريب",
+    "cost": "التكلفة",
+    "addTrainingRecord": "اضافة سجل جديد للتدريبات",
+    "editTrainingRecord": "تعديل سجل التدريبات",
+    "selectHorse": "اختر الخيل",
+    "followUpNumber": "رقم المتابعة",
+    "notifyMe": "أخطرني في"
   },
   "invoices": {
     "title": "الفواتير",

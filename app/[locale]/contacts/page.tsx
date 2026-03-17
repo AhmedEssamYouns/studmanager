@@ -34,21 +34,21 @@ export default function ContactsPage() {
 
   return (
     <MainLayout>
-      <div className={`p-6 max-w-[1400px] mx-auto ${isRTL ? "text-right font-cairo" : "text-left"}`} dir={direction}>
-        <div className="bg-white rounded-3xl p-6 shadow-sm">
+      <div className={`p-3 sm:p-6 max-w-[1400px] mx-auto ${isRTL ? "text-right font-cairo" : "text-left"}`} dir={direction}>
+        <div className="bg-white rounded-2xl sm:rounded-3xl p-4 sm:p-6 shadow-sm">
           {/* Header */}
-          <div className="flex flex-col md:flex-row justify-between items-center mb-6 gap-4">
-            <h2 className="text-xl font-bold text-[#3b2b20]">جهات الاتصال</h2>
-            <div className="flex flex-1 w-full max-w-xl items-center gap-3">
-              <div className="relative flex-1">
+          <div className="flex flex-col gap-3 mb-6">
+            <h2 className="text-lg sm:text-xl font-bold text-[#3b2b20]">جهات الاتصال</h2>
+            <div className="flex flex-wrap items-center gap-2 sm:gap-3">
+              <div className="relative flex-1 min-w-[150px]">
                 <input type="text" placeholder="البحث" className="w-full bg-white border border-gray-200 rounded-xl px-4 py-2.5 text-sm outline-none focus:border-[#4b2f1a] transition-colors pr-10" />
                 <Search className="absolute right-3 top-1/2 -translate-y-1/2 w-4 h-4 text-gray-400" />
               </div>
-              <button onClick={() => openModal("add")} className="bg-[#3b2b20] text-white px-5 py-2.5 rounded-xl font-semibold text-sm flex items-center gap-2 hover:bg-[#2e2119] transition-colors whitespace-nowrap">
-                <span className="text-lg leading-none">+</span> إضافة جهة اتصال جديدة
+              <button onClick={() => openModal("add")} className="bg-[#3b2b20] text-white px-3 sm:px-5 py-2.5 rounded-xl font-semibold text-xs sm:text-sm flex items-center gap-1 sm:gap-2 hover:bg-[#2e2119] transition-colors whitespace-nowrap">
+                <span className="text-lg leading-none">+</span> <span className="hidden sm:inline">إضافة جهة اتصال جديدة</span><span className="sm:hidden">إضافة</span>
               </button>
-              <button className="p-2.5 bg-gray-100 rounded-xl hover:bg-gray-200 transition-colors"><Trash2 className="w-5 h-5 text-gray-600" /></button>
-              <button className="p-2.5 bg-gray-100 rounded-xl hover:bg-gray-200 transition-colors"><Download className="w-5 h-5 text-gray-600" /></button>
+              <button className="p-2 sm:p-2.5 bg-gray-100 rounded-xl hover:bg-gray-200 transition-colors"><Trash2 className="w-4 h-4 sm:w-5 sm:h-5 text-gray-600" /></button>
+              <button className="p-2 sm:p-2.5 bg-gray-100 rounded-xl hover:bg-gray-200 transition-colors"><Download className="w-4 h-4 sm:w-5 sm:h-5 text-gray-600" /></button>
             </div>
           </div>
 

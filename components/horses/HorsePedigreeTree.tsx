@@ -12,7 +12,7 @@ interface HorsePedigreeTreeProps {
   horse: Horse;
 }
 
-export const HorsePedigreeTree: FC<HorsePedigreeTreeProps> = ({ horse }) => {
+export const HorsePedigreeTree: FC<HorsePedigreeTreeProps> = ({ horse: _horse }) => {
   const { direction } = useLocale();
   const isRTL = direction === "rtl";
 

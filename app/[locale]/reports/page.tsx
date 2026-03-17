@@ -14,7 +14,7 @@ export default function ReportsPage() {
   return (
     <MainLayout>
       <div className={`p-6 max-w-[1400px] mx-auto space-y-5 ${isRTL ? "text-right font-cairo" : "text-left"}`} dir={direction}>
-        <h1 className="text-2xl font-bold text-[#3b2b20] text-center mb-2">التقارير</h1>
+        <h1 className="text-2xl font-bold text-[#3b2b20] text-start mb-2">التقارير</h1>
 
         {/* Row 1: Horses Pie + Housing Bar */}
         <HorsesOverviewCard />

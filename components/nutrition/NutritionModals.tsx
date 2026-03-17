@@ -14,7 +14,7 @@ interface NutritionModalsProps {
   categoryTitle?: string;
 }
 
-export const NutritionModals = ({ isOpen, type, onClose, recordData, categoryTitle }: NutritionModalsProps) => {
+export const NutritionModals = ({ isOpen, type, onClose, recordData: _recordData, categoryTitle }: NutritionModalsProps) => {
   const { direction } = useLocale();
 
   if (!isOpen || !type) return null;

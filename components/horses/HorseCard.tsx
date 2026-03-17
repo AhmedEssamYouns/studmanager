@@ -18,14 +18,12 @@ interface Horse {
 
 interface HorseCardProps {
   horse: Horse;
-  onViewDetails?: (id: string) => void;
   onEdit?: (id: string) => void;
   onDelete?: (id: string) => void;
 }
 
 export const HorseCard: FC<HorseCardProps> = ({
   horse,
-  onViewDetails,
 }) => {
   const { t } = useTranslation();
   const { direction, locale } = useLocale();

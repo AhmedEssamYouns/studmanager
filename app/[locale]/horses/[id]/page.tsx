@@ -31,7 +31,7 @@ const mockHorseDetail = {
 };
 
 export default function HorseProfilePage({
-  params,
+  params: _params,
 }: {
   params: { locale: string; id: string };
 }) {

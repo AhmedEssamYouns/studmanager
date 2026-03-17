@@ -10,7 +10,6 @@ import {
   TrashIcon,
 } from '@/components/layout/AppIcons';
 import { MainLayout } from '@/components/layout/MainLayout';
-import { TopBar } from '@/components/layout/TopBar';
 import { useLocale, useTranslation } from '@/lib/locale-context';
 import { useState } from 'react';
 
