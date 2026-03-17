@@ -92,7 +92,7 @@ export default function DashboardPage() {
             </h2>
             <Link
               href={`/${locale}/invoices`}
-              className="inline-flex rounded-full bg-[#4b2f1a] px-4 py-2 text-xs font-semibold text-white transition hover:bg-[#3f2616] sm:px-6 sm:text-sm"
+              className="inline-flex w-fit rounded-full bg-[#4b2f1a] px-4 py-2 text-xs font-semibold text-white transition hover:bg-[#3f2616] sm:px-6 sm:text-sm"
             >
               الفواتير
             </Link>
@@ -154,7 +154,7 @@ export default function DashboardPage() {
 
           <article className="order-1 rounded-[16px] bg-white p-4 shadow-[0_16px_36px_rgba(94,56,23,0.05)] sm:rounded-[28px] sm:p-6 lg:order-2">
             <div className="mb-4 flex flex-col gap-3 sm:mb-5 sm:flex-row sm:items-center sm:justify-between">
-              <div className="flex items-center rounded-xl border border-[#4b2f1a] overflow-hidden text-xs font-semibold sm:text-sm">
+              <div className="flex w-fit items-center rounded-xl border border-[#4b2f1a] overflow-hidden text-xs font-semibold sm:text-sm">
                 {viewTabs.map((tab) => (
                   <button
                     key={tab.key}
