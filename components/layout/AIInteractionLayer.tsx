@@ -2,7 +2,6 @@
 
 import { useState, useEffect } from 'react';
 import Image from 'next/image';
-import { useLocale } from '@/lib/locale-context';
 import { X } from 'lucide-react';
 
 const AI_CATEGORIES = [
@@ -14,7 +13,6 @@ const AI_CATEGORIES = [
 ];
 
 export function AIInteractionLayer() {
-  const { direction } = useLocale();
   const [isOpen, setIsOpen] = useState(false);
   const [isMounted, setIsMounted] = useState(false);
   const [showFlash, setShowFlash] = useState(false);
