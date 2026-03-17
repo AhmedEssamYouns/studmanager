@@ -109,7 +109,11 @@
     "friends": "Friends",
     "clients": "Clients",
     "project": "Project",
-    "teamGroup": "Team"
+    "teamGroup": "Team",
+    "all": "All",
+    "vets": "Vets",
+    "suppliers": "Suppliers",
+    "others": "Others"
   },
   "team": {
     "title": "Team Management",
