@@ -77,7 +77,7 @@ function SidebarItem({ item, isActive, href }: SidebarItemProps) {
       case 'performance':
         return (
           <img
-            src={isActive ? '/sidebar/الأداء-active.svg' : '/sidebar/الأداء.svg'}
+            src={isActive ? '/sidebar/%D8%A7%D9%84%D8%A3%D8%AF%D8%A7%D8%A1-active.svg' : '/sidebar/%D8%A7%D9%84%D8%A3%D8%AF%D8%A7%D8%A1.svg'}
             alt=""
             className="h-5 w-5 flex-shrink-0"
           />
@@ -85,7 +85,7 @@ function SidebarItem({ item, isActive, href }: SidebarItemProps) {
       case 'settings':
         return (
           <img
-            src={isActive ? '/sidebar/الإعدادات الأساسية-active.svg' : '/sidebar/الإعدادات الأساسية.svg'}
+            src={isActive ? '/sidebar/%D8%A7%D9%84%D8%A5%D8%B9%D8%AF%D8%A7%D8%AF%D8%A7%D8%AA%20%D8%A7%D9%84%D8%A3%D8%B3%D8%A7%D8%B3%D9%8A%D8%A9-active.svg' : '/sidebar/%D8%A7%D9%84%D8%A5%D8%B9%D8%AF%D8%A7%D8%AF%D8%A7%D8%AA%20%D8%A7%D9%84%D8%A3%D8%B3%D8%A7%D8%B3%D9%8A%D8%A9.svg'}
             alt=""
             className="h-5 w-5 flex-shrink-0"
           />
@@ -93,7 +93,7 @@ function SidebarItem({ item, isActive, href }: SidebarItemProps) {
       case 'expenses':
         return (
           <img
-            src="/sidebar/المصروفات.svg"
+            src="/sidebar/%D8%A7%D9%84%D9%85%D8%B5%D8%B1%D9%88%D9%81%D8%A7%D8%AA.svg"
             alt=""
             className="h-5 w-5 flex-shrink-0"
           />
@@ -101,7 +101,7 @@ function SidebarItem({ item, isActive, href }: SidebarItemProps) {
       case 'reports':
         return (
           <img
-            src="/sidebar/التقارير.svg"
+            src="/sidebar/%D8%A7%D9%84%D8%AA%D9%82%D8%A7%D8%B1%D9%8A%D8%B1.svg"
             alt=""
             className="h-5 w-5 flex-shrink-0"
           />
@@ -109,7 +109,7 @@ function SidebarItem({ item, isActive, href }: SidebarItemProps) {
       case 'contacts':
         return (
           <img
-            src="/sidebar/جهات الإتصال.svg"
+            src="/sidebar/%D8%AC%D9%87%D8%A7%D8%AA%20%D8%A7%D9%84%D8%A5%D8%AA%D8%B5%D8%A7%D9%84.svg"
             alt=""
             className="h-5 w-5 flex-shrink-0"
           />
@@ -117,7 +117,7 @@ function SidebarItem({ item, isActive, href }: SidebarItemProps) {
       case 'news':
         return (
           <img
-            src="/sidebar/الأخبار.svg"
+            src="/sidebar/%D8%A7%D9%84%D8%A3%D8%AE%D8%A8%D8%A7%D8%B1.svg"
             alt=""
             className="h-5 w-5 flex-shrink-0"
           />
@@ -125,7 +125,7 @@ function SidebarItem({ item, isActive, href }: SidebarItemProps) {
       case 'evaluations':
         return (
           <img
-            src="/sidebar/التقويم%20و%20الأحداث.svg"
+            src="/sidebar/%D8%A7%D9%84%D8%AA%D9%82%D9%88%D9%8A%D9%85%20%D9%88%20%D8%A7%D9%84%D8%A3%D8%AD%D8%AF%D8%A7%D8%AB.svg"
             alt=""
             className="h-5 w-5 flex-shrink-0"
           />
@@ -133,7 +133,7 @@ function SidebarItem({ item, isActive, href }: SidebarItemProps) {
       case 'reproduction':
         return (
           <img
-            src={isActive ? '/sidebar/التناسليات-active.svg' : '/sidebar/التناسليات.svg'}
+            src={isActive ? '/sidebar/%D8%A7%D9%84%D8%AA%D9%86%D8%A7%D8%B3%D9%84%D9%8A%D8%A7%D8%AA-active.svg' : '/sidebar/%D8%A7%D9%84%D8%AA%D9%86%D8%A7%D8%B3%D9%84%D9%8A%D8%A7%D8%AA.svg'}
             alt=""
             className="h-5 w-5 flex-shrink-0"
           />
@@ -141,7 +141,7 @@ function SidebarItem({ item, isActive, href }: SidebarItemProps) {
       case 'database':
         return (
           <img
-            src="/sidebar/قاعدة البيانات.svg"
+            src="/sidebar/%D9%82%D8%A7%D8%B9%D8%AF%D8%A9%20%D8%A7%D9%84%D8%A8%D9%8A%D8%A7%D9%86%D8%A7%D8%AA.svg"
             alt=""
             className="h-5 w-5 flex-shrink-0"
           />

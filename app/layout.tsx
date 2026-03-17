@@ -5,7 +5,18 @@ export const metadata: Metadata = {
   title: 'StudManager',
   description: 'Professional Invoice Management System',
   icons: {
-    icon: '/favicon.ico',
+    icon: [
+      { url: '/brand/icon.png', sizes: '1024x1024', type: 'image/png' },
+      { url: '/brand/icon.png', sizes: '32x32', type: 'image/png' },
+      { url: '/brand/icon.png', sizes: '16x16', type: 'image/png' },
+    ],
+  },
+  openGraph: {
+    images: '/brand/preview.png',
+  },
+  twitter: {
+    card: 'summary_large_image',
+    images: '/brand/preview.png',
   },
 };
 
