@@ -347,7 +347,7 @@ export const ExpensesModals = ({
         <div className="fixed inset-0 bg-black/40 z-50 flex items-center justify-center p-4 overflow-y-auto" dir={direction}>
             <div className="bg-white rounded-[28px] w-full max-w-5xl p-6 md:p-8 relative shadow-xl my-8 font-cairo">
                 <div
-                    className={`flex items-center mb-8 ${isRTL ? "flex-row-reverse justify-between" : "justify-between"
+                    className={`flex items-center mb-8 ${isRTL ? "flex-row-reverse justify-between" : "justify-between flex-row-reverse"
                         }`}
                 >
                     <button
@@ -375,7 +375,7 @@ export const ExpensesModals = ({
                 </div>
 
                 <div
-                    className={`flex items-center gap-4 ${isRTL ? "flex-row-reverse" : ""
+                    className={`flex items-center gap-4 ${isRTL ? "flex-row-reverse" : "flex-row-reverse"
                         }`}
                 >
                     <button
