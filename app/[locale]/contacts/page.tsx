@@ -3,7 +3,7 @@
 import { useState, useMemo } from 'react';
 import { MainLayout } from "@/components/layout/MainLayout";
 import { useLocale, useTranslation } from "@/lib/locale-context";
-import { Search, ChevronLeft, ChevronRight, Download, Trash2, Edit, PlusCircle } from "lucide-react";
+import { Search, ChevronLeft, ChevronRight, Download, Trash2, Edit, PlusCircle, MessageCircle } from "lucide-react";
 
 interface Contact {
   id: string;
@@ -28,11 +28,11 @@ export default function ContactsPage() {
   const [currentPage, setCurrentPage] = useState(1);
   
   const groups = [
-    { id: 'all', name: t('contacts.all') || 'الكل' },
-    { id: 'vets', name: t('contacts.vets') || 'أطباء' },
-    { id: 'suppliers', name: t('contacts.suppliers') || 'موردين' },
-    { id: 'clients', name: t('contacts.clients') || 'عملاء' },
-    { id: 'others', name: t('contacts.others') || 'آخرون' },
+    { id: 'all', name: t('contacts.all') !== 'contacts.all' ? t('contacts.all') : 'الكل' },
+    { id: 'vets', name: t('contacts.vets') !== 'contacts.vets' ? t('contacts.vets') : 'أطباء' },
+    { id: 'suppliers', name: t('contacts.suppliers') !== 'contacts.suppliers' ? t('contacts.suppliers') : 'موردين' },
+    { id: 'clients', name: t('contacts.clients') !== 'contacts.clients' ? t('contacts.clients') : 'عملاء' },
+    { id: 'others', name: t('contacts.others') !== 'contacts.others' ? t('contacts.others') : 'آخرون' },
   ];
 
   const filteredContacts = useMemo(() => {
@@ -117,7 +117,7 @@ export default function ContactsPage() {
                       <td className="px-6 py-5">
                         <div className="flex items-center justify-center gap-4 text-[#4b2f1a]">
                            <button className="transition hover:opacity-80 p-1.5" aria-label="WhatsApp">
-                            <img src="/svgs/whatsapp.svg" alt="" className="h-5 w-5" />
+                            <MessageCircle className="h-5 w-5" />
                           </button>
                           <span className="h-6 w-px bg-[#ece2da]" />
                           <button className="transition hover:opacity-80 p-1.5" aria-label="Edit">

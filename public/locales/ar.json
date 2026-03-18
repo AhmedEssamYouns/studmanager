@@ -109,7 +109,11 @@
     "friends": "الأصدقاء",
     "clients": "العملاء",
     "project": "المشروع",
-    "teamGroup": "الفريق"
+    "teamGroup": "الفريق",
+    "all": "الكل",
+    "vets": "أطباء",
+    "suppliers": "موردين",
+    "others": "آخرون"
   },
   "team": {
     "title": "إدارة الأعضاء",
