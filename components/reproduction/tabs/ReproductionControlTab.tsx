@@ -21,18 +21,15 @@ const dummyReproductionControlRows: ReproductionControlRow[] = Array.from({
 }));
 
 export default function ReproductionControlTab() {
-  const { locale, direction } = useLocale();
+  const { locale, direction, t } = useLocale();
   const isRTL = direction === "rtl";
 
   const [query, setQuery] = useState("");
   const [selectedIds, setSelectedIds] = useState<string[]>([]);
-
-  // NEW: keep rows in state (for add/edit)
   const [rows, setRows] = useState<ReproductionControlRow[]>(
     dummyReproductionControlRows,
   );
 
-  // NEW: modal state
   const [modalOpen, setModalOpen] = useState(false);
   const [modalMode, setModalMode] = useState<"add" | "edit">("add");
   const [editingRow, setEditingRow] = useState<ReproductionControlRow | null>(
@@ -62,21 +59,18 @@ export default function ReproductionControlTab() {
     else setSelectedIds(filtered.map((r) => r.id));
   }
 
-  // NEW
   function openAddModal() {
     setModalMode("add");
     setEditingRow(null);
     setModalOpen(true);
   }
 
-  // NEW
   function openEditModal(row: ReproductionControlRow) {
     setModalMode("edit");
     setEditingRow(row);
     setModalOpen(true);
   }
 
-  // NEW
   function handleModalSubmit(data: ReproductionControlRow) {
     if (modalMode === "add") {
       setRows((cur) => [{ ...data, id: String(Date.now()) }, ...cur]);
@@ -101,7 +95,7 @@ export default function ReproductionControlTab() {
             className="h-11 px-4 rounded-2xl bg-[#4b2f1a] text-white text-sm font-semibold flex items-center gap-2"
           >
             <span className="text-lg leading-none">＋</span>
-            {locale === "ar" ? "إضافة سجل جديد" : "Add new record"}
+            {t("common.addNewRecord")}
           </button>
 
           <button
@@ -112,12 +106,14 @@ export default function ReproductionControlTab() {
                 : "bg-[#d9534f] text-white"
             }`}
           >
-            {locale === "ar" ? "حذف" : "Delete"}
+            {t("common.delete")}
           </button>
 
           <button
             disabled={selectedIds.length === 0}
             className="h-11 px-4 rounded-2xl text-sm font-semibold flex items-center gap-2"
+            aria-label={t("common.download")}
+            title={t("common.download")}
           >
             <FaDownload className="h-8 w-6" color="#4b2f1a" />
           </button>
@@ -137,7 +133,7 @@ export default function ReproductionControlTab() {
             className={`w-full h-11 rounded-2xl border border-[#ece2da] bg-white text-sm outline-none ${
               isRTL ? "pr-10 text-right" : "pl-10 text-left"
             }`}
-            placeholder={locale === "ar" ? "البحث" : "Search"}
+            placeholder={t("common.search")}
           />
         </div>
       </div>

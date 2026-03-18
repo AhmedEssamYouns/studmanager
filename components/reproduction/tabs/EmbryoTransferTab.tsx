@@ -24,18 +24,15 @@ const dummyEmbryoTransferRows: EmbryoTransferRow[] = Array.from({
 }));
 
 export default function EmbryoTransferTab() {
-  const { locale, direction } = useLocale();
+  const { locale, direction, t } = useLocale();
   const isRTL = direction === "rtl";
 
   const [query, setQuery] = useState("");
   const [selectedIds, setSelectedIds] = useState<string[]>([]);
-
-  // keep rows in state (add/edit)
   const [rows, setRows] = useState<EmbryoTransferRow[]>(
     dummyEmbryoTransferRows,
   );
 
-  // modal state
   const [modalOpen, setModalOpen] = useState(false);
   const [modalMode, setModalMode] = useState<"add" | "edit">("add");
   const [editingRow, setEditingRow] = useState<EmbryoTransferRow | null>(null);
@@ -98,9 +95,7 @@ export default function EmbryoTransferTab() {
     <div className="space-y-4">
       {/* Top actions like screenshot (responsive) */}
       <div
-        className={`flex items-center justify-between gap-3 flex-wrap ${
-          isRTL ? "flex-row-reverse" : ""
-        }`}
+        className={`flex items-center justify-between gap-3 flex-wrap ${isRTL ? "flex-row-reverse" : ""}`}
       >
         <div className="flex items-center gap-2">
           <button
@@ -108,7 +103,7 @@ export default function EmbryoTransferTab() {
             className="h-11 px-4 rounded-2xl bg-[#4b2f1a] text-white text-sm font-semibold flex items-center gap-2"
           >
             <span className="text-lg leading-none">＋</span>
-            {locale === "ar" ? "إضافة سجل جديد" : "Add new record"}
+            {t("common.addNewRecord")}
           </button>
 
           <button
@@ -119,7 +114,7 @@ export default function EmbryoTransferTab() {
                 : "bg-[#d9534f] text-white"
             }`}
           >
-            {locale === "ar" ? "حذف" : "Delete"}
+            {t("common.delete")}
           </button>
         </div>
 
@@ -137,7 +132,7 @@ export default function EmbryoTransferTab() {
             className={`w-full h-11 rounded-2xl border border-[#ece2da] bg-white text-sm outline-none ${
               isRTL ? "pr-10 text-right" : "pl-10 text-left"
             }`}
-            placeholder={locale === "ar" ? "البحث" : "Search"}
+            placeholder={t("common.search")}
           />
         </div>
       </div>

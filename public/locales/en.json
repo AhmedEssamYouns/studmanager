@@ -13,6 +13,10 @@
     "success": "Successful",
     "language": "Language",
     "english": "English",
+    "download": "Download",
+    "selectAll": "Select all",
+    "select": "Select",
+    "noRecordsFound": "No records found",
     "arabic": "العربية",
     "actions": "Actions",
     "select_language": "Select Language",
@@ -27,7 +31,12 @@
     "dob": "DOB",
     "bornIn": "Born in",
     "currentlyIn": "Currently in",
-    "deleteAll": "Delete All?"
+    "deleteAll": "Delete All?",
+    "date": "Date",
+    "time": "Time",
+    "notes": "Notes",
+    "price": "Price",
+    "location": "location"
   },
   "sidebar": {
     "dashboard": "Dashboard",
@@ -319,22 +328,116 @@
     "matingResult": "Mating Test"
   },
   "reproduction": {
-    "maresOverview": {
-      "viewProfile": "View profile",
-      "searchPlaceholder": "Search mare",
-      "recordsTitle": "Reproduction records",
-      "summary": {
-        "offspringCount": "Offspring count",
-        "lastBirth": "Last birth",
-        "successfulPregnancies": "Successful pregnancies",
-        "reproductionService": "Reproduction service",
-        "embryoCollection": "Embryo collection",
-        "pregnancy": "Pregnancy",
-        "embryoTransfer": "Embryo transfer",
-        "currentEmbryos": "Current embryos"
+    "tables": {
+      "control": {
+        "headers": {
+          "scheduled": "Scheduled",
+          "examMethod": "Exam method",
+          "doctor": "Doctor"
+        }
+      },
+      "embryoTransfer": {
+        "headers": {
+          "stallion": "Stallion",
+          "futureMare": "Donor mare",
+          "collectionDate": "Collection date",
+          "tankName": "Tank",
+          "type": "Type",
+          "forSale": "For sale",
+          "canister": "Canister",
+          "color": "Color"
+        }
       }
     },
     "modals": {
+      "shared": {
+        "fields": {
+          "executor": "Executor",
+          "initialResults": "Initial results"
+        },
+        "horse": {
+          "optA": "Horse A",
+          "optB": "Horse B"
+        },
+        "executor": {
+          "opt1": "Executor 1",
+          "opt2": "Executor 2"
+        }
+      },
+      "natural": {
+        "titleAdd": "Add record",
+        "titleEdit": "Edit record",
+        "fields": {
+          "futureMare": "Future mare",
+          "initialResults": "Initial results"
+        },
+        "horse": {
+          "select": "Select horse",
+          "optA": "Horse A",
+          "optB": "Horse B",
+          "optC": "Horse C"
+        }
+      },
+      "fresh": {
+        "titleAdd": "Add fresh semen",
+        "titleEdit": "Edit",
+        "fields": {
+          "futureMare": "Future mare"
+        }
+      },
+      "frozen": {
+        "titleAdd": "Add frozen semen",
+        "titleEdit": "Edit",
+        "fields": {
+          "futureMare": "Future mare",
+          "qty": "Quantity / ml"
+        },
+        "qty": {
+          "ml5": "5 ml",
+          "ml10": "10 ml",
+          "ml15": "15 ml",
+          "ml20": "20 ml"
+        }
+      },
+      "embryoTransfer": {
+        "titleAdd": "Add new record",
+        "titleEdit": "Edit record",
+        "fields": {
+          "donorMareName": "Donor mare name",
+          "stallionName": "Stallion name",
+          "tank": "Tank",
+          "collectionDate": "Collection date",
+          "color": "Color",
+          "canister": "Canister",
+          "forSale": "For sale",
+          "type": "Type"
+        },
+        "donorMare": {
+          "opt1": "Calypotra",
+          "opt2": "Mare 2"
+        },
+        "stallion": {
+          "opt1": "Maddah",
+          "opt2": "Stallion 2"
+        },
+        "tank": {
+          "opt1": "Tank A",
+          "opt2": "Tank B"
+        },
+        "forSale": {
+          "unspecified": "Unspecified"
+        },
+        "type": {
+          "male": "Male",
+          "female": "Female",
+          "unknown": "Unknown"
+        },
+        "color": {
+          "red": "Red",
+          "green": "Green",
+          "yellow": "Yellow"
+        }
+      },
       "record": {
         "fields": {
           "stallionName": "Stallion name",
@@ -377,6 +480,21 @@
           "service2": "Service 2"
         },
         "genitalServiceHint": "(Note: please choose a genital service to determine pregnancy check correctly)"
+      }
+    },
+    "maresOverview": {
+      "viewProfile": "View profile",
+      "searchPlaceholder": "Search mare",
+      "recordsTitle": "Reproduction records",
+      "summary": {
+        "offspringCount": "Offspring count",
+        "lastBirth": "Last birth",
+        "successfulPregnancies": "Successful pregnancies",
+        "reproductionService": "Reproduction service",
+        "embryoCollection": "Embryo collection",
+        "pregnancy": "Pregnancy",
+        "embryoTransfer": "Embryo transfer",
+        "currentEmbryos": "Current embryos"
       }
     }
   }
