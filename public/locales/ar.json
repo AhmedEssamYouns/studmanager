@@ -12,6 +12,10 @@
     "error": "حدث خطأ",
     "success": "تم بنجاح",
     "language": "اللغة",
+    "download": "تحميل",
+    "selectAll": "تحديد الكل",
+    "select": "تحديد",
+    "noRecordsFound": "لا توجد سجلات",
     "english": "English",
     "arabic": "العربية",
     "actions": "الإجراءات",
@@ -21,7 +25,18 @@
     "deleteRecordMsg": "لن تتمكن من استعادة هذا السجل",
     "deleteSelected": "حذف العناصر المحددة؟",
     "deleteSelectedMsg": "لن تتمكن من استعادة البيانات المحذوفة",
-    "dragAndDrop": "اسحب و أفلت"
+    "dragAndDrop": "اسحب و أفلت",
+    "name": "الاسم",
+    "farm": "المزرعة",
+    "dob": "تاريخ الميلاد",
+    "bornIn": "ولد في",
+    "currentlyIn": "حالياً في",
+    "deleteAll": "حذف الجميع؟",
+    "date": "التاريخ",
+    "time": "الوقت",
+    "notes": "ملاحظات",
+    "price": " السعر",
+    "location": "الموقع"
   },
   "sidebar": {
     "dashboard": "لوحة التحكم",
@@ -41,6 +56,20 @@
     "evaluations": "التقويم و الأحداث",
     "database": "قاعدة البيانات",
     "revenue": "الإيرادات"
+  },
+  "reproductionMares": {
+    "tabs": {
+      "overview": "ملخص التناسل",
+      "transfer": "نقل الأجنة",
+      "control": "التحكم في التناسل"
+    }
+  },
+  "reproductionPage": {
+    "tabs": {
+      "mares": "الأفراس",
+      "stallions": "الفحول",
+      "breeding": "التربية"
+    }
   },
   "months": {
     "january": "يناير",
@@ -164,9 +193,10 @@
     "pregnantMares": "عدد القهرة العشر",
     "nonPregnantMares": "عدد القهرة غير عشر",
     "naturalBreeding": "الطلاق الطبيعية",
-    "frozenSemen": "سايل متوجمجمد",
-    "freshSemen": "سايل متوجحديث",
-    "embryoTransfer": "نقل الأجنة"
+    "frozenSemen": "سائل منوي  حديث",
+    "freshSemen": "سايل منوي طازج",
+    "embryoTransfer": "نقل الأجنة",
+    "vetCheck": "الفحص البيطري"
   },
   "performance": {
     "title": "الأداء",
@@ -296,5 +326,176 @@
     "fatherName": "اسم الأب",
     "motherName": "اسم الأم",
     "matingResult": "إختبار التزاوج"
+  },
+  "reproduction": {
+    "tables": {
+      "control": {
+        "headers": {
+          "scheduled": "مجدول",
+          "examMethod": "طريقة الفحص",
+          "doctor": "الطبيب"
+        }
+      },
+      "embryoTransfer": {
+        "headers": {
+          "stallion": "الفحل",
+          "futureMare": "الفرسة المانحة",
+          "collectionDate": "تاريخ التجميع",
+          "tankName": "الخزان",
+          "type": "النوع",
+          "forSale": "للبيع",
+          "canister": "الحاوية",
+          "color": "اللون"
+        }
+      }
+    },
+    "maresOverview": {
+      "viewProfile": "رؤية الملف الشخصي",
+      "searchPlaceholder": "اختر الفرس",
+      "recordsTitle": "سجل التناسل",
+      "summary": {
+        "offspringCount": "عدد الأبناء",
+        "lastBirth": "آخر مرة تمت ولادته",
+        "successfulPregnancies": "عدد حالات الحمل الناجحة",
+        "reproductionService": "خدمة التكاثر",
+        "embryoCollection": "جمع الأجنة",
+        "pregnancy": "حمل",
+        "embryoTransfer": "نقل الأجنة",
+        "currentEmbryos": "عدد الأجنة الحالية"
+      }
+    },
+    "modals": {
+      "shared": {
+        "fields": {
+          "executor": "المنفذ",
+          "initialResults": "النتائج الأولية"
+        },
+        "horse": {
+          "optA": "فرس أ",
+          "optB": "فرس ب"
+        },
+        "executor": {
+          "opt1": "منفذ ١",
+          "opt2": "منفذ ٢"
+        }
+      },
+      "natural": {
+        "titleAdd": "إضافة سجل جديد",
+        "titleEdit": "تعديل السجل",
+        "fields": {
+          "futureMare": "الفرسة المستقبلية",
+          "initialResults": "النتائج الأولية"
+        },
+        "horse": {
+          "select": "اختر الفرس",
+          "optA": "فرس أ",
+          "optB": "فرس ب",
+          "optC": "فرس ج"
+        }
+      },
+      "fresh": {
+        "titleAdd": "إضافة سائل منوي حديث",
+        "titleEdit": "تعديل",
+        "fields": {
+          "futureMare": "الفرسة المستقبلية"
+        }
+      },
+      "frozen": {
+        "titleAdd": "إضافة طلوق مجمدة",
+        "titleEdit": "تعديل",
+        "fields": {
+          "futureMare": "الفرسة المستقبلية",
+          "qty": "الكمية / مل"
+        },
+        "qty": {
+          "ml5": "5 مل",
+          "ml10": "10 مل",
+          "ml15": "15 مل",
+          "ml20": "20 مل"
+        }
+      },
+      "embryoTransfer": {
+        "titleAdd": "إضافة سجل جديد",
+        "titleEdit": "تعديل السجل",
+        "fields": {
+          "donorMareName": "اسم الفرسة المانحة",
+          "stallionName": "اسم الفحل",
+          "tank": "الخزان",
+          "collectionDate": "تاريخ التجميع",
+          "color": "اللون",
+          "canister": "الحاوية",
+          "forSale": "للبيع",
+          "type": "النوع"
+        },
+        "donorMare": {
+          "opt1": "كاليبوترا",
+          "opt2": "فرسة ٢"
+        },
+        "stallion": {
+          "opt1": "مداح مهنا",
+          "opt2": "فحل ٢"
+        },
+        "tank": {
+          "opt1": "اسم الخزان",
+          "opt2": "خزان ٢"
+        },
+        "forSale": {
+          "unspecified": "غير محدد"
+        },
+        "type": {
+          "male": "ذكر",
+          "female": "أنثى",
+          "unknown": "غير معروف"
+        },
+        "color": {
+          "red": "أحمر",
+          "green": "أخضر",
+          "yellow": "أصفر"
+        }
+      },
+      "record": {
+        "fields": {
+          "stallionName": "اسم الفحل",
+          "inseminationType": "نوع التلقيح",
+          "result": "النتيجة"
+        },
+        "stallionOpt1": "مداح مهنا",
+        "stallionOpt2": "فحل ٢",
+        "insemination": {
+          "natural": "طبيعي",
+          "fresh": "سائل منوي حديث",
+          "frozen": "سائل منوي مجمد"
+        },
+        "result": {
+          "success": "نجح",
+          "failed": "فشل"
+        }
+      },
+      "control": {
+        "fields": {
+          "veterinarian": "الطبيب البيطري",
+          "examMethod": "طريقة الفحص",
+          "uterus": "الرحم (Uterus)",
+          "vagina": "المهبل (Vagina)",
+          "edema": "الوذمة (Edema)",
+          "cervix": "عنق الرحم (Cervix)",
+          "genitalService": "اختر خدمة تناسلية"
+        },
+        "examMethod": {
+          "opt1": "طريقة الفحص",
+          "ultrasound": "سونار",
+          "manual": "فحص يدوي"
+        },
+        "doctor": {
+          "opt1": "محمد احمد",
+          "opt2": "د. أحمد"
+        },
+        "genitalService": {
+          "service1": "خدمة 1",
+          "service2": "خدمة 2"
+        },
+        "genitalServiceHint": "(ملاحظة: يرجى اختيار خدمة تناسلية لتحديد فحص الحمل بشكل صحيح)"
+      }
+    }
   }
 }
