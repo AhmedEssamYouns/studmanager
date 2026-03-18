@@ -2,33 +2,38 @@
 
 import { PieChart, Pie, Cell, ResponsiveContainer } from "recharts";
 import Image from "next/image";
-
-const HORSE_PIE_DATA = [
-  { name: "الفحول", value: 100, color: "#7b61ff" },
-  { name: "الأفراس", value: 80, color: "#ff6b6b" },
-  { name: "المهر", value: 10, color: "#2ec4b6" },
-  { name: "المهرة", value: 30, color: "#ffd93d" },
-];
-
-const HOUSING_DATA = [
-  { label: "متاح", value: 50, color: "#4caf50" },
-  { label: "مشغول", value: 50, color: "#ef5350" },
-];
+import { useLocale, useTranslation } from "@/lib/locale-context";
 
 export function HorsesOverviewCard() {
+  const { t } = useTranslation();
+  const { direction } = useLocale();
+  const isRTL = direction === 'rtl';
+
+  const HORSE_PIE_DATA = [
+    { name: t('reports.stallions'), value: 100, color: "#7b61ff" },
+    { name: t('reports.mares'), value: 80, color: "#ff6b6b" },
+    { name: t('reports.colts'), value: 10, color: "#2ec4b6" },
+    { name: t('reports.fillies'), value: 30, color: "#ffd93d" },
+  ];
+
+  const HOUSING_DATA = [
+    { label: t('reports.available'), value: 50, color: "#4caf50" },
+    { label: t('reports.occupied'), value: 50, color: "#ef5350" },
+  ];
+
   const total = HORSE_PIE_DATA.reduce((s, d) => s + d.value, 0);
 
   return (
     <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
       {/* Horses Pie */}
       <div className="bg-white rounded-2xl p-5 shadow-sm border border-gray-50">
-        <h3 className="text-[15px] font-bold text-[#3b2b20] mb-4 text-right">الخيل</h3>
-        <div className="flex items-center gap-4">
+        <h3 className={`text-[15px] font-bold text-[#3b2b20] mb-4 ${isRTL ? 'text-right' : 'text-left'}`}>{t('reports.horses')}</h3>
+        <div className={`flex items-center gap-4 ${isRTL ? 'flex-row' : 'flex-row-reverse'}`}>
           <div className="flex-1">
             {HORSE_PIE_DATA.map(d => (
-              <div key={d.name} className="flex items-center justify-between text-xs mb-2">
+              <div key={d.name} className={`flex items-center justify-between text-xs mb-2 ${isRTL ? 'flex-row-reverse' : 'flex-row'}`}>
                 <span className="text-gray-500">{d.name}</span>
-                <div className="flex items-center gap-1.5">
+                <div className={`flex items-center gap-1.5 ${isRTL ? 'flex-row-reverse' : 'flex-row'}`}>
                   <span className="font-bold text-[#3b2b20]">{d.value}</span>
                   <div className="w-2 h-2 rounded-full" style={{ backgroundColor: d.color }} />
                 </div>
@@ -52,13 +57,15 @@ export function HorsesOverviewCard() {
 
       {/* Housing Bar */}
       <div className="bg-white rounded-2xl p-5 shadow-sm border border-gray-50">
-        <h3 className="text-[15px] font-bold text-[#3b2b20] mb-4 text-right">الإيواء <span className="text-gray-400 font-normal text-xs">(الإجمالي: 80)</span></h3>
-        <div className="flex items-center text-xs text-gray-500 mb-3 justify-between px-2">
+        <h3 className={`text-[15px] font-bold text-[#3b2b20] mb-4 ${isRTL ? 'text-right' : 'text-left'}`}>
+          {t('reports.housing')} <span className="text-gray-400 font-normal text-xs">({t('reports.total')}: 80)</span>
+        </h3>
+        <div className={`flex items-center text-xs text-gray-500 mb-3 justify-between px-2 ${isRTL ? 'flex-row-reverse' : 'flex-row'}`}>
           {[0, 10, 20, 30, 40, 50].map(n => <span key={n}>{n}</span>)}
         </div>
         {HOUSING_DATA.map(d => (
           <div key={d.label} className="mb-3">
-            <div className="flex items-center justify-between text-xs mb-1">
+            <div className={`flex items-center justify-between text-xs mb-1 ${isRTL ? 'flex-row-reverse' : 'flex-row'}`}>
               <span className="text-gray-500">{d.value} {d.label}</span>
             </div>
             <div className="w-full bg-gray-100 rounded-full h-6 overflow-hidden">
@@ -73,20 +80,24 @@ export function HorsesOverviewCard() {
 
 // Foal count cards with horse SVGs
 export function FoalCards() {
+  const { t } = useTranslation();
+  const { direction } = useLocale();
+  const isRTL = direction === 'rtl';
+
   return (
     <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-      <div className="bg-white rounded-2xl p-5 shadow-sm border border-gray-50 flex items-center justify-between">
-        <div className="text-right">
-          <p className="text-sm text-gray-500 mb-1">عدد القهرة العشر</p>
+      <div className={`bg-white rounded-2xl p-5 shadow-sm border border-gray-50 flex items-center justify-between ${isRTL ? 'flex-row' : 'flex-row-reverse'}`}>
+        <div className={isRTL ? 'text-right' : 'text-left'}>
+          <p className="text-sm text-gray-500 mb-1">{t('reports.pregnantMares')}</p>
           <p className="text-4xl font-bold text-[#3b2b20]">28</p>
         </div>
         <div className="relative w-16 h-16">
           <Image src="/svgs/horsecheck.svg" alt="horse" fill className="object-contain" />
         </div>
       </div>
-      <div className="bg-white rounded-2xl p-5 shadow-sm border border-gray-50 flex items-center justify-between">
-        <div className="text-right">
-          <p className="text-sm text-gray-500 mb-1">عدد القهرة غير عشر</p>
+      <div className={`bg-white rounded-2xl p-5 shadow-sm border border-gray-50 flex items-center justify-between ${isRTL ? 'flex-row' : 'flex-row-reverse'}`}>
+        <div className={isRTL ? 'text-right' : 'text-left'}>
+          <p className="text-sm text-gray-500 mb-1">{t('reports.nonPregnantMares')}</p>
           <p className="text-4xl font-bold text-[#3b2b20]">10</p>
         </div>
         <div className="relative w-16 h-16">

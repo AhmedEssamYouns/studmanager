@@ -12,30 +12,32 @@ export function SettingsForm({ activeTab }: SettingsFormProps) {
   const { t } = useTranslation();
   const isRTL = direction === 'rtl';
 
-  const fields: Record<SettingCategory, { label: string; placeholder: string }[]> = {
+  const fields: Record<SettingCategory, { key: string; label: string; placeholder: string; hasPhoneIcon?: boolean }[]> = {
     housing: [
-      { label: t('settings.numPlaces'), placeholder: t('settings.numPlaces') },
-      { label: t('settings.numHorses'), placeholder: t('settings.numHorses') },
+      { key: 'numPlaces', label: t('settings.numPlaces'), placeholder: t('settings.numPlaces') },
+      { key: 'numHorses', label: t('settings.numHorses'), placeholder: t('settings.numHorses') },
     ],
     bloodTest: [
-      { label: t('settings.labName'), placeholder: t('settings.labName') },
-      { label: t('settings.sampleReason'), placeholder: t('settings.sampleReason') },
+      { key: 'labName', label: t('settings.labName'), placeholder: t('settings.labName') },
+      { key: 'followUpNumber', label: t('settings.followUpNumber'), placeholder: t('settings.followUpNumber'), hasPhoneIcon: true },
+      { key: 'sampleReason', label: t('settings.sampleReason'), placeholder: t('settings.sampleReason') },
     ],
     wormDose: [
-      { label: t('settings.doseType'), placeholder: t('settings.doseType') },
-      { label: t('settings.doseResponsible'), placeholder: t('settings.doseResponsible') },
+      { key: 'doseType', label: t('settings.doseType'), placeholder: t('settings.doseType') },
+      { key: 'doseResponsible', label: t('settings.doseResponsible'), placeholder: t('settings.doseResponsible') },
     ],
     hoofLegCare: [
-      { label: t('settings.farrierName'), placeholder: t('settings.farrierName') },
-      { label: t('settings.shoeingType'), placeholder: t('settings.shoeingType') },
+      { key: 'farrierName', label: t('settings.farrierName'), placeholder: t('settings.farrierName') },
+      { key: 'farrierNumber', label: t('settings.farrierNumber'), placeholder: t('settings.farrierNumber'), hasPhoneIcon: true },
+      { key: 'trimmingType', label: t('settings.trimmingType'), placeholder: t('settings.trimmingType') },
     ],
     injuries: [
-      { label: t('settings.injuryName'), placeholder: t('settings.injuryName') },
-      { label: t('settings.conditionName'), placeholder: t('settings.conditionName') },
+      { key: 'practitionerName', label: t('settings.practitionerName'), placeholder: t('settings.practitionerName') },
+      { key: 'farrierNumber', label: t('settings.farrierNumber'), placeholder: t('settings.farrierNumber'), hasPhoneIcon: true },
     ],
     medicalCare: [
-      { label: t('settings.careType'), placeholder: t('settings.careType') },
-      { label: t('settings.followUpNumber'), placeholder: t('settings.followUpNumber') },
+      { key: 'careType', label: t('settings.careType'), placeholder: t('settings.careType') },
+      { key: 'followUpNumber', label: t('settings.followUpNumber'), placeholder: t('settings.followUpNumber'), hasPhoneIcon: true },
     ],
   };
 
@@ -45,16 +47,16 @@ export function SettingsForm({ activeTab }: SettingsFormProps) {
     <div className="bg-white p-6 flex-1 h-full min-h-[300px] flex flex-col">
       <div className={`grid grid-cols-1 md:grid-cols-2 gap-4 mb-6 ${isRTL ? 'text-right' : 'text-left'}`}>
         {activeFields.map((field, idx) => (
-          <div key={idx} className="flex flex-col gap-1.5">
+          <div key={idx} className={`flex flex-col gap-1.5 ${field.key === 'sampleReason' || field.key === 'trimmingType' ? 'md:col-span-2' : ''}`}>
             <div className="relative">
               <input
                 type="text"
                 placeholder={field.placeholder}
                 className={`w-full px-4 py-3 rounded-xl border border-gray-200 focus:outline-none focus:ring-2 focus:ring-[#4B2F1A] focus:border-transparent transition-all ${
-                  isRTL ? 'text-right pr-4' : 'text-left pl-4'
+                  isRTL ? `text-right ${field.hasPhoneIcon ? 'pl-10' : ''}` : `text-left ${field.hasPhoneIcon ? 'pr-10' : ''}`
                 }`}
               />
-               {idx === 0 && activeTab === 'bloodTest' && (
+               {field.hasPhoneIcon && (
                 <div className={`absolute top-1/2 -translate-y-1/2 text-gray-400 ${isRTL ? 'left-3' : 'right-3'}`}>
                   <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
                 </div>

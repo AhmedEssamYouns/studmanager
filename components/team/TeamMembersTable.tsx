@@ -2,6 +2,7 @@
 
 import type { Member } from './types';
 import { ChevronIcon } from '@/components/layout/AppIcons';
+import { useLocale, useTranslation } from '@/lib/locale-context';
 
 interface TeamMembersTableProps {
   members: Member[];
@@ -10,17 +11,20 @@ interface TeamMembersTableProps {
 }
 
 export function TeamMembersTable({ members, onEdit, onDelete }: TeamMembersTableProps) {
+  const { t } = useTranslation();
+  const { direction } = useLocale();
+
   return (
     <>
       <div className="overflow-hidden rounded-[24px] bg-white shadow-[0_12px_26px_rgba(91,53,24,0.08)]">
-        <table className="w-full text-right">
+        <table className={`w-full ${direction === 'rtl' ? 'text-right' : 'text-left'}`}>
           <thead className="bg-[#4b2f1a] text-white">
             <tr className="text-lg font-semibold">
-              <th className="px-6 py-5">المستخدم</th>
-              <th className="px-6 py-5">الدور</th>
-              <th className="px-6 py-5">اسم المستخدم</th>
-              <th className="px-6 py-5">كلمة السر</th>
-              <th className="px-6 py-5">الإجراءات</th>
+              <th className="px-6 py-5">{t('team.user')}</th>
+              <th className="px-6 py-5">{t('team.role')}</th>
+              <th className="px-6 py-5">{t('team.username')}</th>
+              <th className="px-6 py-5">{t('team.password')}</th>
+              <th className={`px-6 py-5 ${direction === 'rtl' ? 'text-right' : 'text-left'}`}>{t('team.actions')}</th>
             </tr>
           </thead>
           <tbody className="text-[1.05rem] text-[#2f3346]">
@@ -31,7 +35,7 @@ export function TeamMembersTable({ members, onEdit, onDelete }: TeamMembersTable
                 <td className="px-6 py-5">{member.username}</td>
                 <td className="px-6 py-5">{member.password}</td>
                 <td className="px-6 py-5">
-                  <div className="flex flex-row-reverse items-center justify-start gap-4 text-[#4b2f1a]">
+                  <div className={`flex items-center gap-4 text-[#4b2f1a] ${direction === 'rtl' ? 'flex-row-reverse justify-start' : 'flex-row justify-start'}`}>
                     <button className="transition hover:opacity-80" aria-label="Copy">
                       <img src="/svgs/copy.svg" alt="" className="h-5 w-5" />
                     </button>

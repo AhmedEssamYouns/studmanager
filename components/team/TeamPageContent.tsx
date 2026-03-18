@@ -2,7 +2,7 @@
 
 import { useMemo, useState } from 'react';
 import { PlusCircleIcon, SearchIcon } from '@/components/layout/AppIcons';
-import { useLocale } from '@/lib/locale-context';
+import { useLocale, useTranslation } from '@/lib/locale-context';
 import { TeamMemberModal } from './TeamMemberModal';
 import { TeamMembersTable } from './TeamMembersTable';
 import { emptyMemberForm, initialMembers, type Member, type MemberFormState } from './types';
@@ -10,6 +10,7 @@ import { ListCheck } from 'lucide-react';
 
 export function TeamPageContent() {
   const { direction } = useLocale();
+  const { t } = useTranslation();
   const [members, setMembers] = useState(initialMembers);
   const [query, setQuery] = useState('');
   const [mode, setMode] = useState<'add' | 'edit' | null>(null);
@@ -65,11 +66,11 @@ export function TeamPageContent() {
   return (
     <div className="space-y-7">
       <section className="space-y-5">
-        <div className="flex items-center justify-between">
-          <h1 className="text-[2.1rem] font-bold text-[#27304a]">إدارة الأعضاء</h1>
+        <div className="flex flex-col gap-5 sm:flex-row sm:items-center sm:justify-between">
+          <h1 className="text-[2.1rem] font-bold text-[#27304a]">{t('team.title')}</h1>
 
-          <div className="flex items-center gap-5">
-            <div className="relative w-[24rem] max-w-full">
+          <div className="flex flex-col gap-4 sm:flex-row sm:items-center sm:gap-5">
+            <div className="relative w-full sm:w-[24rem]">
               <SearchIcon
                 className={`absolute top-1/2 h-5 w-5 -translate-y-1/2 text-[#5a473d] ${direction === 'rtl' ? 'right-4' : 'left-4'
                   }`}
@@ -78,24 +79,26 @@ export function TeamPageContent() {
                 type="search"
                 value={query}
                 onChange={(e) => setQuery(e.target.value)}
-                placeholder="البحث"
+                placeholder={t('common.search')}
                 className={`h-11 w-full rounded-2xl border border-[#ece2da] bg-white text-sm text-[#2c2330] outline-none transition placeholder:text-[#d9cfc5] focus:border-[#5a3b25] focus:ring-2 focus:ring-[#5a3b25]/10 ${direction === 'rtl' ? 'pr-12 text-right' : 'pl-12 text-left'
                   }`}
               />
             </div>
 
-            <button
-              onClick={openAddModal}
-              className="flex items-center gap-2 rounded-[18px] bg-[#4b2f1a] px-6 py-3 text-[1.05rem] font-bold text-white"
-            >
-              <PlusCircleIcon className="h-5 w-5" />
-              <span>إضافة مستخدم</span>
-            </button>
+            <div className="flex items-center gap-3">
+              <button
+                onClick={openAddModal}
+                className="flex flex-1 items-center justify-center gap-2 rounded-[18px] bg-[#4b2f1a] px-6 py-3 text-[1.05rem] font-bold text-white whitespace-nowrap"
+              >
+                <PlusCircleIcon className="h-5 w-5" />
+                <span>{t('team.addUser')}</span>
+              </button>
 
-            <button className="flex items-center gap-2 rounded-[18px] bg-[#4b2f1a] px-6 py-3 text-[1.05rem] font-bold text-white">
-              <ListCheck className="h-5 w-5" />
-              <span>المهام</span>
-            </button>
+              <button className="flex flex-1 items-center justify-center gap-2 rounded-[18px] bg-[#4b2f1a] px-6 py-3 text-[1.05rem] font-bold text-white whitespace-nowrap">
+                <ListCheck className="h-5 w-5" />
+                <span>{t('team.tasks')}</span>
+              </button>
+            </div>
           </div>
         </div>
 
@@ -108,8 +111,8 @@ export function TeamPageContent() {
 
       {mode && (
         <TeamMemberModal
-          title={mode === 'add' ? 'إضافة عضو جديد' : 'تعديل عضو'}
-          submitLabel="حفظ"
+          title={mode === 'add' ? t('team.addNewMember') : t('team.editMember')}
+          submitLabel={t('common.save')}
           iconSrc={mode === 'add' ? '/svgs/manage-members-foucs.svg' : '/svgs/manage-members.svg'}
           form={form}
           onChange={(field, value) => setForm((current) => ({ ...current, [field]: value }))}

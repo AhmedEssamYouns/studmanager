@@ -134,22 +134,22 @@ export default function InvoicesPage() {
                   </div>
 
                   <h2 className="mb-5 text-center text-2xl font-bold text-[#4a2f1e] sm:text-[2rem]">
-                    {invoice.productName}
+                    {invoice.productName === 'اسم المنتج' ? t('invoices.productName') : invoice.productName}
                   </h2>
 
                   <div className="space-y-4 text-[1.05rem] text-[#3b2a24]">
                     {[
-                      ['اسم العميل', invoice.clientName],
-                      ['رقم الفاتورة', invoice.invoiceNumber],
-                      ['التاريخ', invoice.date],
-                      ['الحالة', invoice.status === 'paid' ? 'مدفوع' : 'قيد التنفيذ'],
-                      ['الفئة', invoice.category === 'feed' ? 'طعام' : 'خدمات'],
-                      ['التكلفة', `${invoice.cost}$`],
+                      [t('invoices.clientName'), invoice.clientName],
+                      [t('invoices.invoiceNumber'), invoice.invoiceNumber],
+                      [t('invoices.invoiceDate'), invoice.date],
+                      [t('invoices.status'), invoice.status === 'paid' ? t('invoices.paid') : t('invoices.pending')],
+                      [t('invoices.category'), invoice.category === 'feed' ? t('invoices.category_feed') : t('invoices.category_vet')],
+                      [t('invoices.cost'), `${invoice.cost}$`],
                     ].map(([label, value]) => (
                       <div key={label} className="grid grid-cols-[1fr_auto_1fr] items-center gap-3">
                         <span className="font-semibold">{label}</span>
                         <span className="text-[#8a786f]">|</span>
-                        <span className="text-right">{value}</span>
+                        <span className={`text-right ${direction === 'rtl' ? 'text-right' : 'text-left'}`}>{value}</span>
                       </div>
                     ))}
                   </div>

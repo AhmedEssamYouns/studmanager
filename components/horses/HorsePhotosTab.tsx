@@ -1,27 +1,60 @@
-"use client";
-
-import { FC } from "react";
-import { useLocale } from "@/lib/locale-context";
+import { FC, useState, useEffect } from "react";
+import { useLocale, useTranslation } from "@/lib/locale-context";
+import { X, ChevronLeft, ChevronRight, Maximize2 } from "lucide-react";
 
 interface HorsePhotosTabProps {
   horse?: any;
 }
 
 const DUMMY_PHOTOS = [
-  "https://images.unsplash.com/photo-1553284965-83fd3e82fa5a?w=600&h=400&fit=crop",
-  "https://images.unsplash.com/photo-1598974357801-bca105fa3216?w=400&h=300&fit=crop",
-  "https://images.unsplash.com/photo-1549887552-cb1071d3e5ca?w=600&h=400&fit=crop",
-  "https://images.unsplash.com/photo-1522851218987-a3f2be67d341?w=400&h=600&fit=crop",
-  "https://images.unsplash.com/photo-1506161494800-4786729a502c?w=400&h=600&fit=crop",
-  "https://images.unsplash.com/photo-1591857997327-14280aeeb1eb?w=600&h=400&fit=crop",
-  "https://images.unsplash.com/photo-1520286888494-b1eb21c43715?w=600&h=400&fit=crop",
-  "https://images.unsplash.com/photo-1582260274154-1b12b5bdf704?w=600&h=400&fit=crop",
-  "https://images.unsplash.com/photo-1627916327663-0d3a776e27bc?w=400&h=300&fit=crop",
+  "https://images.unsplash.com/photo-1553284965-83fd3e82fa5a?w=1200&h=800&fit=crop",
+  "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSSH6ACmKsSXoww14vYxz-6qqqhFPatON2446yUVxRxm0QcetZGEkJl7xFsVrzkrLphGYviSb3QeZru5yQ1d7Xoc0cn9vbd7NzvNAIZ7jQJ&s=10",
+  "https://images.unsplash.com/photo-1598974357801-cbca100e65d3?w=1200&h=800&fit=crop",
+  "https://images.unsplash.com/photo-1534073737927-85f1ebff1f5d?w=1200&h=800&fit=crop",
+  "https://images.unsplash.com/photo-1551884170-09fb70a3a2ed?w=1200&h=800&fit=crop",
+  "https://images.unsplash.com/photo-1523464862212-d6631d073194?w=1200&h=800&fit=crop",
+  "https://images.unsplash.com/photo-1493246507139-91e8bef99c02?w=1200&h=800&fit=crop",
 ];
 
 export const HorsePhotosTab: FC<HorsePhotosTabProps> = () => {
   const { direction } = useLocale();
+  const { t } = useTranslation();
   const isRTL = direction === "rtl";
+  
+  const [selectedIdx, setSelectedIdx] = useState<number | null>(null);
+
+  // Close on Escape
+  useEffect(() => {
+    const handleEsc = (e: KeyboardEvent) => {
+      if (e.key === "Escape") setSelectedIdx(null);
+      if (e.key === "ArrowLeft") {
+        if (isRTL) {
+          handleNext(); // In RTL, left arrow means next image logically
+        } else {
+          handlePrev(); // In LTR, left arrow means previous image logically
+        }
+      }
+      if (e.key === "ArrowRight") {
+        if (isRTL) {
+          handlePrev(); // In RTL, right arrow means previous image logically
+        } else {
+          handleNext(); // In LTR, right arrow means next image logically
+        }
+      }
+    };
+    window.addEventListener("keydown", handleEsc);
+    return () => window.removeEventListener("keydown", handleEsc);
+  }, [selectedIdx, isRTL]);
+
+  const handleNext = () => {
+    if (selectedIdx === null) return;
+    setSelectedIdx((prev) => (prev !== null && prev < DUMMY_PHOTOS.length - 1 ? prev + 1 : 0));
+  };
+
+  const handlePrev = () => {
+    if (selectedIdx === null) return;
+    setSelectedIdx((prev) => (prev !== null && prev > 0 ? prev - 1 : DUMMY_PHOTOS.length - 1));
+  };
 
   return (
     <div className={`mb-12 ${isRTL ? "text-right" : "text-left"}`}>
@@ -29,19 +62,90 @@ export const HorsePhotosTab: FC<HorsePhotosTabProps> = () => {
         {isRTL ? "الصور" : "Photos"}
       </h2>
       
-      {/* Masonry-like layout using CSS columns */}
-      <div className="columns-1 sm:columns-2 lg:columns-3 gap-4 space-y-4">
+      {/* Justified-style layout using Flexbox */}
+      <div className="flex flex-wrap gap-3">
         {DUMMY_PHOTOS.map((photo, i) => (
-          <div key={i} className="relative w-full rounded-2xl overflow-hidden break-inside-avoid">
-            {/* The image component requires width/height so we use an intrinsic img tag for masonry if relying on the original ratio, or next/image with layout responsive */}
+          <div 
+            key={i} 
+            onClick={() => setSelectedIdx(i)}
+            className="group relative rounded-2xl overflow-hidden cursor-pointer transition-all hover:shadow-lg"
+            style={{ 
+              height: '300px',
+              flexGrow: i % 3 === 0 ? 1.5 : 1,
+              flexBasis: i % 3 === 0 ? '40%' : '25%',
+              minWidth: '280px'
+            }}
+          >
             <img 
               src={photo} 
               alt={`Horse photo ${i + 1}`} 
-              className="w-full h-auto object-cover rounded-2xl" 
+              className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110" 
             />
+            <div className="absolute inset-0 bg-black/40 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center">
+               <div className="flex flex-col items-center gap-2 transform translate-y-4 group-hover:translate-y-0 transition-transform duration-300">
+                 <Maximize2 className="w-6 h-6 text-white" />
+                 <span className="text-white font-bold text-sm bg-black/40 px-4 py-2 rounded-full backdrop-blur-md border border-white/20">
+                   {t("horses.viewFull")}
+                 </span>
+               </div>
+            </div>
           </div>
         ))}
       </div>
+
+      {/* Full Screen Modal */}
+      {selectedIdx !== null && (
+        <div className="fixed inset-0 z-[100] bg-black/95 flex flex-col items-center justify-center backdrop-blur-sm">
+          {/* Close Button */}
+          <button 
+            onClick={() => setSelectedIdx(null)}
+            className="absolute top-6 right-6 p-3 bg-white/10 hover:bg-white/20 rounded-full text-white transition-colors z-[110]"
+          >
+            <X className="w-8 h-8" />
+          </button>
+
+          {/* Main Stage */}
+          <div className="relative w-full h-full flex items-center justify-center p-4 md:p-20">
+            {/* Arrows */}
+            <button 
+              onClick={(e) => { e.stopPropagation(); isRTL ? handleNext() : handlePrev(); }}
+              className={`absolute ${isRTL ? 'right-4 md:right-10' : 'left-4 md:left-10'} p-4 bg-white/10 hover:bg-white/20 rounded-full text-white transition-all hover:scale-110 z-[110]`}
+            >
+              {isRTL ? <ChevronRight className="w-10 h-10" /> : <ChevronLeft className="w-10 h-10" />}
+            </button>
+
+            <div className="relative w-full h-full max-w-6xl max-h-[80vh] flex items-center justify-center">
+              <img 
+                src={DUMMY_PHOTOS[selectedIdx]} 
+                alt="Selected horse" 
+                className="max-w-full max-h-full object-contain rounded-lg shadow-2xl animate-in zoom-in-95 duration-300"
+              />
+            </div>
+
+            <button 
+              onClick={(e) => { e.stopPropagation(); isRTL ? handlePrev() : handleNext(); }}
+              className={`absolute ${isRTL ? 'left-4 md:left-10' : 'right-4 md:right-10'} p-4 bg-white/10 hover:bg-white/20 rounded-full text-white transition-all hover:scale-110 z-[110]`}
+            >
+              {isRTL ? <ChevronLeft className="w-10 h-10" /> : <ChevronRight className="w-10 h-10" />}
+            </button>
+          </div>
+
+          {/* Thumbnails Strip */}
+          <div className="absolute bottom-10 left-0 right-0 flex justify-center px-4 overflow-x-auto no-scrollbar gap-3 pb-4">
+             {DUMMY_PHOTOS.map((photo, i) => (
+               <button 
+                 key={i}
+                 onClick={() => setSelectedIdx(i)}
+                 className={`relative w-24 h-16 rounded-xl overflow-hidden flex-shrink-0 transition-all ${
+                   selectedIdx === i ? 'ring-2 ring-white scale-110 shadow-lg z-10' : 'opacity-40 hover:opacity-100'
+                 }`}
+               >
+                 <img src={photo} alt="" className="w-full h-full object-cover" />
+               </button>
+             ))}
+          </div>
+        </div>
+      )}
     </div>
   );
 };

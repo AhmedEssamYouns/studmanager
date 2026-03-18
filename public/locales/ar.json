@@ -42,6 +42,29 @@
     "database": "قاعدة البيانات",
     "revenue": "الإيرادات"
   },
+  "months": {
+    "january": "يناير",
+    "february": "فبراير",
+    "march": "مارس",
+    "april": "ابريل",
+    "may": "مايو",
+    "jun": "يونيو",
+    "july": "يوليو",
+    "august": "أغسطس",
+    "september": "سبتمبر",
+    "october": "أكتوبر",
+    "november": "نوفمبر",
+    "december": "ديسمبر"
+  },
+  "days": {
+    "saturday": "السبت",
+    "sunday": "الأحد",
+    "monday": "الإثنين",
+    "tuesday": "الثلاثاء",
+    "wednesday": "الأربعاء",
+    "thursday": "الخميس",
+    "friday": "الجمعة"
+  },
   "dashboard": {
     "title": "لوحة التحكم",
     "recentInvoices": "الفواتير الأخيرة",
@@ -49,10 +72,20 @@
     "totalBudget": "الميزانية",
     "totalExpenses": "المصروفات",
     "totalSales": "المبيعات",
+    "profit": "أرباح",
     "addNewInvoice": "إضافة فاتورة جديدة",
     "aiAssistant": "مساعد ذكي",
     "accountHolder": "صاحب الحساب",
-    "userName": "محمد صالح"
+    "userName": "محمد صالح",
+    "invoices": "الفواتير",
+    "product": "المنتج",
+    "clientName": "اسم العميل",
+    "invoiceNumber": "رقم الفاتورة",
+    "status": "الحالة",
+    "category": "الفئة",
+    "cost": "التكلفة",
+    "event": "الحدث",
+    "dragAndDrop": "سحب و إفلات"
   },
   "home": {
     "welcome": "مرحبا بعودتك!",
@@ -76,7 +109,23 @@
     "friends": "الأصدقاء",
     "clients": "العملاء",
     "project": "المشروع",
-    "teamGroup": "الفريق"
+    "teamGroup": "الفريق",
+    "all": "الكل",
+    "vets": "أطباء",
+    "suppliers": "موردين",
+    "others": "آخرون"
+  },
+  "team": {
+    "title": "إدارة الأعضاء",
+    "user": "المستخدم",
+    "role": "الدور",
+    "username": "اسم المستخدم",
+    "password": "كلمة السر",
+    "actions": "الإجراءات",
+    "addUser": "إضافة مستخدم",
+    "tasks": "المهام",
+    "addNewMember": "إضافة عضو جديد",
+    "editMember": "تعديل عضو"
   },
   "news": {
     "title": "الأخبار",
@@ -89,7 +138,10 @@
     "month": "شهر",
     "week": "أسبوع",
     "day": "يوم",
-    "eventName": "اسم العنصر"
+    "eventName": "اسم العنصر",
+    "viewDay": "يوم",
+    "viewWeek": "أسبوع",
+    "viewMonth": "شهر"
   },
   "reports": {
     "title": "التقارير",
@@ -110,7 +162,11 @@
     "colts": "المهر",
     "fillies": "المهرة",
     "pregnantMares": "عدد القهرة العشر",
-    "nonPregnantMares": "عدد القهرة غير عشر"
+    "nonPregnantMares": "عدد القهرة غير عشر",
+    "naturalBreeding": "الطلاق الطبيعية",
+    "frozenSemen": "سايل متوجمجمد",
+    "freshSemen": "سايل متوجحديث",
+    "embryoTransfer": "نقل الأجنة"
   },
   "performance": {
     "title": "الأداء",
@@ -175,7 +231,8 @@
     "step4": "تحميل الصور والفيديو",
     "male": "ذكر",
     "female": "أنثى",
-    "editHorse": "تعديل خيل"
+    "editHorse": "تعديل خيل",
+    "viewFull": "عرض كامل"
   },
   "groups": {
     "title": "المجموعات",
@@ -223,6 +280,21 @@
     "shoeingType": "نوع التحدية / العلف",
     "injuryName": "اسم الإصابة",
     "conditionName": "اسم الحالة",
-    "careType": "نوع الرعاية"
+    "careType": "نوع الرعاية",
+    "trimmingType": "نوع التقليم",
+    "farrierNumber": "رقم البيطار",
+    "practitionerName": "اسم المعالج"
+  },
+  "database": {
+    "title": "قاعدة البيانات",
+    "pedigreeTab": "شهادة النسب",
+    "matingTab": "اختبار التزاوج",
+    "pedigreeNote": "يرجى العلم أنه يجب أن يكون الخيل مسجل في قاعدة بياناتنا",
+    "matingNoteHeader": "هنا يمكنك اختيار الأب والأم وتجربة تزاوج نظري.",
+    "matingNoteSub": "يرجى العلم أنه يجب أن يكون الأب والأم مسجلين في قاعدة بياناتنا قبل استخدامهما في اختبار التزاوج.",
+    "selectHorse": "اختر الخيل",
+    "fatherName": "اسم الأب",
+    "motherName": "اسم الأم",
+    "matingResult": "إختبار التزاوج"
   }
 }

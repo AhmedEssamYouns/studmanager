@@ -121,38 +121,40 @@ export const NutritionCategoryTable = ({ categoryId }: NutritionCategoryTablePro
   };
 
   return (
-    <div className="bg-white rounded-3xl p-6 shadow-sm font-cairo" dir={direction}>
+    <div className="bg-white rounded-[2rem] p-4 sm:p-8 shadow-sm font-cairo border border-[#f3ece7]" dir={direction}>
       {/* Header Area */}
-      <div className="flex flex-col md:flex-row justify-between items-center mb-6 gap-4">
-        <h2 className="text-xl font-bold text-[#3b2b20]">{isRTL ? config.titleAr : config.titleEn}</h2>
+      <div className="flex flex-col xl:flex-row justify-between items-start xl:items-center mb-8 gap-6">
+        <h2 className="text-2xl font-bold text-[#3b2b20] whitespace-nowrap">{isRTL ? config.titleAr : config.titleEn}</h2>
         
-        <div className="flex flex-1 w-full max-w-xl items-center gap-3">
+        <div className="flex flex-col sm:flex-row w-full xl:w-auto items-stretch sm:items-center gap-4">
           {/* Search Box */}
-          <div className="relative flex-1">
+          <div className="relative flex-1 sm:w-80">
              <input
                 type="text"
                 placeholder={isRTL ? "البحث" : "Search"}
-                className="w-full bg-white border border-gray-200 rounded-xl px-4 py-2.5 text-sm outline-none focus:border-[#4b2f1a] transition-colors pr-10"
+                className="w-full bg-[#fdfbf9] border border-[#ece2da] rounded-2xl px-5 py-3 text-sm outline-none focus:border-[#4b2f1a] transition-all shadow-sm pr-12"
               />
-              <Search className="absolute right-3 top-1/2 -translate-y-1/2 w-4 h-4 text-gray-400" />
+              <Search className={`absolute ${isRTL ? 'right-4' : 'left-4'} top-1/2 -translate-y-1/2 w-4 h-4 text-[#8a7a6d]`} />
           </div>
           
-          {/* Add Record Button */}
-          <button 
-             onClick={() => openModal("add")}
-             className="bg-[#3b2b20] text-white px-5 py-2.5 rounded-xl font-semibold text-sm flex items-center gap-2 hover:bg-[#2e2119] transition-colors whitespace-nowrap"
-          >
-             <span className="text-lg leading-none">+</span>
-             {isRTL ? "إضافة سجل جديد" : "Add New Record"}
-          </button>
-          
-          {/* Action Icons */}
-          <button className="p-2.5 bg-gray-100 rounded-xl hover:bg-gray-200 transition-colors">
-            <Trash2 className="w-5 h-5 text-gray-600" />
-          </button>
-          <button className="p-2.5 bg-gray-100 rounded-xl hover:bg-gray-200 transition-colors">
-            <Download className="w-5 h-5 text-gray-600" />
-          </button>
+          <div className="flex items-center gap-3">
+            {/* Add Record Button */}
+            <button 
+               onClick={() => openModal("add")}
+               className="flex-1 sm:flex-initial bg-[#3b2b20] text-white px-6 py-3 rounded-2xl font-bold text-[1.05rem] flex items-center justify-center gap-2 hover:bg-[#2e2119] transition-all whitespace-nowrap shadow-md active:scale-95"
+            >
+               <span className="text-xl leading-none">+</span>
+               {isRTL ? "إضافة سجل جديد" : "Add New Record"}
+            </button>
+            
+            {/* Action Icons */}
+            <button className="p-3 bg-white border border-[#ece2da] rounded-2xl hover:bg-gray-50 transition-all shadow-sm text-[#8a7a6d]">
+              <Trash2 className="w-5 h-5" />
+            </button>
+            <button className="p-3 bg-white border border-[#ece2da] rounded-2xl hover:bg-gray-50 transition-all shadow-sm text-[#8a7a6d]">
+              <Download className="w-5 h-5" />
+            </button>
+          </div>
         </div>
       </div>
 

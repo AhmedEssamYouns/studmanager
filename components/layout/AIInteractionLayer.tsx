@@ -3,6 +3,8 @@
 import { useState, useEffect } from 'react';
 import Image from 'next/image';
 import { X } from 'lucide-react';
+import { useRouter } from 'next/navigation';
+import { useLocale } from '@/lib/locale-context';
 
 const AI_CATEGORIES = [
   { id: 'performance', name: 'الاداء', icon: '/ai/الاداء.svg' },
@@ -13,33 +15,33 @@ const AI_CATEGORIES = [
 ];
 
 export function AIInteractionLayer() {
+  const router = useRouter();
+  const { locale, direction } = useLocale();
+  const isRTL = direction === 'rtl';
   const [isOpen, setIsOpen] = useState(false);
   const [isMounted, setIsMounted] = useState(false);
-  const [showFlash, setShowFlash] = useState(false);
 
   useEffect(() => {
     setIsMounted(true);
   }, []);
 
   const handleOpen = () => {
-    setShowFlash(true);
-    setTimeout(() => {
-      setShowFlash(false);
-      setIsOpen(true);
-    }, 150);
+    setIsOpen(true);
+  };
+
+  const handleCategoryClick = (id: string) => {
+    setIsOpen(false);
+    router.push(`/${locale}/ai?model=${id}`);
   };
 
   if (!isMounted) return null;
 
   return (
     <>
-      {showFlash && (
-        <div className="fixed inset-0 z-[200] bg-white animate-out fade-out duration-300 pointer-events-none" />
-      )}
-
       {/* Desktop Button */}
       <div
-        className="fixed top-1/2 -translate-y-1/2 z-50 hidden md:block cursor-pointer transition-all duration-300 hover:scale-110 active:scale-95 group left-5 -translate-x-1/2"
+        className={`fixed top-1/2 -translate-y-1/2 z-50 hidden md:block cursor-pointer transition-all duration-300 hover:scale-110 active:scale-95 group ${false ? 'right-5 translate-x-1/2' : 'left-5 -translate-x-1/2'
+          }`}
         onClick={handleOpen}
       >
         <div className="relative w-16 h-44 flex items-center justify-center">
@@ -54,7 +56,8 @@ export function AIInteractionLayer() {
 
       {/* Mobile Button */}
       <div
-        className="fixed bottom-24 left-6 z-50 md:hidden cursor-pointer active:scale-90 transition-transform"
+        className={`fixed bottom-24 z-50 md:hidden cursor-pointer active:scale-90 transition-transform ${false ? 'right-6' : 'left-6'
+          }`}
         onClick={handleOpen}
       >
         <div className="w-16 h-16 bg-white rounded-full shadow-md flex items-center justify-center border border-[#d6cfc9]">
@@ -71,11 +74,11 @@ export function AIInteractionLayer() {
       {isOpen && (
         <div className="fixed inset-0 z-[100] flex items-center justify-center p-3 md:p-6">
           <div
-            className="absolute inset-0 bg-black/30 backdrop-blur-sm"
+            className="absolute inset-0 bg-black/30 backdrop-blur-sm animate-in fade-in duration-300"
             onClick={() => setIsOpen(false)}
           />
 
-          <div className="relative w-full max-w-6xl bg-[#e9e5e2] rounded-[28px] md:rounded-[40px] shadow-xl overflow-hidden animate-in zoom-in-95 duration-300">
+          <div className="relative w-full max-w-6xl bg-[#e9e5e2] rounded-[28px] md:rounded-[40px] shadow-xl overflow-hidden animate-in fade-in zoom-in-95 duration-300 ease-out">
             {/* Header */}
             <div className="flex items-center justify-between px-5 md:px-8 py-4 md:py-6 border-b border-[#d6cfc9]">
               <div className="text-right">
@@ -101,7 +104,8 @@ export function AIInteractionLayer() {
                 {AI_CATEGORIES.map((cat) => (
                   <div
                     key={cat.id}
-                    className="flex flex-col items-center gap-3 md:gap-5 p-4 md:p-6 rounded-2xl md:rounded-[24px] bg-[#f1eeeb] shadow-md hover:shadow-lg transition-all cursor-pointer"
+                    onClick={() => handleCategoryClick(cat.id)}
+                    className="flex flex-col items-center gap-3 md:gap-5 p-4 md:p-6 rounded-2xl md:rounded-[24px] bg-[#f1eeeb] shadow-md hover:shadow-lg transition-all cursor-pointer hover:bg-[#ece8e4]"
                   >
                     <div className="w-14 h-14 md:w-20 md:h-20 relative">
                       <Image
