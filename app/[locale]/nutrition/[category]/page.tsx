@@ -22,7 +22,7 @@ export default function NutritionCategoryPage(props: NutritionCategoryPageProps)
 
   return (
     <MainLayout>
-      <div className={`p-6 max-w-[1400px] mx-auto ${isRTL ? "text-right" : "text-left"}`}>
+      <div className={`p-4 sm:p-6 max-w-[1400px] mx-auto ${isRTL ? "text-right" : "text-left"}`}>
         {/* Back Button */}
         <Link
           href={`/${locale}/nutrition`}

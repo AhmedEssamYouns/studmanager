@@ -231,7 +231,8 @@
     "step4": "Upload Images",
     "male": "Male",
     "female": "Female",
-    "editHorse": "Edit Horse"
+    "editHorse": "Edit Horse",
+    "viewFull": "View Full"
   },
   "groups": {
     "title": "Groups",
