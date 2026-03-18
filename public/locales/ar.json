@@ -335,5 +335,26 @@
     "checkOutDate": "تاريخ الخروج",
     "notes": "ملاحظات",
     "foodType": "نوع الغذاء"
+  },
+  "performanceModals": {
+    "deleteTitle": "حذف السجل؟",
+    "deleteSubtitle": "لن تتمكن من استعادة هذا السجل",
+    "cancel": "إلغاء",
+    "delete": "حذف",
+    "save": "حفظ",
+    "defaultCategory": "التدريبات",
+    "selectHorse": "اختر الخيل",
+    "trainingDate": "تاريخ التدريب",
+    "trainerName": "اسم المدرب",
+    "followUpNumber": "رقم المتابعة",
+    "trainingType": "نوع التدريب",
+    "trainingDuration": "مدة التدريب",
+    "cost": "التكلفة",
+    "notifyMe": "أخطرني في",
+    "fitnessTraining": "تدريب لياقة",
+    "hour": "ساعة",
+    "muhammadAhmed": "محمد أحمد",
+    "addRecord": "اضافة سجل جديد لـ {{cat}}",
+    "editRecord": "تعديل سجل {{cat}}"
   }
 }

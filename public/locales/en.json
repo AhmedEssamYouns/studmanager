@@ -335,5 +335,26 @@
     "checkOutDate": "Check-out Date",
     "notes": "Notes",
     "foodType": "Food Type"
+  },
+  "performanceModals": {
+    "deleteTitle": "Delete Record?",
+    "deleteSubtitle": "You will not be able to recover this record",
+    "cancel": "Cancel",
+    "delete": "Delete",
+    "save": "Save",
+    "defaultCategory": "Training",
+    "selectHorse": "Select Horse",
+    "trainingDate": "Training Date",
+    "trainerName": "Trainer Name",
+    "followUpNumber": "Follow-up Number",
+    "trainingType": "Training Type",
+    "trainingDuration": "Training Duration",
+    "cost": "Cost",
+    "notifyMe": "Notify Me On",
+    "fitnessTraining": "Fitness Training",
+    "hour": "Hour",
+    "muhammadAhmed": "Muhammad Ahmad",
+    "addRecord": "Add New {{cat}} Record",
+    "editRecord": "Edit {{cat}} Record"
   }
 }
