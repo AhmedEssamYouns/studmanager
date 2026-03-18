@@ -22,7 +22,7 @@ interface CategoryConfig {
 }
 
 const CATEGORY_CONFIG: Record<string, CategoryConfig> = {
-    "membership": {
+    "subscription": {
         titleAr: "العضوية",
         titleEn: "Membership",
         columns: [
@@ -34,7 +34,7 @@ const CATEGORY_CONFIG: Record<string, CategoryConfig> = {
         ],
     },
 
-    "horse-equipment": {
+    "equipment": {
         titleAr: "معدات الخيول",
         titleEn: "Horse Equipment",
         columns: [
@@ -94,37 +94,37 @@ const CATEGORY_CONFIG: Record<string, CategoryConfig> = {
         ],
     },
 
-    "other-expenses": {
-    titleAr: "مصاريف اخرى",
+    "other": {
+        titleAr: "مصاريف اخرى",
         titleEn: "Other Expenses",
-            columns: [
-                { key: "procedure", labelAr: "الإجراء", labelEn: "Procedure" },
-                { key: "date", labelAr: "التاريخ", labelEn: "Date" },
-                { key: "cost", labelAr: "التكلفة", labelEn: "Cost" },
-                { key: "notes", labelAr: "ملاحظات", labelEn: "Notes" },
-            ],
-  },
+        columns: [
+            { key: "procedure", labelAr: "الإجراء", labelEn: "Procedure" },
+            { key: "date", labelAr: "التاريخ", labelEn: "Date" },
+            { key: "cost", labelAr: "التكلفة", labelEn: "Cost" },
+            { key: "notes", labelAr: "ملاحظات", labelEn: "Notes" },
+        ],
+    },
 
-"purchase-operations": {
-    titleAr: "عمليات الشراء",
+    "purchase": {
+        titleAr: "عمليات الشراء",
         titleEn: "Purchase Operations",
-            columns: [
-                { key: "horseName", labelAr: "اسم الخيل", labelEn: "Horse Name" },
-                { key: "ownerName", labelAr: "اسم المالك", labelEn: "Owner Name" },
-                { key: "date", labelAr: "التاريخ", labelEn: "Date" },
-                { key: "cost", labelAr: "التكلفة", labelEn: "Cost" },
-            ],
-  },
+        columns: [
+            { key: "horseName", labelAr: "اسم الخيل", labelEn: "Horse Name" },
+            { key: "ownerName", labelAr: "اسم المالك", labelEn: "Owner Name" },
+            { key: "date", labelAr: "التاريخ", labelEn: "Date" },
+            { key: "cost", labelAr: "التكلفة", labelEn: "Cost" },
+        ],
+    },
 
-"nutrition": {
-    titleAr: "التغذية",
+    "nutrition": {
+        titleAr: "التغذية",
         titleEn: "Nutrition",
-            columns: [
-                { key: "foodType", labelAr: "نوع الغذاء", labelEn: "Food Type" },
-                { key: "date", labelAr: "التاريخ", labelEn: "Date" },
-                { key: "cost", labelAr: "التكلفة", labelEn: "Cost" },
-            ],
-  },
+        columns: [
+            { key: "foodType", labelAr: "نوع الغذاء", labelEn: "Food Type" },
+            { key: "date", labelAr: "التاريخ", labelEn: "Date" },
+            { key: "cost", labelAr: "التكلفة", labelEn: "Cost" },
+        ],
+    },
 };
 
 const DEFAULT_CONFIG: CategoryConfig = {
@@ -141,7 +141,7 @@ const getMockData = (categoryId: string) => {
     const commonCost = "200$";
 
     const dataMap: Record<string, any[]> = {
-        membership: Array.from({ length: 10 }).map((_, i) => ({
+        "subscription": Array.from({ length: 10 }).map((_, i) => ({
             id: i + 1,
             facilityName: "اسم المنشأة",
             startDate: commonDate,
@@ -150,7 +150,7 @@ const getMockData = (categoryId: string) => {
             cost: commonCost,
         })),
 
-        "horse-equipment": [
+        "equipment": [
             { id: 1, equipment: "سرج", date: commonDate, cost: commonCost },
             { id: 2, equipment: "لجام", date: commonDate, cost: commonCost },
             { id: 3, equipment: "أدوات تدريب", date: commonDate, cost: commonCost },
@@ -162,7 +162,7 @@ const getMockData = (categoryId: string) => {
             })),
         ],
 
-        transport: Array.from({ length: 10 }).map((_, i) => ({
+        "transport": Array.from({ length: 10 }).map((_, i) => ({
             id: i + 1,
             horseName: "اسم الخيل",
             transportMethod: i === 1 ? "تريلا" : i === 2 ? "مقطورة فردية" : "شاحنة صغيرة",
@@ -172,7 +172,7 @@ const getMockData = (categoryId: string) => {
             cost: commonCost,
         })),
 
-        labor: [
+        "labor": [
             { id: 1, name: "محمد", jobTitle: "الوظيفة", workStartDate: commonDate, insuranceAmount: "750 EGP", insuranceType: "طبي", salary: "5000 EGP", attachment: "اسم الملف.pdf" },
             { id: 2, name: "احمد", jobTitle: "الوظيفة", workStartDate: commonDate, insuranceAmount: "800 EGP", insuranceType: "طبي", salary: "5000 EGP", attachment: "اسم الملف.pdf" },
             { id: 3, name: "محمد", jobTitle: "الوظيفة", workStartDate: commonDate, insuranceAmount: "850 EGP", insuranceType: "اجتماعي", salary: "5000 EGP", attachment: "اسم الملف.pdf" },
@@ -191,7 +191,7 @@ const getMockData = (categoryId: string) => {
             })),
         ],
 
-        clinics: [
+        "clinics": [
             { id: 1, procedure: "أشعة", procedureDetails: "نوع الأشعة", date: "18 ابريل 2025", cost: commonCost },
             { id: 2, procedure: "تحليل دم", procedureDetails: "نوع التحليل", date: "18 ابريل 2025", cost: commonCost },
             { id: 3, procedure: "جرعة الديدان", procedureDetails: "نوع الجرعة", date: "18 ابريل 2025", cost: commonCost },
@@ -204,7 +204,7 @@ const getMockData = (categoryId: string) => {
             { id: 10, procedure: "التطعيمات", procedureDetails: "نوع التطعيم", date: "18 ابريل 2025", cost: commonCost },
         ],
 
-        housing: Array.from({ length: 10 }).map((_, i) => ({
+        "housing": Array.from({ length: 10 }).map((_, i) => ({
             id: i + 1,
             horseName: "اسم الخيل",
             ownerName: "محمد",
@@ -213,7 +213,7 @@ const getMockData = (categoryId: string) => {
             cost: commonCost,
         })),
 
-        "other-expenses": [
+        "other": [
             { id: 1, procedure: "فاتورة كهرباء", date: commonDate, cost: commonCost, notes: "شهر" },
             { id: 2, procedure: "صيانة معدات", date: commonDate, cost: commonCost, notes: "شهر" },
             { id: 3, procedure: "مستلزمات", date: commonDate, cost: commonCost, notes: "شهر" },
@@ -226,7 +226,7 @@ const getMockData = (categoryId: string) => {
             { id: 10, procedure: "مستلزمات", date: commonDate, cost: commonCost, notes: "6 شهور" },
         ],
 
-        "purchase-operations": Array.from({ length: 10 }).map((_, i) => ({
+        "purchase": Array.from({ length: 10 }).map((_, i) => ({
             id: i + 1,
             horseName: "اسم الخيل",
             ownerName: "محمد",
@@ -234,7 +234,7 @@ const getMockData = (categoryId: string) => {
             cost: commonCost,
         })),
 
-        nutrition: [
+        "nutrition": [
             { id: 1, foodType: "علف", date: "18 ابريل 2025", cost: commonCost },
             { id: 2, foodType: "مكمل شهري", date: "18 ابريل 2025", cost: commonCost },
             ...Array.from({ length: 8 }).map((_, i) => ({
@@ -396,8 +396,8 @@ export const ExpensesCategoryTable = ({ categoryId }: ExpensesCategoryTableProps
                         key={page}
                         onClick={() => setCurrentPage(page)}
                         className={`w-8 h-8 rounded-full text-sm transition-colors ${currentPage === page
-                                ? "bg-[#3b2b20] text-white"
-                                : "text-gray-600 hover:bg-gray-50 bg-white border border-gray-200"
+                            ? "bg-[#3b2b20] text-white"
+                            : "text-gray-600 hover:bg-gray-50 bg-white border border-gray-200"
                             }`}
                     >
                         {page}
@@ -409,8 +409,8 @@ export const ExpensesCategoryTable = ({ categoryId }: ExpensesCategoryTableProps
                 <button
                     onClick={() => setCurrentPage(32)}
                     className={`w-8 h-8 rounded-full text-sm transition-colors ${currentPage === 32
-                            ? "bg-[#3b2b20] text-white"
-                            : "text-gray-600 hover:bg-gray-50 bg-white border border-gray-200"
+                        ? "bg-[#3b2b20] text-white"
+                        : "text-gray-600 hover:bg-gray-50 bg-white border border-gray-200"
                         }`}
                 >
                     32
@@ -429,6 +429,7 @@ export const ExpensesCategoryTable = ({ categoryId }: ExpensesCategoryTableProps
                 type={modalState.type}
                 onClose={closeModal}
                 recordData={modalState.record}
+                categoryId={categoryId}
                 categoryTitle={isRTL ? config.titleAr : config.titleEn}
             />
         </div>

@@ -185,7 +185,25 @@ export const ExpensesModals = ({
     const { direction, locale } = useLocale();
     const isRTL = direction === "rtl";
 
-    const fields = useMemo(() => CATEGORY_FIELDS[categoryId || ""] || [], [categoryId]);
+    const fields = useMemo(() => {
+        const originalFields = CATEGORY_FIELDS[categoryId || ""] || [];
+
+        if (direction === "rtl") {
+            const reordered: typeof originalFields = [];
+
+            for (let i = 0; i < originalFields.length; i += 2) {
+                if (originalFields[i + 1]) {
+                    reordered.push(originalFields[i + 1], originalFields[i]);
+                } else {
+                    reordered.push(originalFields[i]);
+                }
+            }
+
+            return reordered;
+        }
+
+        return originalFields;
+    }, [categoryId, direction]);
     const defaultValues = useMemo(() => getDefaultValues(categoryId), [categoryId]);
 
     if (!isOpen || !type) return null;
@@ -328,7 +346,10 @@ export const ExpensesModals = ({
     return (
         <div className="fixed inset-0 bg-black/40 z-50 flex items-center justify-center p-4 overflow-y-auto" dir={direction}>
             <div className="bg-white rounded-[28px] w-full max-w-5xl p-6 md:p-8 relative shadow-xl my-8 font-cairo">
-                <div className="flex items-center justify-between mb-8">
+                <div
+                    className={`flex items-center mb-8 ${isRTL ? "flex-row-reverse justify-between" : "justify-between"
+                        }`}
+                >
                     <button
                         onClick={onClose}
                         className="p-2 hover:bg-gray-100 rounded-full transition-colors text-gray-500"
@@ -346,13 +367,17 @@ export const ExpensesModals = ({
                     </div>
                 </div>
 
-                <div className="grid grid-cols-1 md:grid-cols-2 gap-x-6 gap-y-6 mb-10">
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-x-6 gap-y-6 mb-10"
+                >
                     {fields.map((field) => (
                         <div key={field.key}>{renderField(field)}</div>
                     ))}
                 </div>
 
-                <div className="flex items-center gap-4">
+                <div
+                    className={`flex items-center gap-4 ${isRTL ? "flex-row-reverse" : ""
+                        }`}
+                >
                     <button
                         onClick={type === "add" ? () => { } : onClose}
                         className="px-10 py-3.5 bg-[#3b2b20] text-white rounded-xl font-bold hover:bg-[#2e2119] transition-colors flex items-center gap-2"
