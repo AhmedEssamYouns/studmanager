@@ -356,5 +356,23 @@
     "muhammadAhmed": "Muhammad Ahmad",
     "addRecord": "Add New {{cat}} Record",
     "editRecord": "Edit {{cat}} Record"
+  },
+  "nutritionModals": {
+    "deleteTitle": "Delete Record?",
+    "deleteSubtitle": "You will not be able to recover this record",
+    "cancel": "Cancel",
+    "delete": "Delete",
+    "save": "Save",
+    "addRecord": "Add New {{cat}} Record",
+    "editRecord": "Edit {{cat}} Record",
+    "defaultCategory": "Feed Changes",
+    "selectHorse": "Select Horse",
+    "changeDate": "Change Date",
+    "feedType": "Feed Type",
+    "quantity": "Quantity / kg",
+    "supplierName": "Supplier Name",
+    "supplierNumber": "Supplier Number",
+    "cost": "Cost",
+    "notifyMe": "Notify Me On"
   }
 }

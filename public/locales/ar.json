@@ -356,5 +356,23 @@
     "muhammadAhmed": "محمد أحمد",
     "addRecord": "اضافة سجل جديد لـ {{cat}}",
     "editRecord": "تعديل سجل {{cat}}"
+  },
+  "nutritionModals": {
+    "deleteTitle": "حذف السجل؟",
+    "deleteSubtitle": "لن تتمكن من استعادة هذا السجل",
+    "cancel": "إلغاء",
+    "delete": "حذف",
+    "save": "حفظ",
+    "addRecord": "اضافة سجل جديد ل{{cat}}",
+    "editRecord": "تعديل سجل {{cat}}",
+    "defaultCategory": "تغييرات الأعلاف",
+    "selectHorse": "اختر الخيل",
+    "changeDate": "تاريخ التغيير",
+    "feedType": "نوع العلف",
+    "quantity": "الكمية / كجم",
+    "supplierName": "اسم المورد",
+    "supplierNumber": "رقم المورد",
+    "cost": "التكلفة",
+    "notifyMe": "أخطرني في"
   }
 }
