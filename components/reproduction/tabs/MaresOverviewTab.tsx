@@ -9,10 +9,9 @@ import { Search } from "lucide-react";
 import ReproductionRecordModal from "@/components/reproduction/modals/ReproductionRecordModal";
 
 type SummaryCard = {
-  titleAr: string;
-  titleEn: string;
+  titleKey: string;
   value: string | number;
-  sub?: { labelAr: string; labelEn: string; value: string | number }[];
+  sub?: { labelKey: string; value: string | number }[];
 };
 
 const dummyHorse = {
@@ -25,45 +24,34 @@ const dummyHorse = {
   bornInEn: "Egypt",
   currentInAr: "مصر",
   currentInEn: "Egypt",
-  imageUrl:
-    "https://images.unsplash.com/photo-1517849845537-4d257902454a?auto=format&fit=crop&w=600&q=60",
 };
 
 const summaryCards: SummaryCard[] = [
+  { titleKey: "reproduction.maresOverview.summary.offspringCount", value: 5 },
   {
-    titleAr: "عدد الأبناء",
-    titleEn: "Offspring count",
-    value: 5,
-  },
-  {
-    titleAr: "آخر مرة تمت ولادته",
-    titleEn: "Last birth",
+    titleKey: "reproduction.maresOverview.summary.lastBirth",
     value: "مداح مهنا",
   },
   {
-    titleAr: "عدد حالات الحمل الناجحة",
-    titleEn: "Successful pregnancies",
+    titleKey: "reproduction.maresOverview.summary.successfulPregnancies",
     value: 5,
   },
   {
-    titleAr: "خدمة التكاثر",
-    titleEn: "Reproduction service",
+    titleKey: "reproduction.maresOverview.summary.reproductionService",
     value: "",
     sub: [
-      { labelAr: "جمع الأجنة", labelEn: "Embryo collection", value: 5 },
-      { labelAr: "حمل", labelEn: "Pregnancy", value: 5 },
+      {
+        labelKey: "reproduction.maresOverview.summary.embryoCollection",
+        value: 5,
+      },
+      { labelKey: "reproduction.maresOverview.summary.pregnancy", value: 5 },
     ],
   },
   {
-    titleAr: "نقل الأجنة",
-    titleEn: "Embryo transfer",
+    titleKey: "reproduction.maresOverview.summary.embryoTransfer",
     value: "0/0",
   },
-  {
-    titleAr: "عدد الأجنة الحالية",
-    titleEn: "Current embryos",
-    value: 5,
-  },
+  { titleKey: "reproduction.maresOverview.summary.currentEmbryos", value: 5 },
 ];
 
 // Table dummy JSON (matches screenshot columns)
@@ -111,16 +99,13 @@ const dummyRows: RecordItem[] = [
 ];
 
 export default function MaresOverviewTab() {
-  const { locale, direction } = useLocale();
+  const { locale, direction, t } = useLocale();
   const isRTL = direction === "rtl";
 
   const [query, setQuery] = useState("");
   const [selectedIds, setSelectedIds] = useState<string[]>([]);
-
-  // NEW: keep rows in state (so add/edit updates the table)
   const [rows, setRows] = useState<RecordItem[]>(dummyRows);
 
-  // NEW: modal state
   const [modalOpen, setModalOpen] = useState(false);
   const [modalMode, setModalMode] = useState<"add" | "edit">("add");
   const [editingRow, setEditingRow] = useState<RecordItem | null>(null);
@@ -149,21 +134,18 @@ export default function MaresOverviewTab() {
     else setSelectedIds(filtered.map((r) => r.id));
   }
 
-  // NEW: open add
   function openAddModal() {
     setModalMode("add");
     setEditingRow(null);
     setModalOpen(true);
   }
 
-  // NEW: open edit (with filled data)
   function openEditModal(row: RecordItem) {
     setModalMode("edit");
     setEditingRow(row);
     setModalOpen(true);
   }
 
-  // NEW: submit handler (add/edit)
   function handleModalSubmit(data: RecordItem) {
     if (modalMode === "add") {
       setRows((cur) => [{ ...data, id: String(Date.now()) }, ...cur]);
@@ -175,19 +157,19 @@ export default function MaresOverviewTab() {
   }
 
   return (
-    <div className="space-y-6">
+    <div className="space-y-6 w-full max-w-full overflow-x-hidden">
       {/* Top card (search + info) */}
-      <div className="rounded-2xl bg-white shadow-sm p-4 sm:p-6">
+      <div className="rounded-2xl bg-white shadow-sm p-4 sm:p-6 w-full max-w-full overflow-x-hidden">
         <div
           className={`flex flex-col sm:flex-row sm:items-center gap-3 ${
             isRTL ? "sm:flex-row-reverse" : ""
           }`}
         >
-          <button className="h-11 px-4 rounded-2xl bg-[#4b2f1a] text-white text-sm font-semibold flex items-center justify-center w-[300px] sm:w-auto">
-            {locale === "ar" ? "رؤية الملف الشخصي" : "View profile"}
+          <button className="h-11 px-4 rounded-2xl bg-[#4b2f1a] text-white text-sm font-semibold flex items-center justify-center w-full sm:w-auto max-w-full">
+            {t("reproduction.maresOverview.viewProfile")}
           </button>
 
-          <div className="relative w-full">
+          <div className="relative w-full min-w-0">
             <span
               className={`absolute top-1/2 -translate-y-1/2 text-[#6f625b] ${
                 isRTL ? "right-4" : "left-4"
@@ -198,67 +180,69 @@ export default function MaresOverviewTab() {
             <input
               value={query}
               onChange={(e) => setQuery(e.target.value)}
-              className={`w-full h-11 rounded-2xl border border-[#ece2da] bg-white text-sm outline-none ${
+              className={`w-full max-w-full h-11 rounded-2xl border border-[#ece2da] bg-white text-sm outline-none ${
                 isRTL ? "pr-10 text-right" : "pl-10 text-left"
               }`}
-              placeholder={locale === "ar" ? "اختر الفرس" : "Search mare"}
+              placeholder={t("reproduction.maresOverview.searchPlaceholder")}
             />
           </div>
         </div>
 
-        <div className="mt-6 flex gap-6 items-start">
-          {/* image */}
-          <div className="w-full lg:w-[220px]">
+        {/* Mobile: stack, Desktop: keep same */}
+        <div className="mt-6 grid grid-cols-1 lg:grid-cols-[220px_1fr] gap-6 items-start w-full max-w-full">
+          <div className="w-full max-w-full">
             <div className="w-full aspect-[2/2] rounded-2xl overflow-hidden bg-[#f3f1ef]">
               <img
-                src={dummyHorse.imageUrl}
+                src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQfquc1pFNFujzgkuv6_xka95bqkKHoR4jE5w&s"
                 alt="mare"
                 className="w-full h-full object-cover"
               />
             </div>
           </div>
-          {/* details */}
-          <div className={`${isRTL ? "text-right" : "text-left"}`}>
-            <div className=" gap-y-3 gap-x-8 text-sm">
-              <div className="flex gap-2 mb-5">
-                <span className="font-bold text-[#2c2330]">
-                  {locale === "ar" ? "الاسم" : "Name"} :
+
+          <div className={`${isRTL ? "text-right" : "text-left"} min-w-0`}>
+            <div className="text-sm">
+              <div className="flex gap-2 mb-5 min-w-0">
+                <span className="font-bold text-[#2c2330] whitespace-nowrap">
+                  {t("common.name")} :
                 </span>
-                <span className="text-[#5f525a]">
+                <span className="text-[#5f525a] break-words min-w-0">
                   {locale === "ar" ? dummyHorse.nameAr : dummyHorse.nameEn}
                 </span>
               </div>
 
-              <div className="flex gap-2 mb-5">
-                <span className="font-bold text-[#2c2330]">
-                  {locale === "ar" ? "المزرعة" : "Farm"} :
+              <div className="flex gap-2 mb-5 min-w-0">
+                <span className="font-bold text-[#2c2330] whitespace-nowrap">
+                  {t("common.farm")} :
                 </span>
-                <span className="text-[#5f525a]">
+                <span className="text-[#5f525a] break-words min-w-0">
                   {locale === "ar" ? dummyHorse.farmAr : dummyHorse.farmEn}
                 </span>
               </div>
 
-              <div className="flex gap-2 mb-5">
-                <span className="font-bold text-[#2c2330]">
-                  {locale === "ar" ? "تاريخ الميلاد" : "DOB"} :
+              <div className="flex gap-2 mb-5 min-w-0">
+                <span className="font-bold text-[#2c2330] whitespace-nowrap">
+                  {t("common.dob")} :
                 </span>
-                <span className="text-[#5f525a]">{dummyHorse.dob}</span>
+                <span className="text-[#5f525a] break-words min-w-0">
+                  {dummyHorse.dob}
+                </span>
               </div>
 
-              <div className="flex gap-2 mb-5">
-                <span className="font-bold text-[#2c2330]">
-                  {locale === "ar" ? "ولد في" : "Born in"} :
+              <div className="flex gap-2 mb-5 min-w-0">
+                <span className="font-bold text-[#2c2330] whitespace-nowrap">
+                  {t("common.bornIn")} :
                 </span>
-                <span className="text-[#5f525a]">
+                <span className="text-[#5f525a] break-words min-w-0">
                   {locale === "ar" ? dummyHorse.bornInAr : dummyHorse.bornInEn}
                 </span>
               </div>
 
-              <div className="flex gap-2 mb-5">
-                <span className="font-bold text-[#2c2330]">
-                  {locale === "ar" ? "حاليا في" : "Currently in"} :
+              <div className="flex gap-2 mb-5 min-w-0">
+                <span className="font-bold text-[#2c2330] whitespace-nowrap">
+                  {t("common.currentlyIn")} :
                 </span>
-                <span className="text-[#5f525a]">
+                <span className="text-[#5f525a] break-words min-w-0">
                   {locale === "ar"
                     ? dummyHorse.currentInAr
                     : dummyHorse.currentInEn}
@@ -277,7 +261,7 @@ export default function MaresOverviewTab() {
             className="rounded-2xl bg-white shadow-sm p-5 border border-[#f2ece7] text-center"
           >
             <div className="text-sm font-bold text-[#2c2330]">
-              {locale === "ar" ? c.titleAr : c.titleEn}
+              {t(c.titleKey)}
             </div>
 
             {c.sub ? (
@@ -285,7 +269,7 @@ export default function MaresOverviewTab() {
                 {c.sub.map((s, i) => (
                   <div key={i}>
                     <div className="text-xs text-[#6f625b]">
-                      {locale === "ar" ? s.labelAr : s.labelEn}
+                      {t(s.labelKey)}
                     </div>
                     <div className="mt-1 text-xl font-extrabold text-[#2c2330]">
                       {s.value}
@@ -308,28 +292,28 @@ export default function MaresOverviewTab() {
           isRTL ? "flex-row-reverse" : ""
         }`}
       >
-        <div className="flex items-center gap-2">
+        <div className="flex items-center gap-2 w-full sm:w-auto">
           <button
             onClick={openAddModal}
-            className="h-11 px-4 rounded-2xl bg-[#4b2f1a] text-white text-sm font-semibold"
+            className="h-11 px-4 rounded-2xl bg-[#4b2f1a] text-white text-sm font-semibold w-full sm:w-auto"
           >
-            {locale === "ar" ? "إضافة سجل جديد" : "Add record"}
+            {t("common.addNewRecord")}
           </button>
 
           <button
             disabled={selectedIds.length === 0}
-            className={`h-11 px-4 rounded-2xl text-sm font-semibold ${
+            className={`h-11 px-4 rounded-2xl text-sm font-semibold w-full sm:w-auto ${
               selectedIds.length === 0
                 ? "bg-[#e7e2de] text-[#9a8f88]"
                 : "bg-[#d9534f] text-white"
             }`}
           >
-            {locale === "ar" ? "حذف الكل" : "Delete all"}
+            {t("common.deleteAll")}
           </button>
         </div>
 
-        <div className="text-lg font-bold text-[#2c2330]">
-          {locale === "ar" ? "سجل التناسل" : "Reproduction records"}
+        <div className="text-lg font-bold text-[#2c2330] w-full sm:w-auto">
+          {t("reproduction.maresOverview.recordsTitle")}
         </div>
       </div>
 

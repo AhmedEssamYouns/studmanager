@@ -21,41 +21,47 @@ export default function ReproductionRecordModal({
   onClose,
   onSubmit,
 }: Props) {
-  const { locale, direction } = useLocale();
+  const { locale, direction, t } = useLocale();
   const isRTL = direction === "rtl";
 
   const stallionOptions = useMemo(
     () => [
       { value: "", label: "" },
-      { value: "مداح مهنا", label: locale === "ar" ? "مداح مهنا" : "Maddah" },
-      { value: "فحل ٢", label: locale === "ar" ? "فحل ٢" : "Stallion 2" },
+      {
+        value: "مداح مهنا",
+        label: t("reproduction.modals.record.stallionOpt1"),
+      },
+      { value: "فحل ٢", label: t("reproduction.modals.record.stallionOpt2") },
     ],
-    [locale],
+    [t],
   );
 
   const inseminationTypeOptions = useMemo(
     () => [
       { value: "", label: "" },
-      { value: "طبيعي", label: locale === "ar" ? "طبيعي" : "Natural" },
+      {
+        value: "طبيعي",
+        label: t("reproduction.modals.record.insemination.natural"),
+      },
       {
         value: "سائل منوي حديث",
-        label: locale === "ar" ? "سائل منوي حديث" : "Fresh semen",
+        label: t("reproduction.modals.record.insemination.fresh"),
       },
       {
         value: "سائل منوي مجمد",
-        label: locale === "ar" ? "سائل منوي مجمد" : "Frozen semen",
+        label: t("reproduction.modals.record.insemination.frozen"),
       },
     ],
-    [locale],
+    [t],
   );
 
   const resultOptions = useMemo(
     () => [
       { value: "", label: "" },
-      { value: "نجح", label: locale === "ar" ? "نجح" : "Success" },
-      { value: "فشل", label: locale === "ar" ? "فشل" : "Failed" },
+      { value: "نجح", label: t("reproduction.modals.record.result.success") },
+      { value: "فشل", label: t("reproduction.modals.record.result.failed") },
     ],
-    [locale],
+    [t],
   );
 
   const [stallion, setStallion] = useState("");
@@ -97,19 +103,19 @@ export default function ReproductionRecordModal({
     onSubmit(payload);
   }
 
-  const showDateLabel = !date;
-  const showStallionLabel = !stallion;
-  const showInseminationTypeLabel = !inseminationType;
-  const showResultLabel = !result;
-  const showNotesLabel = !notes;
+  const show = {
+    date: !date,
+    stallion: !stallion,
+    inseminationType: !inseminationType,
+    result: !result,
+    notes: !notes,
+  };
 
   const fieldClass =
     "w-full h-16 rounded-2xl border-2 border-gray-300 bg-white px-6 focus:outline-none focus:ring-0";
 
-  // Make select arrow ourselves
   const selectClass = `${fieldClass} pr-12 appearance-none`;
 
-  // Hide native date indicators (WebKit) so no icon shows
   const dateInputClass =
     `${fieldClass} ` +
     "[&::-webkit-calendar-picker-indicator]:opacity-0 " +
@@ -119,23 +125,16 @@ export default function ReproductionRecordModal({
     "[&::-webkit-clear-button]:hidden";
 
   const arrowSideClass = isRTL ? "left-5" : "right-5";
+  const labelSideClass = isRTL ? "right-6" : "left-6";
 
   return (
     <FormModal
       isOpen={open}
-      title={
-        mode === "add"
-          ? locale === "ar"
-            ? "إضافة سجل جديد"
-            : "Add record"
-          : locale === "ar"
-            ? "تعديل السجل"
-            : "Edit record"
-      }
+      title={mode === "add" ? t("common.addNewRecord") : t("common.editRecord")}
       onClose={onClose}
       onSubmit={submit}
-      submitText={locale === "ar" ? "حفظ" : "Save"}
-      cancelText={locale === "ar" ? "إلغاء" : "Cancel"}
+      submitText={t("common.save")}
+      cancelText={t("common.cancel")}
     >
       <div className={isRTL ? "text-right" : "text-left"}>
         <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
@@ -146,26 +145,24 @@ export default function ReproductionRecordModal({
               value={date}
               onChange={(e) => setDate(e.target.value)}
               className={dateInputClass}
-              aria-label={locale === "ar" ? "التاريخ" : "Date"}
+              aria-label={t("common.date")}
             />
-            {showDateLabel && (
+            {show.date && (
               <span
-                className={`pointer-events-none absolute top-1/2 -translate-y-1/2 text-base text-gray-700 ${
-                  isRTL ? "right-6" : "left-6"
-                }`}
+                className={`pointer-events-none absolute top-1/2 -translate-y-1/2 text-base text-gray-700 ${labelSideClass}`}
               >
-                {locale === "ar" ? "التاريخ" : "Date"}
+                {t("common.date")}
               </span>
             )}
           </div>
 
-          {/* stallion name (with arrow icon) */}
+          {/* stallion name */}
           <div className="relative">
             <select
               value={stallion}
               onChange={(e) => setStallion(e.target.value)}
               className={selectClass}
-              aria-label={locale === "ar" ? "اسم الفحل" : "Stallion name"}
+              aria-label={t("reproduction.modals.record.fields.stallionName")}
             >
               {stallionOptions.map((o) => (
                 <option key={o.value} value={o.value}>
@@ -178,24 +175,22 @@ export default function ReproductionRecordModal({
               className={`pointer-events-none absolute top-1/2 -translate-y-1/2 ${arrowSideClass} h-5 w-5 text-gray-600`}
             />
 
-            {showStallionLabel && (
+            {show.stallion && (
               <span
-                className={`pointer-events-none absolute top-1/2 -translate-y-1/2 text-base text-gray-700 ${
-                  isRTL ? "right-6" : "left-6"
-                }`}
+                className={`pointer-events-none absolute top-1/2 -translate-y-1/2 text-base text-gray-700 ${labelSideClass}`}
               >
-                {locale === "ar" ? "اسم الفحل" : "Stallion name"}
+                {t("reproduction.modals.record.fields.stallionName")}
               </span>
             )}
           </div>
 
-          {/* result (with arrow icon) */}
+          {/* result */}
           <div className="relative">
             <select
               value={result}
               onChange={(e) => setResult(e.target.value)}
               className={selectClass}
-              aria-label={locale === "ar" ? "النتيجة" : "Result"}
+              aria-label={t("reproduction.modals.record.fields.result")}
             >
               {resultOptions.map((o) => (
                 <option key={o.value} value={o.value}>
@@ -208,24 +203,24 @@ export default function ReproductionRecordModal({
               className={`pointer-events-none absolute top-1/2 -translate-y-1/2 ${arrowSideClass} h-5 w-5 text-gray-600`}
             />
 
-            {showResultLabel && (
+            {show.result && (
               <span
-                className={`pointer-events-none absolute top-1/2 -translate-y-1/2 text-base text-gray-700 ${
-                  isRTL ? "right-6" : "left-6"
-                }`}
+                className={`pointer-events-none absolute top-1/2 -translate-y-1/2 text-base text-gray-700 ${labelSideClass}`}
               >
-                {locale === "ar" ? "النتيجة" : "Result"}
+                {t("reproduction.modals.record.fields.result")}
               </span>
             )}
           </div>
 
-          {/* insemination type (with arrow icon) */}
+          {/* insemination type */}
           <div className="relative">
             <select
               value={inseminationType}
               onChange={(e) => setInseminationType(e.target.value)}
               className={selectClass}
-              aria-label={locale === "ar" ? "نوع التلقيح" : "Insemination type"}
+              aria-label={t(
+                "reproduction.modals.record.fields.inseminationType",
+              )}
             >
               {inseminationTypeOptions.map((o) => (
                 <option key={o.value} value={o.value}>
@@ -238,33 +233,29 @@ export default function ReproductionRecordModal({
               className={`pointer-events-none absolute top-1/2 -translate-y-1/2 ${arrowSideClass} h-5 w-5 text-gray-600`}
             />
 
-            {showInseminationTypeLabel && (
+            {show.inseminationType && (
               <span
-                className={`pointer-events-none absolute top-1/2 -translate-y-1/2 text-base text-gray-700 ${
-                  isRTL ? "right-6" : "left-6"
-                }`}
+                className={`pointer-events-none absolute top-1/2 -translate-y-1/2 text-base text-gray-700 ${labelSideClass}`}
               >
-                {locale === "ar" ? "نوع التلقيح" : "Insemination type"}
+                {t("reproduction.modals.record.fields.inseminationType")}
               </span>
             )}
           </div>
         </div>
 
-        {/* notes (full width) */}
+        {/* notes */}
         <div className="mt-6 relative">
           <input
             value={notes}
             onChange={(e) => setNotes(e.target.value)}
             className={fieldClass}
-            aria-label={locale === "ar" ? "ملاحظات" : "Notes"}
+            aria-label={t("common.notes")}
           />
-          {showNotesLabel && (
+          {show.notes && (
             <span
-              className={`pointer-events-none absolute top-1/2 -translate-y-1/2 text-base text-gray-700 ${
-                isRTL ? "right-6" : "left-6"
-              }`}
+              className={`pointer-events-none absolute top-1/2 -translate-y-1/2 text-base text-gray-700 ${labelSideClass}`}
             >
-              {locale === "ar" ? "ملاحظات" : "Notes"}
+              {t("common.notes")}
             </span>
           )}
         </div>

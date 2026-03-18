@@ -14,35 +14,57 @@ import { dummyByType, type StallionType } from "./stallions/dummy";
 import { StallionProfileCard } from "./stallions/StallionProfileCard";
 import { StallionToolbar } from "./stallions/StallionToolbar";
 
-function tagToType(tag: string): StallionType {
-  if (tag === "الطلوق الطبيعية" || tag === "Natural semen") return "natural";
-  if (tag === "سائل منوي حديث" || tag === "Fresh semen") return "fresh";
-  if (tag === "الطلوق المجمدة" || tag === "Frozen semen") return "frozen";
+function tagToType(tag: string, locale: "ar" | "en"): StallionType {
+  // store Arabic-only keys as "stable ids" for mapping
+  // and render labels via t() in UI (below)
+  if (tag === "natural") return "natural";
+  if (tag === "fresh") return "fresh";
+  if (tag === "frozen") return "frozen";
   return "vet";
 }
 
 export default function StallionsTab() {
-  const { locale, direction } = useLocale();
+  const { locale, direction, t } = useLocale();
 
   const [query, setQuery] = useState("");
-  const tags = [
-    locale === "ar" ? "الطلوق الطبيعية" : "Natural semen",
-    locale === "ar" ? "سائل منوي حديث" : "Fresh semen",
-    locale === "ar" ? "الطلوق المجمدة" : "Frozen semen",
-    locale === "ar" ? "الفحص البيطري" : "Vet check",
-  ];
-  const [activeTag, setActiveTag] = useState<string>("الطلوق الطبيعية");
-  const activeType = tagToType(activeTag);
 
-  // table data per tab (dummy json)
+  // Use stable ids for tab keys, translate labels via JSON
+  const tags: { key: "natural" | "fresh" | "frozen" | "vet"; label: string }[] =
+    [
+      {
+        key: "natural",
+        label:
+          locale === "ar"
+            ? t("reports.naturalBreeding")
+            : t("reports.naturalBreeding"),
+      },
+      {
+        key: "fresh",
+        label:
+          locale === "ar" ? t("reports.freshSemen") : t("reports.freshSemen"),
+      },
+      {
+        key: "frozen",
+        label:
+          locale === "ar" ? t("reports.frozenSemen") : t("reports.frozenSemen"),
+      },
+      {
+        key: "vet",
+        label: locale === "ar" ? t("reports.vetCheck") : t("reports.vetCheck"),
+      },
+    ];
+
+  const [activeTag, setActiveTag] = useState<
+    "natural" | "fresh" | "frozen" | "vet"
+  >("natural");
+  const activeType = tagToType(activeTag, locale);
+
   const [itemsByType, setItemsByType] = useState(dummyByType);
 
-  // selection + delete states
   const [toDelete, setToDelete] = useState<RecordItem | null>(null);
   const [confirmingMultiple, setConfirmingMultiple] = useState(false);
   const [selectedIds, setSelectedIds] = useState<string[]>([]);
 
-  // form modals
   const [formOpen, setFormOpen] = useState(false);
   const [formMode, setFormMode] = useState<"add" | "edit">("add");
   const [editingRow, setEditingRow] = useState<RecordItem | null>(null);
@@ -72,8 +94,8 @@ export default function StallionsTab() {
     else setSelectedIds(filtered.map((r) => r.id));
   }
 
-  function handleTagChange(tag: string) {
-    setActiveTag(tag);
+  function handleTagChange(tagKey: "natural" | "fresh" | "frozen" | "vet") {
+    setActiveTag(tagKey);
     setSelectedIds([]);
     setToDelete(null);
     setConfirmingMultiple(false);
@@ -145,54 +167,48 @@ export default function StallionsTab() {
 
   const modalOpen = !!toDelete || confirmingMultiple;
   const modalTitle = toDelete
-    ? locale === "ar"
-      ? "حذف العنصر؟"
-      : "Delete item?"
-    : locale === "ar"
-      ? "حذف العناصر المحددة؟"
-      : "Delete selected items?";
-
+    ? t("common.deleteRecord")
+    : t("common.deleteSelected");
   const modalDesc = toDelete
-    ? locale === "ar"
-      ? "لن تتمكن من استعادة السجل"
-      : "You won't be able to recover this record."
-    : locale === "ar"
-      ? "لن تتمكن من استعادة السجلات"
-      : "You won't be able to recover these records.";
+    ? t("common.deleteRecordMsg")
+    : t("common.deleteSelectedMsg");
 
   return (
-    <div className="space-y-6">
-      <div className="flex items-center justify-between gap-4">
-        <div className="flex-1">
-          <StallionProfileCard
-            locale={locale}
-            direction={direction}
-            query={query}
-            onQueryChange={setQuery}
-          />
+    <div className="space-y-6 w-full max-w-full overflow-x-hidden">
+      <div className="w-full max-w-full">
+        <StallionProfileCard
+          locale={locale}
+          direction={direction}
+          query={query}
+          onQueryChange={setQuery}
+        />
 
-          <StallionToolbar
-            locale={locale}
-            direction={direction}
-            tags={tags}
-            activeTag={activeTag}
-            selectedCount={selectedIds.length}
-            onAdd={handleAddClick}
-            onDeleteSelected={() => setConfirmingMultiple(true)}
-            onTagChange={handleTagChange}
-          />
+        <StallionToolbar
+          locale={locale}
+          direction={direction}
+          tags={tags.map((x) => x.label)}
+          activeTag={
+            tags.find((x) => x.key === activeTag)?.label ?? tags[0].label
+          }
+          selectedCount={selectedIds.length}
+          onAdd={handleAddClick}
+          onDeleteSelected={() => setConfirmingMultiple(true)}
+          onTagChange={(label) => {
+            const found = tags.find((x) => x.label === label);
+            if (found) handleTagChange(found.key);
+          }}
+        />
 
-          <ReproductionRecordsTable
-            locale={locale}
-            direction={direction}
-            rows={filtered}
-            selectedIds={selectedIds}
-            onToggleSelect={toggleSelect}
-            onToggleSelectAll={toggleSelectAll}
-            onEdit={handleEdit}
-            onDelete={(row) => setToDelete(row)}
-          />
-        </div>
+        <ReproductionRecordsTable
+          locale={locale}
+          direction={direction}
+          rows={filtered}
+          selectedIds={selectedIds}
+          onToggleSelect={toggleSelect}
+          onToggleSelectAll={toggleSelectAll}
+          onEdit={handleEdit}
+          onDelete={(row) => setToDelete(row)}
+        />
       </div>
 
       <DeleteConfirmModal
@@ -209,7 +225,6 @@ export default function StallionsTab() {
         }}
       />
 
-      {/* Form modals */}
       {activeType === "natural" && (
         <NaturalModal
           open={formOpen}
