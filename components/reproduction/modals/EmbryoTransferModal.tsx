@@ -21,7 +21,7 @@ export default function EmbryoTransferModal({
   onClose,
   onSubmit,
 }: Props) {
-  const { locale, direction } = useLocale();
+  const { direction, t } = useLocale();
   const isRTL = direction === "rtl";
 
   const donorMareOptions = useMemo(
@@ -29,52 +29,76 @@ export default function EmbryoTransferModal({
       { value: "", label: "" },
       {
         value: "كاليبوترا",
-        label: locale === "ar" ? "كاليبوترا" : "Calypotra",
+        label: t("reproduction.modals.embryoTransfer.donorMare.opt1"),
       },
-      { value: "فرسة ٢", label: locale === "ar" ? "فرسة ٢" : "Mare 2" },
+      {
+        value: "فرسة ٢",
+        label: t("reproduction.modals.embryoTransfer.donorMare.opt2"),
+      },
     ],
-    [locale],
+    [t],
   );
 
   const stallionOptions = useMemo(
     () => [
       { value: "", label: "" },
-      { value: "مداح مهنا", label: locale === "ar" ? "مداح مهنا" : "Maddah" },
-      { value: "فحل ٢", label: locale === "ar" ? "فحل ٢" : "Stallion 2" },
+      {
+        value: "مداح مهنا",
+        label: t("reproduction.modals.embryoTransfer.stallion.opt1"),
+      },
+      {
+        value: "فحل ٢",
+        label: t("reproduction.modals.embryoTransfer.stallion.opt2"),
+      },
     ],
-    [locale],
+    [t],
   );
 
   const tankOptions = useMemo(
     () => [
       { value: "", label: "" },
-      { value: "اسم الخزان", label: locale === "ar" ? "اسم الخزان" : "Tank A" },
-      { value: "خزان ٢", label: locale === "ar" ? "خزان ٢" : "Tank B" },
+      {
+        value: "اسم الخزان",
+        label: t("reproduction.modals.embryoTransfer.tank.opt1"),
+      },
+      {
+        value: "خزان ٢",
+        label: t("reproduction.modals.embryoTransfer.tank.opt2"),
+      },
     ],
-    [locale],
+    [t],
   );
 
   const typeOptions = useMemo(
     () => [
       { value: "", label: "" },
-      { value: "ذكر", label: locale === "ar" ? "ذكر" : "Male" },
-      { value: "أنثى", label: locale === "ar" ? "أنثى" : "Female" },
-      { value: "غير معروف", label: locale === "ar" ? "غير معروف" : "Unknown" },
+      {
+        value: "ذكر",
+        label: t("reproduction.modals.embryoTransfer.type.male"),
+      },
+      {
+        value: "أنثى",
+        label: t("reproduction.modals.embryoTransfer.type.female"),
+      },
+      {
+        value: "غير معروف",
+        label: t("reproduction.modals.embryoTransfer.type.unknown"),
+      },
     ],
-    [locale],
+    [t],
   );
 
   const forSaleOptions = useMemo(
     () => [
       { value: "", label: "" },
-      { value: "نعم", label: locale === "ar" ? "نعم" : "Yes" },
-      { value: "لا", label: locale === "ar" ? "لا" : "No" },
+      { value: "نعم", label: t("common.yes") },
+      { value: "لا", label: t("common.no") },
       {
         value: "غير محدد",
-        label: locale === "ar" ? "غير محدد" : "Unspecified",
+        label: t("reproduction.modals.embryoTransfer.forSale.unspecified"),
       },
     ],
-    [locale],
+    [t],
   );
 
   const canisterOptions = useMemo(
@@ -99,15 +123,23 @@ export default function EmbryoTransferModal({
   const [canister, setCanister] = useState("");
   const [color, setColor] = useState<EmbryoTransferRow["color"]>("red");
 
-  // NEW: color select options
   const colorOptions = useMemo(
     () => [
       { value: "", label: "" },
-      { value: "red", label: locale === "ar" ? "أحمر" : "Red" },
-      { value: "green", label: locale === "ar" ? "أخضر" : "Green" },
-      { value: "yellow", label: locale === "ar" ? "أصفر" : "Yellow" },
+      {
+        value: "red",
+        label: t("reproduction.modals.embryoTransfer.color.red"),
+      },
+      {
+        value: "green",
+        label: t("reproduction.modals.embryoTransfer.color.green"),
+      },
+      {
+        value: "yellow",
+        label: t("reproduction.modals.embryoTransfer.color.yellow"),
+      },
     ],
-    [locale],
+    [t],
   );
 
   useEffect(() => {
@@ -159,7 +191,6 @@ export default function EmbryoTransferModal({
     "w-full h-16 rounded-2xl border-2 border-gray-300 bg-white px-6 focus:outline-none focus:ring-0";
   const selectClass = `${fieldClass} pr-12 appearance-none`;
 
-  // Hide native date indicator
   const dateInputClass =
     `${fieldClass} ` +
     "[&::-webkit-calendar-picker-indicator]:opacity-0 " +
@@ -179,7 +210,6 @@ export default function EmbryoTransferModal({
     type: !type,
     forSale: !forSale,
     price: !price,
-    // NEW
     color: !color,
   };
 
@@ -188,27 +218,24 @@ export default function EmbryoTransferModal({
       isOpen={open}
       title={
         mode === "add"
-          ? locale === "ar"
-            ? "إضافة سجل جديد"
-            : "Add new record"
-          : locale === "ar"
-            ? "تعديل السجل"
-            : "Edit record"
+          ? t("reproduction.modals.embryoTransfer.titleAdd")
+          : t("reproduction.modals.embryoTransfer.titleEdit")
       }
       onClose={onClose}
       onSubmit={submit}
-      submitText={locale === "ar" ? "حفظ" : "Save"}
-      cancelText={locale === "ar" ? "إلغاء" : "Cancel"}
+      submitText={t("common.save")}
+      cancelText={t("common.cancel")}
     >
       <div className={isRTL ? "text-right" : "text-left"}>
-        {/* row 1 */}
         <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
           <div className="relative">
             <select
               value={futureMare}
               onChange={(e) => setFutureMare(e.target.value)}
               className={selectClass}
-              aria-label={locale === "ar" ? "اسم الفرسة المانحة" : "Donor mare"}
+              aria-label={t(
+                "reproduction.modals.embryoTransfer.fields.donorMareName",
+              )}
             >
               {donorMareOptions.map((o) => (
                 <option key={o.value} value={o.value}>
@@ -223,7 +250,7 @@ export default function EmbryoTransferModal({
               <span
                 className={`pointer-events-none absolute top-1/2 -translate-y-1/2 text-base text-gray-700 ${labelSideClass}`}
               >
-                {locale === "ar" ? "اسم الفرسة المانحة" : "Donor mare name"}
+                {t("reproduction.modals.embryoTransfer.fields.donorMareName")}
               </span>
             )}
           </div>
@@ -233,7 +260,9 @@ export default function EmbryoTransferModal({
               value={stallion}
               onChange={(e) => setStallion(e.target.value)}
               className={selectClass}
-              aria-label={locale === "ar" ? "اسم الفحل" : "Stallion name"}
+              aria-label={t(
+                "reproduction.modals.embryoTransfer.fields.stallionName",
+              )}
             >
               {stallionOptions.map((o) => (
                 <option key={o.value} value={o.value}>
@@ -248,18 +277,17 @@ export default function EmbryoTransferModal({
               <span
                 className={`pointer-events-none absolute top-1/2 -translate-y-1/2 text-base text-gray-700 ${labelSideClass}`}
               >
-                {locale === "ar" ? "اسم الفحل" : "Stallion name"}
+                {t("reproduction.modals.embryoTransfer.fields.stallionName")}
               </span>
             )}
           </div>
 
-          {/* row 2 */}
           <div className="relative">
             <select
               value={tankName}
               onChange={(e) => setTankName(e.target.value)}
               className={selectClass}
-              aria-label={locale === "ar" ? "الخزان" : "Tank"}
+              aria-label={t("reproduction.modals.embryoTransfer.fields.tank")}
             >
               {tankOptions.map((o) => (
                 <option key={o.value} value={o.value}>
@@ -274,7 +302,7 @@ export default function EmbryoTransferModal({
               <span
                 className={`pointer-events-none absolute top-1/2 -translate-y-1/2 text-base text-gray-700 ${labelSideClass}`}
               >
-                {locale === "ar" ? "الخزان" : "Tank"}
+                {t("reproduction.modals.embryoTransfer.fields.tank")}
               </span>
             )}
           </div>
@@ -285,21 +313,21 @@ export default function EmbryoTransferModal({
               value={collectionDate}
               onChange={(e) => setCollectionDate(e.target.value)}
               className={dateInputClass}
-              aria-label={locale === "ar" ? "تاريخ التجميع" : "Collection date"}
+              aria-label={t(
+                "reproduction.modals.embryoTransfer.fields.collectionDate",
+              )}
             />
             {show.collectionDate && (
               <span
                 className={`pointer-events-none absolute top-1/2 -translate-y-1/2 text-base text-gray-700 ${labelSideClass}`}
               >
-                {locale === "ar" ? "تاريخ التجميع" : "Collection date"}
+                {t("reproduction.modals.embryoTransfer.fields.collectionDate")}
               </span>
             )}
           </div>
         </div>
 
-        {/* row 3: color (select) + canister */}
         <div className="mt-6 grid grid-cols-1 sm:grid-cols-2 gap-6 items-start">
-          {/* color as selection */}
           <div className="relative">
             <select
               value={color}
@@ -307,7 +335,7 @@ export default function EmbryoTransferModal({
                 setColor(e.target.value as EmbryoTransferRow["color"])
               }
               className={selectClass}
-              aria-label={locale === "ar" ? "اللون" : "Color"}
+              aria-label={t("reproduction.modals.embryoTransfer.fields.color")}
             >
               {colorOptions.map((o) => (
                 <option key={o.value} value={o.value}>
@@ -320,7 +348,6 @@ export default function EmbryoTransferModal({
               className={`pointer-events-none absolute top-1/2 -translate-y-1/2 ${arrowSideClass} h-5 w-5 text-gray-600`}
             />
 
-            {/* small color dot inside the field */}
             {!!color && (
               <span
                 className={`pointer-events-none absolute top-1/2 -translate-y-1/2 ${
@@ -339,18 +366,19 @@ export default function EmbryoTransferModal({
               <span
                 className={`pointer-events-none absolute top-1/2 -translate-y-1/2 text-base text-gray-700 ${labelSideClass}`}
               >
-                {locale === "ar" ? "اللون" : "Color"}
+                {t("reproduction.modals.embryoTransfer.fields.color")}
               </span>
             )}
           </div>
 
-          {/* canister */}
           <div className="relative">
             <select
               value={canister}
               onChange={(e) => setCanister(e.target.value)}
               className={selectClass}
-              aria-label={locale === "ar" ? "الحاوية" : "Canister"}
+              aria-label={t(
+                "reproduction.modals.embryoTransfer.fields.canister",
+              )}
             >
               {canisterOptions.map((o) => (
                 <option key={o.value} value={o.value}>
@@ -365,26 +393,25 @@ export default function EmbryoTransferModal({
               <span
                 className={`pointer-events-none absolute top-1/2 -translate-y-1/2 text-base text-gray-700 ${labelSideClass}`}
               >
-                {locale === "ar" ? "الحاوية" : "Canister"}
+                {t("reproduction.modals.embryoTransfer.fields.canister")}
               </span>
             )}
           </div>
         </div>
 
-        {/* row 4 */}
         <div className="mt-6 grid grid-cols-1 sm:grid-cols-3 gap-6">
           <div className="relative">
             <input
               value={price}
               onChange={(e) => setPrice(e.target.value)}
               className={fieldClass}
-              aria-label={locale === "ar" ? "السعر" : "Price"}
+              aria-label={t("common.price")}
             />
             {show.price && (
               <span
                 className={`pointer-events-none absolute top-1/2 -translate-y-1/2 text-base text-gray-700 ${labelSideClass}`}
               >
-                {locale === "ar" ? "السعر" : "Price"}
+                {t("common.price")}
               </span>
             )}
           </div>
@@ -394,7 +421,9 @@ export default function EmbryoTransferModal({
               value={forSale}
               onChange={(e) => setForSale(e.target.value)}
               className={selectClass}
-              aria-label={locale === "ar" ? "للبيع" : "For sale"}
+              aria-label={t(
+                "reproduction.modals.embryoTransfer.fields.forSale",
+              )}
             >
               {forSaleOptions.map((o) => (
                 <option key={o.value} value={o.value}>
@@ -409,7 +438,7 @@ export default function EmbryoTransferModal({
               <span
                 className={`pointer-events-none absolute top-1/2 -translate-y-1/2 text-base text-gray-700 ${labelSideClass}`}
               >
-                {locale === "ar" ? "للبيع" : "For sale"}
+                {t("reproduction.modals.embryoTransfer.fields.forSale")}
               </span>
             )}
           </div>
@@ -419,7 +448,7 @@ export default function EmbryoTransferModal({
               value={type}
               onChange={(e) => setType(e.target.value)}
               className={selectClass}
-              aria-label={locale === "ar" ? "النوع" : "Type"}
+              aria-label={t("reproduction.modals.embryoTransfer.fields.type")}
             >
               {typeOptions.map((o) => (
                 <option key={o.value} value={o.value}>
@@ -434,7 +463,7 @@ export default function EmbryoTransferModal({
               <span
                 className={`pointer-events-none absolute top-1/2 -translate-y-1/2 text-base text-gray-700 ${labelSideClass}`}
               >
-                {locale === "ar" ? "النوع" : "Type"}
+                {t("reproduction.modals.embryoTransfer.fields.type")}
               </span>
             )}
           </div>

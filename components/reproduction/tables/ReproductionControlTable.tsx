@@ -1,6 +1,7 @@
 "use client";
 
 import { Edit, Trash2 } from "lucide-react";
+import { useLocale } from "@/lib/locale-context";
 
 export type ReproductionControlRow = {
   id: string;
@@ -32,27 +33,18 @@ export default function ReproductionControlTable({
   onEdit,
   onDelete,
 }: Props) {
+  const { t } = useLocale();
   const isRTL = direction === "rtl";
   const allSelected = rows.length > 0 && selectedIds.length === rows.length;
 
-  const headers =
-    locale === "ar"
-      ? {
-          scheduled: "مجدول",
-          date: "التاريخ",
-          time: "الوقت",
-          examMethod: "طريقة الفحص",
-          doctor: "الطبيب",
-          actions: "الإجراءات",
-        }
-      : {
-          scheduled: "Scheduled",
-          date: "Date",
-          time: "Time",
-          examMethod: "Exam method",
-          doctor: "Doctor",
-          actions: "Actions",
-        };
+  const headers = {
+    scheduled: t("reproduction.tables.control.headers.scheduled"),
+    date: t("common.date"),
+    time: t("common.time"),
+    examMethod: t("reproduction.tables.control.headers.examMethod"),
+    doctor: t("reproduction.tables.control.headers.doctor"),
+    actions: t("common.actions"),
+  };
 
   return (
     <div className="overflow-auto bg-white rounded-2xl shadow-sm mt-4 border border-[#f2ece7]">
@@ -64,7 +56,7 @@ export default function ReproductionControlTable({
                 type="checkbox"
                 checked={allSelected}
                 onChange={onToggleSelectAll}
-                aria-label="select all"
+                aria-label={t("common.selectAll")}
               />
             </th>
 
@@ -98,7 +90,7 @@ export default function ReproductionControlTable({
                   type="checkbox"
                   checked={selectedIds.includes(row.id)}
                   onChange={() => onToggleSelect(row.id)}
-                  aria-label={`select-${row.id}`}
+                  aria-label={`${t("common.select")}-${row.id}`}
                 />
               </td>
 
@@ -119,14 +111,14 @@ export default function ReproductionControlTable({
               >
                 <button
                   className="p-2 rounded-lg bg-white border border-[#e8e2dd]"
-                  aria-label="edit"
+                  aria-label={t("common.edit")}
                   onClick={() => onEdit(row)}
                 >
                   <Edit className="h-4 w-4 text-[#6b584f]" />
                 </button>
                 <button
                   className="p-2 rounded-lg bg-white border border-[#e8e2dd]"
-                  aria-label="delete"
+                  aria-label={t("common.delete")}
                   onClick={() => onDelete(row)}
                 >
                   <Trash2 className="h-4 w-4 text-[#d9534f]" />
@@ -141,7 +133,7 @@ export default function ReproductionControlTable({
                 colSpan={7}
                 className="py-8 text-center text-sm text-[#7a6b63]"
               >
-                {locale === "ar" ? "لا توجد سجلات" : "No records found"}
+                {t("common.noRecordsFound")}
               </td>
             </tr>
           )}

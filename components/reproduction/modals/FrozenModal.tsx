@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 import { FormModal } from "@/components/common/FormModal";
 import { useLocale } from "@/lib/locale-context";
 
@@ -22,7 +22,7 @@ export function FrozenModal({
   onClose,
   onSubmit,
 }: Props) {
-  const { locale, direction } = useLocale();
+  const { direction, t } = useLocale();
   const isRTL = direction === "rtl";
 
   const [horse, setHorse] = useState("");
@@ -36,17 +36,34 @@ export function FrozenModal({
   const [file, setFile] = useState<File | null>(null);
   const [filePreview, setFilePreview] = useState<string | undefined>(undefined);
 
-  // options (replace with real data)
-  const horseOptions = [
-    { value: "", label: locale === "ar" ? "" : "" },
-    { value: "h-a", label: locale === "ar" ? "فرس أ" : "Horse A" },
-    { value: "h-b", label: locale === "ar" ? "فرس ب" : "Horse B" },
-  ];
-  const executorOptions = [
-    { value: "", label: locale === "ar" ? "" : "" },
-    { value: "e-a", label: locale === "ar" ? "منفذ ١" : "Executor 1" },
-    { value: "e-b", label: locale === "ar" ? "منفذ ٢" : "Executor 2" },
-  ];
+  const horseOptions = useMemo(
+    () => [
+      { value: "", label: "" },
+      { value: "h-a", label: t("reproduction.modals.shared.horse.optA") },
+      { value: "h-b", label: t("reproduction.modals.shared.horse.optB") },
+    ],
+    [t],
+  );
+
+  const executorOptions = useMemo(
+    () => [
+      { value: "", label: "" },
+      { value: "e-a", label: t("reproduction.modals.shared.executor.opt1") },
+      { value: "e-b", label: t("reproduction.modals.shared.executor.opt2") },
+    ],
+    [t],
+  );
+
+  const qtyOptions = useMemo(
+    () => [
+      { value: "", label: "" },
+      { value: "5", label: t("reproduction.modals.frozen.qty.ml5") },
+      { value: "10", label: t("reproduction.modals.frozen.qty.ml10") },
+      { value: "15", label: t("reproduction.modals.frozen.qty.ml15") },
+      { value: "20", label: t("reproduction.modals.frozen.qty.ml20") },
+    ],
+    [t],
+  );
 
   useEffect(() => {
     if (initialData) {
@@ -86,7 +103,6 @@ export function FrozenModal({
     });
   }
 
-  // inside labels only when empty
   const showHorseLabel = !horse;
   const showExecutorLabel = !executor;
   const showResultsLabel = !results;
@@ -103,22 +119,16 @@ export function FrozenModal({
       isOpen={open}
       title={
         mode === "add"
-          ? locale === "ar"
-            ? "إضافة طلوق مجمدة"
-            : "Add frozen semen"
-          : locale === "ar"
-            ? "تعديل"
-            : "Edit"
+          ? t("reproduction.modals.frozen.titleAdd")
+          : t("reproduction.modals.frozen.titleEdit")
       }
       onClose={onClose}
       onSubmit={submit}
-      submitText={locale === "ar" ? "حفظ" : "Save"}
-      cancelText={locale === "ar" ? "إلغاء" : "Cancel"}
+      submitText={t("common.save")}
+      cancelText={t("common.cancel")}
     >
       <div className={isRTL ? "text-right" : "text-left"}>
-        {/* exact layout as screenshot */}
         <div className="grid grid-cols-1 sm:grid-cols-2 gap-8">
-          {/* row 1 left: التاريخ */}
           <div className="relative">
             <span className="pointer-events-none absolute left-5 top-1/2 -translate-y-1/2 text-gray-600">
               <FiCalendar size={22} />
@@ -129,16 +139,15 @@ export function FrozenModal({
               value={date}
               onChange={(e) => setDate(e.target.value)}
               className={`${fieldClass} pl-14`}
-              aria-label={locale === "ar" ? "التاريخ" : "Date"}
+              aria-label={t("common.date")}
             />
 
             {showDateLabel && (
               <span className="pointer-events-none absolute right-6 top-1/2 -translate-y-1/2 text-base text-gray-700">
-                {locale === "ar" ? "التاريخ" : "Date"}
+                {t("common.date")}
               </span>
             )}
 
-            {/* hide native date icon */}
             <style jsx>{`
               input[type="date"]::-webkit-calendar-picker-indicator {
                 opacity: 0;
@@ -156,13 +165,12 @@ export function FrozenModal({
             `}</style>
           </div>
 
-          {/* row 1 right: الفرسة المستقبلية (select) */}
           <div className="relative">
             <select
               value={horse}
               onChange={(e) => setHorse(e.target.value)}
               className={`${fieldClass} pr-16 appearance-none`}
-              aria-label={locale === "ar" ? "الفرسة المستقبلية" : "Future mare"}
+              aria-label={t("reproduction.modals.frozen.fields.futureMare")}
             >
               {horseOptions.map((opt) => (
                 <option key={opt.value} value={opt.value}>
@@ -177,36 +185,31 @@ export function FrozenModal({
 
             {showHorseLabel && (
               <span className="pointer-events-none absolute right-6 top-1/2 -translate-y-1/2 text-base text-gray-700">
-                {locale === "ar" ? "الفرسة المستقبلية" : "Future mare"}
+                {t("reproduction.modals.frozen.fields.futureMare")}
               </span>
             )}
           </div>
 
-          {/* row 2 left: النتائج الأولية */}
           <div className="relative">
             <input
               value={results}
               onChange={(e) => setResults(e.target.value)}
               className={fieldClass}
-              aria-label={
-                locale === "ar" ? "النتائج الأولية" : "Initial results"
-              }
+              aria-label={t("reproduction.modals.shared.fields.initialResults")}
             />
-
             {showResultsLabel && (
               <span className="pointer-events-none absolute right-6 top-1/2 -translate-y-1/2 text-base text-gray-400">
-                {locale === "ar" ? "النتائج الأولية" : "Initial results"}
+                {t("reproduction.modals.shared.fields.initialResults")}
               </span>
             )}
           </div>
 
-          {/* row 2 right: المنفذ (select) */}
           <div className="relative">
             <select
               value={executor}
               onChange={(e) => setExecutor(e.target.value)}
               className={`${fieldClass} pr-16 appearance-none`}
-              aria-label={locale === "ar" ? "المنفذ" : "Executor"}
+              aria-label={t("reproduction.modals.shared.fields.executor")}
             >
               {executorOptions.map((opt) => (
                 <option key={opt.value} value={opt.value}>
@@ -221,12 +224,11 @@ export function FrozenModal({
 
             {showExecutorLabel && (
               <span className="pointer-events-none absolute right-6 top-1/2 -translate-y-1/2 text-base text-gray-700">
-                {locale === "ar" ? "المنفذ" : "Executor"}
+                {t("reproduction.modals.shared.fields.executor")}
               </span>
             )}
           </div>
 
-          {/* row 3 left: المكان */}
           <div className="relative">
             <span className="pointer-events-none absolute left-5 top-1/2 -translate-y-1/2 text-gray-700">
               <FiMapPin size={22} />
@@ -236,17 +238,15 @@ export function FrozenModal({
               value={location}
               onChange={(e) => setLocation(e.target.value)}
               className={`${fieldClass} pl-14`}
-              aria-label={locale === "ar" ? "المكان" : "Location"}
+              aria-label={t("common.location")}
             />
-
             {showLocationLabel && (
               <span className="pointer-events-none absolute right-6 top-1/2 -translate-y-1/2 text-base text-gray-700">
-                {locale === "ar" ? "المكان" : "Location"}
+                {t("common.location")}
               </span>
             )}
           </div>
 
-          {/* row 3 right: السعر */}
           <div className="relative">
             <span className="pointer-events-none absolute left-5 top-1/2 -translate-y-1/2 text-gray-600">
               <HiOutlineBanknotes size={24} />
@@ -256,30 +256,27 @@ export function FrozenModal({
               value={price}
               onChange={(e) => setPrice(e.target.value)}
               className={`${fieldClass} pl-14`}
-              aria-label={locale === "ar" ? "السعر" : "Price"}
+              aria-label={t("common.price")}
             />
-
             {showPriceLabel && (
               <span className="pointer-events-none absolute right-6 top-1/2 -translate-y-1/2 text-base text-gray-700">
-                {locale === "ar" ? "السعر" : "Price"}
+                {t("common.price")}
               </span>
             )}
           </div>
 
-          {/* row 4 full width: الكمية / مل (select with chevron) */}
           <div className="relative sm:col-span-2">
             <select
               value={qty}
               onChange={(e) => setQty(e.target.value)}
               className={`${fieldClass} pr-16 appearance-none`}
-              aria-label={locale === "ar" ? "الكمية / مل" : "Quantity / ml"}
+              aria-label={t("reproduction.modals.frozen.fields.qty")}
             >
-              {/* keep empty option so inside label shows */}
-              <option value="">{locale === "ar" ? "" : ""}</option>
-              <option value="5">5 ml</option>
-              <option value="10">10 ml</option>
-              <option value="15">15 ml</option>
-              <option value="20">20 ml</option>
+              {qtyOptions.map((opt) => (
+                <option key={opt.value} value={opt.value}>
+                  {opt.label}
+                </option>
+              ))}
             </select>
 
             <span className="pointer-events-none absolute left-6 top-1/2 -translate-y-1/2 text-gray-700">
@@ -288,7 +285,7 @@ export function FrozenModal({
 
             {showQtyLabel && (
               <span className="pointer-events-none absolute right-6 top-1/2 -translate-y-1/2 text-base text-gray-700">
-                {locale === "ar" ? "الكمية / مل" : "Quantity / ml"}
+                {t("reproduction.modals.frozen.fields.qty")}
               </span>
             )}
           </div>

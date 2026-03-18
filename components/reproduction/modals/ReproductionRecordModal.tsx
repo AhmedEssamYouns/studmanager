@@ -21,7 +21,7 @@ export default function ReproductionRecordModal({
   onClose,
   onSubmit,
 }: Props) {
-  const { locale, direction, t } = useLocale();
+  const { direction, t } = useLocale();
   const isRTL = direction === "rtl";
 
   const stallionOptions = useMemo(

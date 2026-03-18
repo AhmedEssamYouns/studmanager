@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 import { FormModal } from "@/components/common/FormModal";
 import { useLocale } from "@/lib/locale-context";
 
@@ -22,10 +22,9 @@ export function FreshModal({
   onClose,
   onSubmit,
 }: Props) {
-  const { locale, direction } = useLocale();
+  const { direction, t } = useLocale();
   const isRTL = direction === "rtl";
 
-  // fields (match screenshot)
   const [horse, setHorse] = useState("");
   const [executor, setExecutor] = useState("");
   const [results, setResults] = useState("");
@@ -36,17 +35,23 @@ export function FreshModal({
   const [file, setFile] = useState<File | null>(null);
   const [filePreview, setFilePreview] = useState<string | undefined>(undefined);
 
-  // simple options for selects (replace with real data if you have it)
-  const horseOptions = [
-    { value: "", label: locale === "ar" ? "" : "" },
-    { value: "h-a", label: locale === "ar" ? "فرس أ" : "Horse A" },
-    { value: "h-b", label: locale === "ar" ? "فرس ب" : "Horse B" },
-  ];
-  const executorOptions = [
-    { value: "", label: locale === "ar" ? "" : "" },
-    { value: "e-a", label: locale === "ar" ? "منفذ ١" : "Executor 1" },
-    { value: "e-b", label: locale === "ar" ? "منفذ ٢" : "Executor 2" },
-  ];
+  const horseOptions = useMemo(
+    () => [
+      { value: "", label: "" },
+      { value: "h-a", label: t("reproduction.modals.shared.horse.optA") },
+      { value: "h-b", label: t("reproduction.modals.shared.horse.optB") },
+    ],
+    [t],
+  );
+
+  const executorOptions = useMemo(
+    () => [
+      { value: "", label: "" },
+      { value: "e-a", label: t("reproduction.modals.shared.executor.opt1") },
+      { value: "e-b", label: t("reproduction.modals.shared.executor.opt2") },
+    ],
+    [t],
+  );
 
   useEffect(() => {
     if (initialData) {
@@ -83,7 +88,6 @@ export function FreshModal({
     });
   }
 
-  // show inside label only when empty (so it disappears while typing)
   const showHorseLabel = !horse;
   const showExecutorLabel = !executor;
   const showResultsLabel = !results;
@@ -91,7 +95,6 @@ export function FreshModal({
   const showPriceLabel = !price;
   const showLocationLabel = !location;
 
-  // common field class (match screenshot)
   const fieldClass =
     "w-full h-16 rounded-2xl border-2 border-gray-300 bg-white px-6 focus:outline-none focus:ring-0";
 
@@ -100,22 +103,16 @@ export function FreshModal({
       isOpen={open}
       title={
         mode === "add"
-          ? locale === "ar"
-            ? "إضافة سائل منوي حديث"
-            : "Add fresh semen"
-          : locale === "ar"
-            ? "تعديل"
-            : "Edit"
+          ? t("reproduction.modals.fresh.titleAdd")
+          : t("reproduction.modals.fresh.titleEdit")
       }
       onClose={onClose}
       onSubmit={submit}
-      submitText={locale === "ar" ? "حفظ" : "Save"}
-      cancelText={locale === "ar" ? "إلغاء" : "Cancel"}
+      submitText={t("common.save")}
+      cancelText={t("common.cancel")}
     >
       <div className={isRTL ? "text-right" : "text-left"}>
-        {/* layout exactly as screenshot (3 rows x 2 cols) */}
         <div className="grid grid-cols-1 sm:grid-cols-2 gap-8">
-          {/* row 1 left: التاريخ */}
           <div className="relative">
             <span className="pointer-events-none absolute left-5 top-1/2 -translate-y-1/2 text-gray-600">
               <FiCalendar size={22} />
@@ -126,16 +123,15 @@ export function FreshModal({
               value={date}
               onChange={(e) => setDate(e.target.value)}
               className={`${fieldClass} pl-14`}
-              aria-label={locale === "ar" ? "التاريخ" : "Date"}
+              aria-label={t("common.date")}
             />
 
             {showDateLabel && (
               <span className="pointer-events-none absolute right-6 top-1/2 -translate-y-1/2 text-base text-gray-700">
-                {locale === "ar" ? "التاريخ" : "Date"}
+                {t("common.date")}
               </span>
             )}
 
-            {/* remove native calendar icon */}
             <style jsx>{`
               input[type="date"]::-webkit-calendar-picker-indicator {
                 opacity: 0;
@@ -153,13 +149,12 @@ export function FreshModal({
             `}</style>
           </div>
 
-          {/* row 1 right: الفرسة المستقبلية (select + chevron) */}
           <div className="relative">
             <select
               value={horse}
               onChange={(e) => setHorse(e.target.value)}
               className={`${fieldClass} pr-16 appearance-none`}
-              aria-label={locale === "ar" ? "الفرسة المستقبلية" : "Future mare"}
+              aria-label={t("reproduction.modals.fresh.fields.futureMare")}
             >
               {horseOptions.map((opt) => (
                 <option key={opt.value} value={opt.value}>
@@ -174,36 +169,32 @@ export function FreshModal({
 
             {showHorseLabel && (
               <span className="pointer-events-none absolute right-6 top-1/2 -translate-y-1/2 text-base text-gray-700">
-                {locale === "ar" ? "الفرسة المستقبلية" : "Future mare"}
+                {t("reproduction.modals.fresh.fields.futureMare")}
               </span>
             )}
           </div>
 
-          {/* row 2 left: النتائج الأولية (no icon, light label) */}
           <div className="relative">
             <input
               value={results}
               onChange={(e) => setResults(e.target.value)}
               className={fieldClass}
-              aria-label={
-                locale === "ar" ? "النتائج الأولية" : "Initial results"
-              }
+              aria-label={t("reproduction.modals.shared.fields.initialResults")}
             />
 
             {showResultsLabel && (
               <span className="pointer-events-none absolute right-6 top-1/2 -translate-y-1/2 text-base text-gray-400">
-                {locale === "ar" ? "النتائج الأولية" : "Initial results"}
+                {t("reproduction.modals.shared.fields.initialResults")}
               </span>
             )}
           </div>
 
-          {/* row 2 right: المنفذ (select + chevron) */}
           <div className="relative">
             <select
               value={executor}
               onChange={(e) => setExecutor(e.target.value)}
               className={`${fieldClass} pr-16 appearance-none`}
-              aria-label={locale === "ar" ? "المنفذ" : "Executor"}
+              aria-label={t("reproduction.modals.shared.fields.executor")}
             >
               {executorOptions.map((opt) => (
                 <option key={opt.value} value={opt.value}>
@@ -218,12 +209,11 @@ export function FreshModal({
 
             {showExecutorLabel && (
               <span className="pointer-events-none absolute right-6 top-1/2 -translate-y-1/2 text-base text-gray-700">
-                {locale === "ar" ? "المنفذ" : "Executor"}
+                {t("reproduction.modals.shared.fields.executor")}
               </span>
             )}
           </div>
 
-          {/* row 3 left: المكان (icon) */}
           <div className="relative">
             <span className="pointer-events-none absolute left-5 top-1/2 -translate-y-1/2 text-gray-700">
               <FiMapPin size={22} />
@@ -233,17 +223,16 @@ export function FreshModal({
               value={location}
               onChange={(e) => setLocation(e.target.value)}
               className={`${fieldClass} pl-14`}
-              aria-label={locale === "ar" ? "المكان" : "Location"}
+              aria-label={t("common.location")}
             />
 
             {showLocationLabel && (
               <span className="pointer-events-none absolute right-6 top-1/2 -translate-y-1/2 text-base text-gray-700">
-                {locale === "ar" ? "المكان" : "Location"}
+                {t("common.location")}
               </span>
             )}
           </div>
 
-          {/* row 3 right: السعر (icon) */}
           <div className="relative">
             <span className="pointer-events-none absolute left-5 top-1/2 -translate-y-1/2 text-gray-600">
               <HiOutlineBanknotes size={24} />
@@ -253,12 +242,12 @@ export function FreshModal({
               value={price}
               onChange={(e) => setPrice(e.target.value)}
               className={`${fieldClass} pl-14`}
-              aria-label={locale === "ar" ? "السعر" : "Price"}
+              aria-label={t("common.price")}
             />
 
             {showPriceLabel && (
               <span className="pointer-events-none absolute right-6 top-1/2 -translate-y-1/2 text-base text-gray-700">
-                {locale === "ar" ? "السعر" : "Price"}
+                {t("common.price")}
               </span>
             )}
           </div>

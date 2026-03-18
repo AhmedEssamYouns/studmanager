@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 import { FormModal } from "@/components/common/FormModal";
 import { useLocale } from "@/lib/locale-context";
 
@@ -22,7 +22,9 @@ export function NaturalModal({
   onClose,
   onSubmit,
 }: Props) {
-  const { locale, direction } = useLocale();
+  const { direction, t } = useLocale();
+  const isRTL = direction === "rtl";
+
   const [selectedHorse, setSelectedHorse] = useState("");
   const [date, setDate] = useState("");
   const [results, setResults] = useState("");
@@ -31,12 +33,15 @@ export function NaturalModal({
   const [file, setFile] = useState<File | null>(null);
   const [filePreview, setFilePreview] = useState<string | undefined>(undefined);
 
-  const horseOptions = [
-    { value: "", label: locale === "ar" ? "اختر الفرس" : "Select horse" },
-    { value: "frs-a", label: locale === "ar" ? "فرس أ" : "Horse A" },
-    { value: "frs-b", label: locale === "ar" ? "فرس ب" : "Horse B" },
-    { value: "frs-c", label: locale === "ar" ? "فرس ج" : "Horse C" },
-  ];
+  const horseOptions = useMemo(
+    () => [
+      { value: "", label: t("reproduction.modals.natural.horse.select") },
+      { value: "frs-a", label: t("reproduction.modals.natural.horse.optA") },
+      { value: "frs-b", label: t("reproduction.modals.natural.horse.optB") },
+      { value: "frs-c", label: t("reproduction.modals.natural.horse.optC") },
+    ],
+    [t],
+  );
 
   useEffect(() => {
     if (initialData) {
@@ -70,10 +75,8 @@ export function NaturalModal({
     });
   }
 
-  const isRTL = direction === "rtl";
-
-  // Hide the "inside label" when the input has a value (so it won't overlap while typing)
   const showDateLabel = !date;
+  const showHorseLabel = !selectedHorse;
   const showPriceLabel = !price;
   const showResultsLabel = !results;
   const showLocationLabel = !location;
@@ -83,21 +86,17 @@ export function NaturalModal({
       isOpen={open}
       title={
         mode === "add"
-          ? locale === "ar"
-            ? "إضافة سجل جديد"
-            : "Add record"
-          : locale === "ar"
-            ? "تعديل السجل"
-            : "Edit record"
+          ? t("reproduction.modals.natural.titleAdd")
+          : t("reproduction.modals.natural.titleEdit")
       }
       onClose={onClose}
       onSubmit={submit}
-      submitText={locale === "ar" ? "حفظ" : "Save"}
-      cancelText={locale === "ar" ? "إلغاء" : "Cancel"}
+      submitText={t("common.save")}
+      cancelText={t("common.cancel")}
     >
       <div className={isRTL ? "text-right" : "text-left"}>
         <div className="grid grid-cols-1 sm:grid-cols-2 gap-8">
-          {/* التاريخ (left) */}
+          {/* date */}
           <div className="relative">
             <span className="pointer-events-none absolute left-5 top-1/2 -translate-y-1/2 text-gray-600">
               <FiCalendar size={22} />
@@ -108,16 +107,15 @@ export function NaturalModal({
               value={date}
               onChange={(e) => setDate(e.target.value)}
               className="w-full h-16 rounded-2xl border-2 border-gray-300 bg-white px-6 pl-14 focus:outline-none focus:ring-0"
-              aria-label={locale === "ar" ? "التاريخ" : "Date"}
+              aria-label={t("common.date")}
             />
 
             {showDateLabel && (
               <span className="pointer-events-none absolute right-6 top-1/2 -translate-y-1/2 text-base text-gray-700">
-                {locale === "ar" ? "التاريخ" : "Date"}
+                {t("common.date")}
               </span>
             )}
 
-            {/* hide the native date picker icon (WebKit browsers like Chrome/Safari) */}
             <style jsx>{`
               input[type="date"]::-webkit-calendar-picker-indicator {
                 opacity: 0;
@@ -135,13 +133,13 @@ export function NaturalModal({
             `}</style>
           </div>
 
-          {/* الفرسة المستقبلية (right) */}
+          {/* future mare */}
           <div className="relative">
             <select
               value={selectedHorse}
               onChange={(e) => setSelectedHorse(e.target.value)}
               className="w-full h-16 rounded-2xl border-2 border-gray-300 bg-white px-6 pr-16 appearance-none focus:outline-none focus:ring-0"
-              aria-label={locale === "ar" ? "الفرسة المستقبلية" : "Future mare"}
+              aria-label={t("reproduction.modals.natural.fields.futureMare")}
             >
               {horseOptions.map((opt) => (
                 <option key={opt.value} value={opt.value}>
@@ -153,9 +151,15 @@ export function NaturalModal({
             <span className="pointer-events-none absolute left-6 top-1/2 -translate-y-1/2 text-gray-700">
               <FiChevronDown size={22} />
             </span>
+
+            {showHorseLabel && (
+              <span className="pointer-events-none absolute right-6 top-1/2 -translate-y-1/2 text-base text-gray-700">
+                {t("reproduction.modals.natural.fields.futureMare")}
+              </span>
+            )}
           </div>
 
-          {/* السعر (left) */}
+          {/* price */}
           <div className="relative">
             <span className="pointer-events-none absolute left-5 top-1/2 -translate-y-1/2 text-gray-600">
               <HiOutlineBanknotes size={24} />
@@ -165,35 +169,35 @@ export function NaturalModal({
               value={price}
               onChange={(e) => setPrice(e.target.value)}
               className="w-full h-16 rounded-2xl border-2 border-gray-300 bg-white px-6 pl-14 focus:outline-none focus:ring-0"
-              aria-label={locale === "ar" ? "السعر" : "Price"}
+              aria-label={t("common.price")}
             />
 
             {showPriceLabel && (
               <span className="pointer-events-none absolute right-6 top-1/2 -translate-y-1/2 text-base text-gray-700">
-                {locale === "ar" ? "السعر" : "Price"}
+                {t("common.price")}
               </span>
             )}
           </div>
 
-          {/* النتائج الأولية (right) */}
+          {/* initial results */}
           <div className="relative">
             <input
               value={results}
               onChange={(e) => setResults(e.target.value)}
               className="w-full h-16 rounded-2xl border-2 border-gray-300 bg-white px-6 focus:outline-none focus:ring-0"
-              aria-label={
-                locale === "ar" ? "النتائج الأولية" : "Initial results"
-              }
+              aria-label={t(
+                "reproduction.modals.natural.fields.initialResults",
+              )}
             />
 
             {showResultsLabel && (
               <span className="pointer-events-none absolute right-6 top-1/2 -translate-y-1/2 text-base text-gray-400">
-                {locale === "ar" ? "النتائج الأولية" : "Initial results"}
+                {t("reproduction.modals.natural.fields.initialResults")}
               </span>
             )}
           </div>
 
-          {/* المكان (full width) */}
+          {/* location */}
           <div className="relative sm:col-span-2">
             <span className="pointer-events-none absolute left-5 top-1/2 -translate-y-1/2 text-gray-700">
               <FiMapPin size={22} />
@@ -203,12 +207,12 @@ export function NaturalModal({
               value={location}
               onChange={(e) => setLocation(e.target.value)}
               className="w-full h-16 rounded-2xl border-2 border-gray-300 bg-white px-6 pl-14 focus:outline-none focus:ring-0"
-              aria-label={locale === "ar" ? "المكان" : "Location"}
+              aria-label={t("common.location")}
             />
 
             {showLocationLabel && (
               <span className="pointer-events-none absolute right-6 top-1/2 -translate-y-1/2 text-base text-gray-700">
-                {locale === "ar" ? "المكان" : "Location"}
+                {t("common.location")}
               </span>
             )}
           </div>
