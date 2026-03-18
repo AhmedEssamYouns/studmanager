@@ -1,6 +1,7 @@
 "use client";
 
 import type { FC } from "react";
+import { useLocale } from "@/lib/locale-context";
 
 type Props = {
   locale: string;
@@ -14,7 +15,6 @@ type Props = {
 };
 
 export const StallionToolbar: FC<Props> = ({
-  locale,
   direction,
   tags,
   activeTag,
@@ -23,20 +23,22 @@ export const StallionToolbar: FC<Props> = ({
   onDeleteSelected,
   onTagChange,
 }) => {
+  const { t } = useLocale();
   const isRTL = direction === "rtl";
 
   return (
-    <div
-      className={`mt-4 flex flex-col lg:flex-row lg:items-center lg:justify-between gap-4 ${
-        isRTL ? "lg:flex-row-reverse" : ""
-      }`}
-    >
-      <div className="flex flex-col sm:flex-row gap-3">
+    <div className="mt-4 space-y-3 w-full max-w-full overflow-x-hidden">
+      {/* Buttons: stack on mobile, row on >=sm */}
+      <div
+        className={`flex flex-col sm:flex-row gap-3 w-full ${
+          isRTL ? "sm:flex-row-reverse" : ""
+        }`}
+      >
         <button
           className="h-11 px-4 rounded-2xl bg-[#4b2f1a] text-white font-bold w-full sm:w-auto"
           onClick={onAdd}
         >
-          {locale === "ar" ? "إضافة سجل جديد" : "Add Record"}
+          {t("common.addNewRecord")}
         </button>
 
         <button
@@ -48,26 +50,55 @@ export const StallionToolbar: FC<Props> = ({
               : "bg-[#c2463a]"
           }`}
         >
-          {locale === "ar" ? "حذف" : "Delete"}
+          {t("common.delete")}
         </button>
       </div>
 
-      <div
-        className={`flex gap-3 flex-wrap ${isRTL ? "justify-start" : "justify-end"} w-full lg:w-auto`}
-      >
-        {tags.map((b) => (
-          <button
-            key={b}
-            onClick={() => onTagChange(b)}
-            className={`px-4 py-2 rounded-full text-sm border ${
-              activeTag === b
-                ? "bg-[#fff6e7] border-[#bfae87]"
-                : "bg-white border-[#e8e2dd]"
-            }`}
-          >
-            {b}
-          </button>
-        ))}
+      {/* Tags:
+          - Mobile: horizontal scroll (no wrap) to avoid overflow
+          - Desktop: wrap as before
+      */}
+      <div className="w-full">
+        <div
+          className={`flex gap-2 overflow-x-auto whitespace-nowrap py-1 sm:hidden ${
+            isRTL ? "justify-start" : "justify-start"
+          }`}
+          style={{ WebkitOverflowScrolling: "touch" }}
+        >
+          {tags.map((b) => (
+            <button
+              key={b}
+              onClick={() => onTagChange(b)}
+              className={`shrink-0 px-4 py-2 rounded-full text-sm border ${
+                activeTag === b
+                  ? "bg-[#fff6e7] border-[#bfae87]"
+                  : "bg-white border-[#e8e2dd]"
+              }`}
+            >
+              {b}
+            </button>
+          ))}
+        </div>
+
+        <div
+          className={`hidden sm:flex gap-3 flex-wrap ${
+            isRTL ? "justify-start" : "justify-end"
+          } w-full`}
+        >
+          {tags.map((b) => (
+            <button
+              key={b}
+              onClick={() => onTagChange(b)}
+              className={`px-4 py-2 rounded-full text-sm border ${
+                activeTag === b
+                  ? "bg-[#fff6e7] border-[#bfae87]"
+                  : "bg-white border-[#e8e2dd]"
+              }`}
+            >
+              {b}
+            </button>
+          ))}
+        </div>
       </div>
     </div>
   );

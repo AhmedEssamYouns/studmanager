@@ -21,7 +21,13 @@
     "deleteRecordMsg": "You will not be able to recover this record",
     "deleteSelected": "Delete Selected Items?",
     "deleteSelectedMsg": "You will not be able to recover the deleted data",
-    "dragAndDrop": "Drag & Drop"
+    "dragAndDrop": "Drag & Drop",
+    "name": "Name",
+    "farm": "Farm",
+    "dob": "DOB",
+    "bornIn": "Born in",
+    "currentlyIn": "Currently in",
+    "deleteAll": "Delete All?"
   },
   "sidebar": {
     "dashboard": "Dashboard",
@@ -41,6 +47,20 @@
     "evaluations": "Calendar & Events",
     "database": "Database",
     "revenue": "Revenue"
+  },
+  "reproductionMares": {
+    "tabs": {
+      "overview": "Reproduction overview",
+      "transfer": "Embryo transfer",
+      "control": "Reproduction control"
+    }
+  },
+  "reproductionPage": {
+    "tabs": {
+      "mares": "Mares",
+      "stallions": "Stallions",
+      "breeding": "Breeding"
+    }
   },
   "months": {
     "january": "January",
@@ -166,7 +186,8 @@
     "naturalBreeding": "Natural Breeding",
     "frozenSemen": "Frozen Semen",
     "freshSemen": "Fresh Semen",
-    "embryoTransfer": "Embryo Transfer"
+    "embryoTransfer": "Embryo Transfer",
+    "vetCheck": "Vet Check"
   },
   "performance": {
     "title": "Performance",
@@ -296,5 +317,67 @@
     "fatherName": "Father's Name",
     "motherName": "Mother's Name",
     "matingResult": "Mating Test"
+  },
+  "reproduction": {
+    "maresOverview": {
+      "viewProfile": "View profile",
+      "searchPlaceholder": "Search mare",
+      "recordsTitle": "Reproduction records",
+      "summary": {
+        "offspringCount": "Offspring count",
+        "lastBirth": "Last birth",
+        "successfulPregnancies": "Successful pregnancies",
+        "reproductionService": "Reproduction service",
+        "embryoCollection": "Embryo collection",
+        "pregnancy": "Pregnancy",
+        "embryoTransfer": "Embryo transfer",
+        "currentEmbryos": "Current embryos"
+      }
+    },
+    "modals": {
+      "record": {
+        "fields": {
+          "stallionName": "Stallion name",
+          "inseminationType": "Insemination type",
+          "result": "Result"
+        },
+        "stallionOpt1": "Maddah",
+        "stallionOpt2": "Stallion 2",
+        "insemination": {
+          "natural": "Natural",
+          "fresh": "Fresh semen",
+          "frozen": "Frozen semen"
+        },
+        "result": {
+          "success": "Success",
+          "failed": "Failed"
+        }
+      },
+      "control": {
+        "fields": {
+          "veterinarian": "Veterinarian",
+          "examMethod": "Exam method",
+          "uterus": "Uterus",
+          "vagina": "Vagina",
+          "edema": "Edema",
+          "cervix": "Cervix",
+          "genitalService": "Choose genital service"
+        },
+        "examMethod": {
+          "opt1": "Exam method",
+          "ultrasound": "Ultrasound",
+          "manual": "Manual exam"
+        },
+        "doctor": {
+          "opt1": "Mohamed Ahmed",
+          "opt2": "Dr. Ahmed"
+        },
+        "genitalService": {
+          "service1": "Service 1",
+          "service2": "Service 2"
+        },
+        "genitalServiceHint": "(Note: please choose a genital service to determine pregnancy check correctly)"
+      }
+    }
   }
 }

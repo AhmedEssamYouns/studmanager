@@ -21,7 +21,13 @@
     "deleteRecordMsg": "لن تتمكن من استعادة هذا السجل",
     "deleteSelected": "حذف العناصر المحددة؟",
     "deleteSelectedMsg": "لن تتمكن من استعادة البيانات المحذوفة",
-    "dragAndDrop": "اسحب و أفلت"
+    "dragAndDrop": "اسحب و أفلت",
+    "name": "الاسم",
+    "farm": "المزرعة",
+    "dob": "تاريخ الميلاد",
+    "bornIn": "ولد في",
+    "currentlyIn": "حالياً في",
+    "deleateAll": "حذف الجميع؟"
   },
   "sidebar": {
     "dashboard": "لوحة التحكم",
@@ -41,6 +47,20 @@
     "evaluations": "التقويم و الأحداث",
     "database": "قاعدة البيانات",
     "revenue": "الإيرادات"
+  },
+  "reproductionMares": {
+    "tabs": {
+      "overview": "ملخص التناسل",
+      "transfer": "نقل الأجنة",
+      "control": "التحكم في التناسل"
+    }
+  },
+  "reproductionPage": {
+    "tabs": {
+      "mares": "الأفراس",
+      "stallions": "الفحول",
+      "breeding": "التربية"
+    }
   },
   "months": {
     "january": "يناير",
@@ -164,9 +184,10 @@
     "pregnantMares": "عدد القهرة العشر",
     "nonPregnantMares": "عدد القهرة غير عشر",
     "naturalBreeding": "الطلاق الطبيعية",
-    "frozenSemen": "سايل متوجمجمد",
-    "freshSemen": "سايل متوجحديث",
-    "embryoTransfer": "نقل الأجنة"
+    "frozenSemen": "سائل منوي  حديث",
+    "freshSemen": "سايل منوي طازج",
+    "embryoTransfer": "نقل الأجنة",
+    "vetCheck": "الفحص البيطري"
   },
   "performance": {
     "title": "الأداء",
@@ -296,5 +317,67 @@
     "fatherName": "اسم الأب",
     "motherName": "اسم الأم",
     "matingResult": "إختبار التزاوج"
+  },
+  "reproduction": {
+    "maresOverview": {
+      "viewProfile": "رؤية الملف الشخصي",
+      "searchPlaceholder": "اختر الفرس",
+      "recordsTitle": "سجل التناسل",
+      "summary": {
+        "offspringCount": "عدد الأبناء",
+        "lastBirth": "آخر مرة تمت ولادته",
+        "successfulPregnancies": "عدد حالات الحمل الناجحة",
+        "reproductionService": "خدمة التكاثر",
+        "embryoCollection": "جمع الأجنة",
+        "pregnancy": "حمل",
+        "embryoTransfer": "نقل الأجنة",
+        "currentEmbryos": "عدد الأجنة الحالية"
+      }
+    },
+    "modals": {
+      "record": {
+        "fields": {
+          "stallionName": "اسم الفحل",
+          "inseminationType": "نوع التلقيح",
+          "result": "النتيجة"
+        },
+        "stallionOpt1": "مداح مهنا",
+        "stallionOpt2": "فحل ٢",
+        "insemination": {
+          "natural": "طبيعي",
+          "fresh": "سائل منوي حديث",
+          "frozen": "سائل منوي مجمد"
+        },
+        "result": {
+          "success": "نجح",
+          "failed": "فشل"
+        }
+      },
+      "control": {
+        "fields": {
+          "veterinarian": "الطبيب البيطري",
+          "examMethod": "طريقة الفحص",
+          "uterus": "الرحم (Uterus)",
+          "vagina": "المهبل (Vagina)",
+          "edema": "الوذمة (Edema)",
+          "cervix": "عنق الرحم (Cervix)",
+          "genitalService": "اختر خدمة تناسلية"
+        },
+        "examMethod": {
+          "opt1": "طريقة الفحص",
+          "ultrasound": "سونار",
+          "manual": "فحص يدوي"
+        },
+        "doctor": {
+          "opt1": "محمد احمد",
+          "opt2": "د. أحمد"
+        },
+        "genitalService": {
+          "service1": "خدمة 1",
+          "service2": "خدمة 2"
+        },
+        "genitalServiceHint": "(ملاحظة: يرجى اختيار خدمة تناسلية لتحديد فحص الحمل بشكل صحيح)"
+      }
+    }
   }
 }

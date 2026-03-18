@@ -21,24 +21,26 @@ export default function ReproductionControlModal({
   onClose,
   onSubmit,
 }: Props) {
-  const { locale, direction } = useLocale();
+  const { locale, direction, t } = useLocale();
   const isRTL = direction === "rtl";
 
-  // dropdown options (dummy)
   const examMethodOptions = useMemo(
     () => [
       { value: "", label: "" },
       {
         value: "طريقة الفحص",
-        label: locale === "ar" ? "طريقة الفحص" : "Exam method",
+        label: t("reproduction.modals.control.examMethod.opt1"),
       },
-      { value: "سونار", label: locale === "ar" ? "سونار" : "Ultrasound" },
+      {
+        value: "سونار",
+        label: t("reproduction.modals.control.examMethod.ultrasound"),
+      },
       {
         value: "فحص يدوي",
-        label: locale === "ar" ? "فحص يدوي" : "Manual exam",
+        label: t("reproduction.modals.control.examMethod.manual"),
       },
     ],
-    [locale],
+    [t],
   );
 
   const doctorOptions = useMemo(
@@ -46,25 +48,30 @@ export default function ReproductionControlModal({
       { value: "", label: "" },
       {
         value: "محمد احمد",
-        label: locale === "ar" ? "محمد احمد" : "Mohamed Ahmed",
+        label: t("reproduction.modals.control.doctor.opt1"),
       },
-      { value: "د. أحمد", label: locale === "ar" ? "د. أحمد" : "Dr. Ahmed" },
+      { value: "د. أحمد", label: t("reproduction.modals.control.doctor.opt2") },
     ],
-    [locale],
+    [t],
   );
 
   const genitalServiceOptions = useMemo(
     () => [
       { value: "", label: "" },
-      { value: "خدمة 1", label: locale === "ar" ? "خدمة 1" : "Service 1" },
-      { value: "خدمة 2", label: locale === "ar" ? "خدمة 2" : "Service 2" },
+      {
+        value: "خدمة 1",
+        label: t("reproduction.modals.control.genitalService.service1"),
+      },
+      {
+        value: "خدمة 2",
+        label: t("reproduction.modals.control.genitalService.service2"),
+      },
     ],
-    [locale],
+    [t],
   );
 
-  // local state (matches screenshot fields; row gets mapped from these)
-  const [date, setDate] = useState(""); // input type date
-  const [time, setTime] = useState(""); // input type time
+  const [date, setDate] = useState("");
+  const [time, setTime] = useState("");
   const [examMethod, setExamMethod] = useState("");
   const [doctor, setDoctor] = useState("");
 
@@ -79,22 +86,16 @@ export default function ReproductionControlModal({
   const [genitalService, setGenitalService] = useState("");
   const [price, setPrice] = useState("");
 
-  // scheduled exists in table row; keep it simple as نعم/لا
   const [scheduled, setScheduled] = useState<"نعم" | "لا">("نعم");
 
   useEffect(() => {
     if (!open) return;
 
     if (mode === "edit" && initialData) {
-      // initialData only has scheduled/date/time/examMethod/doctor today.
-      // We'll fill what we can, rest stays empty.
       setScheduled((initialData.scheduled as any) || "نعم");
       setExamMethod(initialData.examMethod || "");
       setDoctor(initialData.doctor || "");
 
-      // If your row.date/time are not ISO, keep them as-is in inputs if possible.
-      // These inputs require "YYYY-MM-DD" and "HH:MM" to show value.
-      // We'll best-effort parse later when you store ISO; for now:
       setDate("");
       setTime("");
 
@@ -128,8 +129,6 @@ export default function ReproductionControlModal({
   function submit(e: React.FormEvent) {
     e.preventDefault();
 
-    // Map modal fields back to the table row shape you currently have.
-    // Keep date/time as readable strings if inputs are empty.
     const payload: ReproductionControlRow = {
       id: initialData?.id || String(Date.now()),
       scheduled,
@@ -185,22 +184,13 @@ export default function ReproductionControlModal({
   return (
     <FormModal
       isOpen={open}
-      title={
-        mode === "add"
-          ? locale === "ar"
-            ? "إضافة سجل جديد"
-            : "Add new record"
-          : locale === "ar"
-            ? "تعديل السجل"
-            : "Edit record"
-      }
+      title={mode === "add" ? t("common.addNewRecord") : t("common.editRecord")}
       onClose={onClose}
       onSubmit={submit}
-      submitText={locale === "ar" ? "حفظ" : "Save"}
-      cancelText={locale === "ar" ? "إلغاء" : "Cancel"}
+      submitText={t("common.save")}
+      cancelText={t("common.cancel")}
     >
       <div className={isRTL ? "text-right" : "text-left"}>
-        {/* Row 1: time + date */}
         <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
           <div className="relative">
             <input
@@ -208,13 +198,13 @@ export default function ReproductionControlModal({
               value={time}
               onChange={(e) => setTime(e.target.value)}
               className={timeInputClass}
-              aria-label={locale === "ar" ? "الوقت" : "Time"}
+              aria-label={t("common.time")}
             />
             {show.time && (
               <span
                 className={`pointer-events-none absolute top-1/2 -translate-y-1/2 text-base text-gray-700 ${labelSideClass}`}
               >
-                {locale === "ar" ? "الوقت" : "Time"}
+                {t("common.time")}
               </span>
             )}
           </div>
@@ -225,24 +215,23 @@ export default function ReproductionControlModal({
               value={date}
               onChange={(e) => setDate(e.target.value)}
               className={dateInputClass}
-              aria-label={locale === "ar" ? "التاريخ" : "Date"}
+              aria-label={t("common.date")}
             />
             {show.date && (
               <span
                 className={`pointer-events-none absolute top-1/2 -translate-y-1/2 text-base text-gray-700 ${labelSideClass}`}
               >
-                {locale === "ar" ? "التاريخ" : "Date"}
+                {t("common.date")}
               </span>
             )}
           </div>
 
-          {/* Row 2: doctor + exam method */}
           <div className="relative">
             <select
               value={doctor}
               onChange={(e) => setDoctor(e.target.value)}
               className={selectClass}
-              aria-label={locale === "ar" ? "الطبيب البيطري" : "Veterinarian"}
+              aria-label={t("reproduction.modals.control.fields.veterinarian")}
             >
               {doctorOptions.map((o) => (
                 <option key={o.value} value={o.value}>
@@ -257,7 +246,7 @@ export default function ReproductionControlModal({
               <span
                 className={`pointer-events-none absolute top-1/2 -translate-y-1/2 text-base text-gray-700 ${labelSideClass}`}
               >
-                {locale === "ar" ? "الطبيب البيطري" : "Veterinarian"}
+                {t("reproduction.modals.control.fields.veterinarian")}
               </span>
             )}
           </div>
@@ -267,7 +256,7 @@ export default function ReproductionControlModal({
               value={examMethod}
               onChange={(e) => setExamMethod(e.target.value)}
               className={selectClass}
-              aria-label={locale === "ar" ? "طريقة الفحص" : "Exam method"}
+              aria-label={t("reproduction.modals.control.fields.examMethod")}
             >
               {examMethodOptions.map((o) => (
                 <option key={o.value} value={o.value}>
@@ -282,12 +271,11 @@ export default function ReproductionControlModal({
               <span
                 className={`pointer-events-none absolute top-1/2 -translate-y-1/2 text-base text-gray-700 ${labelSideClass}`}
               >
-                {locale === "ar" ? "طريقة الفحص" : "Exam method"}
+                {t("reproduction.modals.control.fields.examMethod")}
               </span>
             )}
           </div>
 
-          {/* Row 3: LO/RO */}
           <div className="relative">
             <input
               value={lo}
@@ -320,19 +308,18 @@ export default function ReproductionControlModal({
             )}
           </div>
 
-          {/* Row 4: Uterus / Vagina */}
           <div className="relative">
             <input
               value={uterus}
               onChange={(e) => setUterus(e.target.value)}
               className={fieldClass}
-              aria-label={locale === "ar" ? "الرحم (Uterus)" : "Uterus"}
+              aria-label={t("reproduction.modals.control.fields.uterus")}
             />
             {show.uterus && (
               <span
                 className={`pointer-events-none absolute top-1/2 -translate-y-1/2 text-base text-gray-700 ${labelSideClass}`}
               >
-                {locale === "ar" ? "الرحم (Uterus)" : "Uterus"}
+                {t("reproduction.modals.control.fields.uterus")}
               </span>
             )}
           </div>
@@ -342,30 +329,29 @@ export default function ReproductionControlModal({
               value={vagina}
               onChange={(e) => setVagina(e.target.value)}
               className={fieldClass}
-              aria-label={locale === "ar" ? "المهبل (Vagina)" : "Vagina"}
+              aria-label={t("reproduction.modals.control.fields.vagina")}
             />
             {show.vagina && (
               <span
                 className={`pointer-events-none absolute top-1/2 -translate-y-1/2 text-base text-gray-700 ${labelSideClass}`}
               >
-                {locale === "ar" ? "المهبل (Vagina)" : "Vagina"}
+                {t("reproduction.modals.control.fields.vagina")}
               </span>
             )}
           </div>
 
-          {/* Row 5: Edema / Cervix */}
           <div className="relative">
             <input
               value={edema}
               onChange={(e) => setEdema(e.target.value)}
               className={fieldClass}
-              aria-label={locale === "ar" ? "الوذمة (Edema)" : "Edema"}
+              aria-label={t("reproduction.modals.control.fields.edema")}
             />
             {show.edema && (
               <span
                 className={`pointer-events-none absolute top-1/2 -translate-y-1/2 text-base text-gray-700 ${labelSideClass}`}
               >
-                {locale === "ar" ? "الوذمة (Edema)" : "Edema"}
+                {t("reproduction.modals.control.fields.edema")}
               </span>
             )}
           </div>
@@ -375,44 +361,40 @@ export default function ReproductionControlModal({
               value={cervix}
               onChange={(e) => setCervix(e.target.value)}
               className={fieldClass}
-              aria-label={locale === "ar" ? "عنق الرحم (Cervix)" : "Cervix"}
+              aria-label={t("reproduction.modals.control.fields.cervix")}
             />
             {show.cervix && (
               <span
                 className={`pointer-events-none absolute top-1/2 -translate-y-1/2 text-base text-gray-700 ${labelSideClass}`}
               >
-                {locale === "ar" ? "عنق الرحم (Cervix)" : "Cervix"}
+                {t("reproduction.modals.control.fields.cervix")}
               </span>
             )}
           </div>
         </div>
 
-        {/* Notes */}
         <div className="mt-6 relative">
           <input
             value={notes}
             onChange={(e) => setNotes(e.target.value)}
             className={fieldClass}
-            aria-label={locale === "ar" ? "ملاحظات" : "Notes"}
+            aria-label={t("common.notes")}
           />
           {show.notes && (
             <span
               className={`pointer-events-none absolute top-1/2 -translate-y-1/2 text-base text-gray-700 ${labelSideClass}`}
             >
-              {locale === "ar" ? "ملاحظات" : "Notes"}
+              {t("common.notes")}
             </span>
           )}
         </div>
 
-        {/* Genital service select + help text */}
         <div className="mt-6 relative">
           <select
             value={genitalService}
             onChange={(e) => setGenitalService(e.target.value)}
             className={selectClass}
-            aria-label={
-              locale === "ar" ? "اختر خدمة تناسلية" : "Choose genital service"
-            }
+            aria-label={t("reproduction.modals.control.fields.genitalService")}
           >
             {genitalServiceOptions.map((o) => (
               <option key={o.value} value={o.value}>
@@ -427,32 +409,29 @@ export default function ReproductionControlModal({
             <span
               className={`pointer-events-none absolute top-1/2 -translate-y-1/2 text-base text-gray-700 ${labelSideClass}`}
             >
-              {locale === "ar" ? "اختر خدمة تناسلية" : "Choose genital service"}
+              {t("reproduction.modals.control.fields.genitalService")}
             </span>
           )}
 
           <div
             className={`mt-2 text-xs text-gray-500 ${isRTL ? "text-right" : "text-left"}`}
           >
-            {locale === "ar"
-              ? "(ملاحظة: يرجى اختيار خدمة تناسلية لتحديد فحص الحمل بشكل صحيح)"
-              : "(Note: please choose a genital service to determine pregnancy check correctly)"}
+            {t("reproduction.modals.control.genitalServiceHint")}
           </div>
         </div>
 
-        {/* Price */}
         <div className="mt-6 relative">
           <input
             value={price}
             onChange={(e) => setPrice(e.target.value)}
             className={fieldClass}
-            aria-label={locale === "ar" ? "السعر" : "Price"}
+            aria-label={t("common.price")}
           />
           {show.price && (
             <span
               className={`pointer-events-none absolute top-1/2 -translate-y-1/2 text-base text-gray-700 ${labelSideClass}`}
             >
-              {locale === "ar" ? "السعر" : "Price"}
+              {t("common.price")}
             </span>
           )}
         </div>
