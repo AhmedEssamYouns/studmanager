@@ -95,17 +95,7 @@ const CATEGORY_FIELDS: Record<string, FieldConfig[]> = {
     ],
 };
 
-const CATEGORY_ICONS: Record<string, string> = {
-    subscription: "العضوية",
-    purchase: "عمليات الشراء",
-    nutrition: "التغذية",
-    clinics: "العيادات",
-    housing: "الإيواء",
-    other: "مصاريف أخرى",
-    labor: "العمالة",
-    equipment: "معدات الخيول",
-    transport: "النقل",
-};
+
 
 const getDefaultValues = (categoryId?: string) => {
     const commonDate = "18 مارس 2025";
@@ -180,7 +170,7 @@ export const ExpensesModals = ({
     onClose,
     recordData,
     categoryId,
-    categoryTitle,
+    
 }: ExpensesModalsProps) => {
     const { direction, locale } = useLocale();
     const isRTL = direction === "rtl";
@@ -238,7 +228,6 @@ export const ExpensesModals = ({
         );
     }
 
-    const fallbackTitle = categoryTitle || CATEGORY_ICONS[categoryId || ""] || "السجل";
     const modalTitle =
         type === "add"
             ? isRTL

@@ -9,7 +9,7 @@ import MaresOverviewTab from "./tabs/MaresOverviewTab";
 type TabKey = "overview" | "transfer" | "control";
 
 export default function MaresTab() {
-  const { locale, direction, t } = useLocale();
+  const { direction, t } = useLocale();
   const isRTL = direction === "rtl";
 
   const [active, setActive] = useState<TabKey>("overview");

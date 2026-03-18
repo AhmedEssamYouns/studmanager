@@ -14,7 +14,7 @@ import { dummyByType, type StallionType } from "./stallions/dummy";
 import { StallionProfileCard } from "./stallions/StallionProfileCard";
 import { StallionToolbar } from "./stallions/StallionToolbar";
 
-function tagToType(tag: string, locale: "ar" | "en"): StallionType {
+function tagToType(tag: string): StallionType {
   // store Arabic-only keys as "stable ids" for mapping
   // and render labels via t() in UI (below)
   if (tag === "natural") return "natural";
@@ -57,7 +57,7 @@ export default function StallionsTab() {
   const [activeTag, setActiveTag] = useState<
     "natural" | "fresh" | "frozen" | "vet"
   >("natural");
-  const activeType = tagToType(activeTag, locale);
+  const activeType = tagToType(activeTag);
 
   const [itemsByType, setItemsByType] = useState(dummyByType);
 

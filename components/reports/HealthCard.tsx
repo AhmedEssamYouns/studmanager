@@ -13,7 +13,7 @@ export function HealthCard() {
   ];
 
   const total = HEALTH_DATA.reduce((s, d) => s + d.value, 0);
-  const isRTL = direction === 'rtl';
+  const isRTL = direction === "rtl";
 
   return (
     <div className="bg-white rounded-2xl p-5 shadow-sm border border-gray-50">

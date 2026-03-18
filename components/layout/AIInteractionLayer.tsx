@@ -16,8 +16,8 @@ const AI_CATEGORIES = [
 
 export function AIInteractionLayer() {
   const router = useRouter();
-  const { locale, direction } = useLocale();
-  const isRTL = direction === 'rtl';
+  const { locale } = useLocale();
+  
   const [isOpen, setIsOpen] = useState(false);
   const [isMounted, setIsMounted] = useState(false);
 
