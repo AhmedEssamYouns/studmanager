@@ -13,6 +13,10 @@
     "success": "Successful",
     "language": "Language",
     "english": "English",
+    "download": "Download",
+    "selectAll": "Select all",
+    "select": "Select",
+    "noRecordsFound": "No records found",
     "arabic": "العربية",
     "actions": "Actions",
     "select_language": "Select Language",
@@ -21,7 +25,18 @@
     "deleteRecordMsg": "You will not be able to recover this record",
     "deleteSelected": "Delete Selected Items?",
     "deleteSelectedMsg": "You will not be able to recover the deleted data",
-    "dragAndDrop": "Drag & Drop"
+    "dragAndDrop": "Drag & Drop",
+    "name": "Name",
+    "farm": "Farm",
+    "dob": "DOB",
+    "bornIn": "Born in",
+    "currentlyIn": "Currently in",
+    "deleteAll": "Delete All?",
+    "date": "Date",
+    "time": "Time",
+    "notes": "Notes",
+    "price": "Price",
+    "location": "location"
   },
   "sidebar": {
     "dashboard": "Dashboard",
@@ -41,6 +56,20 @@
     "evaluations": "Calendar & Events",
     "database": "Database",
     "revenue": "Revenue"
+  },
+  "reproductionMares": {
+    "tabs": {
+      "overview": "Reproduction overview",
+      "transfer": "Embryo transfer",
+      "control": "Reproduction control"
+    }
+  },
+  "reproductionPage": {
+    "tabs": {
+      "mares": "Mares",
+      "stallions": "Stallions",
+      "breeding": "Breeding"
+    }
   },
   "months": {
     "january": "January",
@@ -166,7 +195,8 @@
     "naturalBreeding": "Natural Breeding",
     "frozenSemen": "Frozen Semen",
     "freshSemen": "Fresh Semen",
-    "embryoTransfer": "Embryo Transfer"
+    "embryoTransfer": "Embryo Transfer",
+    "vetCheck": "Vet Check"
   },
   "performance": {
     "title": "Performance",
@@ -296,5 +326,254 @@
     "fatherName": "Father's Name",
     "motherName": "Mother's Name",
     "matingResult": "Mating Test"
+  },
+  "expenses": {
+    "subscription": "Subscription",
+    "purchase": "Purchase",
+    "nutrition": "Nutrition",
+    "clinics": "Clinics",
+    "housing": "Housing",
+    "other": "Other Expenses",
+    "labor": "Labor",
+    "equipment": "Horse Equipment",
+    "transport": "Transport",
+    "search": "Search",
+    "addNewRecord": "Add New Record",
+    "actions": "Actions",
+    "delete": "Delete",
+    "facilityName": "Facility Name",
+    "startDate": "Start Date",
+    "endDate": "End Date",
+    "subscriptionDuration": "Subscription Duration",
+    "cost": "Cost",
+    "equipmentName": "Equipment",
+    "date": "Date",
+    "horseName": "Horse Name",
+    "transportMethod": "Transport Method",
+    "from": "From",
+    "to": "To",
+    "name": "Name",
+    "jobTitle": "Job Title",
+    "workStartDate": "Work Start Date",
+    "insuranceAmount": "Insurance Amount",
+    "insuranceType": "Insurance Type",
+    "salary": "Salary",
+    "attachment": "Attachment",
+    "procedure": "Procedure",
+    "procedureDetails": "Procedure Details",
+    "ownerName": "Owner Name",
+    "checkInDate": "Check-in Date",
+    "checkOutDate": "Check-out Date",
+    "notes": "Notes",
+    "foodType": "Food Type"
+  },
+  "performanceModals": {
+    "deleteTitle": "Delete Record?",
+    "deleteSubtitle": "You will not be able to recover this record",
+    "cancel": "Cancel",
+    "delete": "Delete",
+    "save": "Save",
+    "defaultCategory": "Training",
+    "selectHorse": "Select Horse",
+    "trainingDate": "Training Date",
+    "trainerName": "Trainer Name",
+    "followUpNumber": "Follow-up Number",
+    "trainingType": "Training Type",
+    "trainingDuration": "Training Duration",
+    "cost": "Cost",
+    "notifyMe": "Notify Me On",
+    "fitnessTraining": "Fitness Training",
+    "hour": "Hour",
+    "muhammadAhmed": "Muhammad Ahmad",
+    "addRecord": "Add New {{cat}} Record",
+    "editRecord": "Edit {{cat}} Record"
+  },
+  "nutritionModals": {
+    "deleteTitle": "Delete Record?",
+    "deleteSubtitle": "You will not be able to recover this record",
+    "cancel": "Cancel",
+    "delete": "Delete",
+    "save": "Save",
+    "addRecord": "Add New {{cat}} Record",
+    "editRecord": "Edit {{cat}} Record",
+    "defaultCategory": "Feed Changes",
+    "selectHorse": "Select Horse",
+    "changeDate": "Change Date",
+    "feedType": "Feed Type",
+    "quantity": "Quantity / kg",
+    "supplierName": "Supplier Name",
+    "supplierNumber": "Supplier Number",
+    "cost": "Cost",
+    "notifyMe": "Notify Me On"
+  },  "reproduction": {
+    "tables": {
+      "control": {
+        "headers": {
+          "scheduled": "Scheduled",
+          "examMethod": "Exam method",
+          "doctor": "Doctor"
+        }
+      },
+      "embryoTransfer": {
+        "headers": {
+          "stallion": "Stallion",
+          "futureMare": "Donor mare",
+          "collectionDate": "Collection date",
+          "tankName": "Tank",
+          "type": "Type",
+          "forSale": "For sale",
+          "canister": "Canister",
+          "color": "Color"
+        }
+      }
+    },
+    "modals": {
+      "shared": {
+        "fields": {
+          "executor": "Executor",
+          "initialResults": "Initial results"
+        },
+        "horse": {
+          "optA": "Horse A",
+          "optB": "Horse B"
+        },
+        "executor": {
+          "opt1": "Executor 1",
+          "opt2": "Executor 2"
+        }
+      },
+      "natural": {
+        "titleAdd": "Add record",
+        "titleEdit": "Edit record",
+        "fields": {
+          "futureMare": "Future mare",
+          "initialResults": "Initial results"
+        },
+        "horse": {
+          "select": "Select horse",
+          "optA": "Horse A",
+          "optB": "Horse B",
+          "optC": "Horse C"
+        }
+      },
+      "fresh": {
+        "titleAdd": "Add fresh semen",
+        "titleEdit": "Edit",
+        "fields": {
+          "futureMare": "Future mare"
+        }
+      },
+      "frozen": {
+        "titleAdd": "Add frozen semen",
+        "titleEdit": "Edit",
+        "fields": {
+          "futureMare": "Future mare",
+          "qty": "Quantity / ml"
+        },
+        "qty": {
+          "ml5": "5 ml",
+          "ml10": "10 ml",
+          "ml15": "15 ml",
+          "ml20": "20 ml"
+        }
+      },
+      "embryoTransfer": {
+        "titleAdd": "Add new record",
+        "titleEdit": "Edit record",
+        "fields": {
+          "donorMareName": "Donor mare name",
+          "stallionName": "Stallion name",
+          "tank": "Tank",
+          "collectionDate": "Collection date",
+          "color": "Color",
+          "canister": "Canister",
+          "forSale": "For sale",
+          "type": "Type"
+        },
+        "donorMare": {
+          "opt1": "Calypotra",
+          "opt2": "Mare 2"
+        },
+        "stallion": {
+          "opt1": "Maddah",
+          "opt2": "Stallion 2"
+        },
+        "tank": {
+          "opt1": "Tank A",
+          "opt2": "Tank B"
+        },
+        "forSale": {
+          "unspecified": "Unspecified"
+        },
+        "type": {
+          "male": "Male",
+          "female": "Female",
+          "unknown": "Unknown"
+        },
+        "color": {
+          "red": "Red",
+          "green": "Green",
+          "yellow": "Yellow"
+        }
+      },
+      "record": {
+        "fields": {
+          "stallionName": "Stallion name",
+          "inseminationType": "Insemination type",
+          "result": "Result"
+        },
+        "stallionOpt1": "Maddah",
+        "stallionOpt2": "Stallion 2",
+        "insemination": {
+          "natural": "Natural",
+          "fresh": "Fresh semen",
+          "frozen": "Frozen semen"
+        },
+        "result": {
+          "success": "Success",
+          "failed": "Failed"
+        }
+      },
+      "control": {
+        "fields": {
+          "veterinarian": "Veterinarian",
+          "examMethod": "Exam method",
+          "uterus": "Uterus",
+          "vagina": "Vagina",
+          "edema": "Edema",
+          "cervix": "Cervix",
+          "genitalService": "Choose genital service"
+        },
+        "examMethod": {
+          "opt1": "Exam method",
+          "ultrasound": "Ultrasound",
+          "manual": "Manual exam"
+        },
+        "doctor": {
+          "opt1": "Mohamed Ahmed",
+          "opt2": "Dr. Ahmed"
+        },
+        "genitalService": {
+          "service1": "Service 1",
+          "service2": "Service 2"
+        },
+        "genitalServiceHint": "(Note: please choose a genital service to determine pregnancy check correctly)"
+      }
+    },
+    "maresOverview": {
+      "viewProfile": "View profile",
+      "searchPlaceholder": "Search mare",
+      "recordsTitle": "Reproduction records",
+      "summary": {
+        "offspringCount": "Offspring count",
+        "lastBirth": "Last birth",
+        "successfulPregnancies": "Successful pregnancies",
+        "reproductionService": "Reproduction service",
+        "embryoCollection": "Embryo collection",
+        "pregnancy": "Pregnancy",
+        "embryoTransfer": "Embryo transfer",
+        "currentEmbryos": "Current embryos"
+      }
+    }
   }
 }
