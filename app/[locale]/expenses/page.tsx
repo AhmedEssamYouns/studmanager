@@ -9,15 +9,16 @@ import Link from "next/link";
 
 // ===== Categories =====
 const EXPENSES_CATEGORIES = [
-    { id: "housing", labelAr: "الإيواء", labelEn: "Housing", icon: "/expenses/housing.svg" },
-    { id: "clinics", labelAr: "العيادات", labelEn: "Clinics", icon: "/expenses/clinics.svg" },
-    { id: "nutrition", labelAr: "التغذية", labelEn: "Nutrition", icon: "/expenses/nutrition.svg" },
-    { id: "purchase", labelAr: "عملية الشراء", labelEn: "Purchase", icon: "/expenses/purchase.svg" },
     { id: "subscription", labelAr: "عضوية", labelEn: "Subscription", icon: "/expenses/subscription.svg" },
-    { id: "transport", labelAr: "النقل", labelEn: "Transport", icon: "/expenses/transport.svg" },
-    { id: "equipment", labelAr: "معدات الخيول", labelEn: "Horse Equipment", icon: "/expenses/equipment.svg" },
-    { id: "labor", labelAr: "العمالة", labelEn: "Labor", icon: "/expenses/labor.svg" },
+    { id: "purchase", labelAr: "عملية الشراء", labelEn: "Purchase", icon: "/expenses/purchase.svg" },
+    { id: "nutrition", labelAr: "التغذية", labelEn: "Nutrition", icon: "/expenses/nutrition.svg" },
+    { id: "clinics", labelAr: "العيادات", labelEn: "Clinics", icon: "/expenses/clinics.svg" },
+    { id: "housing", labelAr: "الإيواء", labelEn: "Housing", icon: "/expenses/housing.svg" },
     { id: "other", labelAr: "مصاريف أخرى", labelEn: "Other Expenses", icon: "/expenses/other.svg" },
+    { id: "labor", labelAr: "العمالة", labelEn: "Labor", icon: "/expenses/labor.svg" },
+    { id: "equipment", labelAr: "معدات الخيول", labelEn: "Horse Equipment", icon: "/expenses/equipment.svg" },
+    { id: "transport", labelAr: "النقل", labelEn: "Transport", icon: "/expenses/transport.svg" },
+
 ];
 
 export default function ExpensesPage() {
