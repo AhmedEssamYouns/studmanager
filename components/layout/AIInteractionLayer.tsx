@@ -20,18 +20,13 @@ export function AIInteractionLayer() {
   const isRTL = direction === 'rtl';
   const [isOpen, setIsOpen] = useState(false);
   const [isMounted, setIsMounted] = useState(false);
-  const [showFlash, setShowFlash] = useState(false);
 
   useEffect(() => {
     setIsMounted(true);
   }, []);
 
   const handleOpen = () => {
-    setShowFlash(true);
-    setTimeout(() => {
-      setShowFlash(false);
-      setIsOpen(true);
-    }, 150);
+    setIsOpen(true);
   };
 
   const handleCategoryClick = (id: string) => {
@@ -43,10 +38,6 @@ export function AIInteractionLayer() {
 
   return (
     <>
-      {showFlash && (
-        <div className="fixed inset-0 z-[200] bg-white animate-out fade-out duration-300 pointer-events-none" />
-      )}
-
       {/* Desktop Button */}
       <div
         className={`fixed top-1/2 -translate-y-1/2 z-50 hidden md:block cursor-pointer transition-all duration-300 hover:scale-110 active:scale-95 group ${false ? 'right-5 translate-x-1/2' : 'left-5 -translate-x-1/2'
@@ -83,11 +74,11 @@ export function AIInteractionLayer() {
       {isOpen && (
         <div className="fixed inset-0 z-[100] flex items-center justify-center p-3 md:p-6">
           <div
-            className="absolute inset-0 bg-black/30 backdrop-blur-sm"
+            className="absolute inset-0 bg-black/30 backdrop-blur-sm animate-in fade-in duration-300"
             onClick={() => setIsOpen(false)}
           />
 
-          <div className="relative w-full max-w-6xl bg-[#e9e5e2] rounded-[28px] md:rounded-[40px] shadow-xl overflow-hidden animate-in zoom-in-95 duration-300">
+          <div className="relative w-full max-w-6xl bg-[#e9e5e2] rounded-[28px] md:rounded-[40px] shadow-xl overflow-hidden animate-in fade-in zoom-in-95 duration-300 ease-out">
             {/* Header */}
             <div className="flex items-center justify-between px-5 md:px-8 py-4 md:py-6 border-b border-[#d6cfc9]">
               <div className="text-right">

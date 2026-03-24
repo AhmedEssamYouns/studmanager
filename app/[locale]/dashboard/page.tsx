@@ -14,25 +14,25 @@ export default function DashboardPage() {
       label: t('dashboard.totalHorses'),
       value: '200',
       accent: 'text-[#7a5b4a]',
-      icon: <img src="/svgs/عدد الخيل.svg" alt="" className="h-16 w-16 sm:h-24 sm:w-24 object-contain" />,
+      icon: "/svgs/عدد الخيل.svg",
     },
     {
       label: t('dashboard.totalExpenses'),
       value: '500$',
       accent: 'text-[#008f9c]',
-      icon: <img src="/svgs/مصروفات.svg" alt="" className="h-16 w-16 sm:h-24 sm:w-24 object-contain" />,
+      icon: "/svgs/مصروفات.svg",
     },
     {
       label: t('dashboard.profit'),
       value: '500$',
       accent: 'text-[#d37a17]',
-      icon: <img src="/svgs/earning.svg" alt="" className="h-16 w-16 sm:h-24 sm:w-24 object-contain" />,
+      icon: "/svgs/earning.svg",
     },
     {
       label: t('dashboard.totalSales'),
       value: '500',
       accent: 'text-[#d81c24]',
-      icon: <img src="/svgs/red-horse.svg" alt="" className="h-16 w-16 sm:h-24 sm:w-24 object-contain" />,
+      icon: "/svgs/red-horse.svg",
     },
   ];
 
@@ -82,14 +82,23 @@ export default function DashboardPage() {
   return (
     <MainLayout>
       <div className="space-y-4 sm:space-y-6 lg:space-y-7">
-        <section className={`grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-4 ${direction === 'rtl' ? '[direction:rtl]' : '[direction:ltr]'}`}>
+        <section className={`grid grid-cols-1 gap-4 sm:grid-cols-2 desk:grid-cols-4 ${direction === 'rtl' ? '[direction:rtl]' : '[direction:ltr]'}`}>
           {stats.map((stat) => (
-            <article key={stat.label} className="flex flex-col-reverse items-center justify-between gap-4 rounded-[16px] bg-white px-4 py-5 sm:rounded-[24px] sm:px-6 sm:py-6 lg:flex-row-reverse">
-              <div className={`space-y-1 text-center ${direction === 'rtl' ? 'sm:text-right' : 'sm:text-left'}`}>
-                <div className={`text-lg font-bold sm:text-[1.85rem] ${stat.accent}`}>{stat.value}</div>
-                <div className="text-sm font-semibold text-[#2b2231] sm:text-[1.3rem] lg:text-[1.5rem] leading-tight">{stat.label}</div>
+            <article 
+              key={stat.label} 
+              className="flex flex-row sm:flex-col-reverse lg:flex-row-reverse items-center justify-between sm:justify-center lg:justify-between gap-3 sm:gap-4 rounded-[1.25rem] bg-white px-4 py-5 sm:rounded-[24px] sm:px-6 sm:py-6 shadow-sm border border-[#f3e9df] transition-all hover:shadow-md"
+            >
+              <div className={`flex-1 space-y-0.5 sm:space-y-1 ${direction === 'rtl' ? 'text-right' : 'text-left'} sm:text-center lg:text-inherit`}>
+                <div className={`text-xl font-black sm:text-[1.85rem] ${stat.accent} leading-none`}>{stat.value}</div>
+                <div className="text-[0.75rem] font-bold text-[#4a3f35] sm:text-[1.1rem] lg:text-[1.3rem] leading-tight opacity-80">{stat.label}</div>
               </div>
-              {stat.icon}
+              <div className="relative flex-shrink-0">
+                <img 
+                  src={stat.icon} 
+                  alt="" 
+                  className="h-12 w-12 sm:h-20 sm:w-20 lg:h-24 lg:w-24 object-contain drop-shadow-sm" 
+                />
+              </div>
             </article>
           ))}
         </section>
