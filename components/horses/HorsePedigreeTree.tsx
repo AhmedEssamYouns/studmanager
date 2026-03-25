@@ -14,6 +14,7 @@ interface Horse {
 interface HorsePedigreeTreeProps {
   horse: Horse;
   showTitle?: boolean;
+  controlsVariant?: "default" | "compact";
 }
 
 type ParentRole = "Mother" | "Father";
@@ -171,6 +172,7 @@ const PedigreeBox = ({ node, top }: { node: PedigreeNode; top: number }) => {
 export const HorsePedigreeTree: FC<HorsePedigreeTreeProps> = ({
   horse,
   showTitle = true,
+  controlsVariant = "default",
 }) => {
   const { direction } = useLocale();
   const isRTL = direction === "rtl";
@@ -243,7 +245,10 @@ export const HorsePedigreeTree: FC<HorsePedigreeTreeProps> = ({
       className="mx-auto mb-8 w-full max-w-[1500px]"
       dir={isRTL ? "rtl" : "ltr"}
     >
-      <div className="mb-4 flex flex-col gap-3 px-1 sm:flex-row sm:items-center sm:justify-between">
+      <div
+        className="mb-4 flex flex-col gap-3 px-1 sm:flex-row sm:items-center sm:justify-between"
+        dir={controlsVariant === "compact" && !showTitle ? "ltr" : undefined}
+      >
         {showTitle && (
           <h2 className="text-xl font-bold text-[#2a2a2a] sm:text-2xl">
             {isRTL ? "شهادة النسب" : "Pedigree Certificate"}
@@ -255,25 +260,35 @@ export const HorsePedigreeTree: FC<HorsePedigreeTreeProps> = ({
             type="button"
             onClick={handleDownload}
             disabled={isDownloading}
-            className="inline-flex h-11 items-center justify-center gap-2 rounded-2xl bg-white px-4 text-sm font-semibold text-[#3e3640] transition hover:bg-[#f8f3ed] disabled:cursor-not-allowed disabled:opacity-60"
+            className={`inline-flex items-center justify-center gap-2 bg-white font-semibold text-[#3e3640] transition hover:bg-[#f8f3ed] disabled:cursor-not-allowed disabled:opacity-60 ${
+              controlsVariant === "compact"
+                ? "h-11 w-11 rounded-xl border border-[#e6ddd4]"
+                : "h-11 rounded-2xl px-4 text-sm"
+            }`}
             title={isRTL ? "تحميل" : "Download"}
           >
             <DownloadIcon className="h-5 w-5" />
-            <span>
-              {isDownloading
-                ? isRTL
-                  ? "جاري التحميل..."
-                  : "Downloading..."
-                : isRTL
-                  ? "تحميل"
-                  : "Download"}
-            </span>
+            {controlsVariant === "default" ? (
+              <span>
+                {isDownloading
+                  ? isRTL
+                    ? "جاري التحميل..."
+                    : "Downloading..."
+                  : isRTL
+                    ? "تحميل"
+                    : "Download"}
+              </span>
+            ) : null}
           </button>
 
           <button
             type="button"
             onClick={handleToggleFullscreen}
-            className="inline-flex h-11 items-center justify-center gap-2 rounded-2xl bg-white px-4 text-sm font-semibold text-[#3e3640] transition hover:bg-[#f8f3ed]"
+            className={`inline-flex items-center justify-center gap-2 bg-white font-semibold text-[#3e3640] transition hover:bg-[#f8f3ed] ${
+              controlsVariant === "compact"
+                ? "h-11 w-11 rounded-xl border border-[#e6ddd4]"
+                : "h-11 rounded-2xl px-4 text-sm"
+            }`}
             title={
               isFullscreen
                 ? isRTL
@@ -285,15 +300,17 @@ export const HorsePedigreeTree: FC<HorsePedigreeTreeProps> = ({
             }
           >
             <ExpandIcon className="h-5 w-5" />
-            <span>
-              {isFullscreen
-                ? isRTL
-                  ? "تصغير"
-                  : "Exit"
-                : isRTL
-                  ? "تكبير"
-                  : "Expand"}
-            </span>
+            {controlsVariant === "default" ? (
+              <span>
+                {isFullscreen
+                  ? isRTL
+                    ? "تصغير"
+                    : "Exit"
+                  : isRTL
+                    ? "تكبير"
+                    : "Expand"}
+              </span>
+            ) : null}
           </button>
         </div>
       </div>
