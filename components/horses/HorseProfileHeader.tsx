@@ -3,6 +3,7 @@
 import { FC } from "react";
 import Image from "next/image";
 import { useLocale } from "@/lib/locale-context";
+import { useRouter } from "next/navigation";
 
 interface Horse {
   id: string;
@@ -24,6 +25,7 @@ export const HorseProfileHeader: FC<HorseProfileHeaderProps> = ({ horse }) => {
   const isRTL = direction === "rtl";
 
   const horseName = locale === "ar" ? horse.nameAr : horse.nameEn;
+  const router = useRouter();
 
   return (
     <div className="mb-8">
@@ -38,7 +40,7 @@ export const HorseProfileHeader: FC<HorseProfileHeaderProps> = ({ horse }) => {
             className="object-cover"
           />
         </div>
-        
+
         {/* Avatar overlapping the bottom edge */}
         <div className={`absolute -bottom-16 ${isRTL ? "right-12" : "left-12"} w-40 h-40 rounded-full border-4 border-[#fdfbf7] overflow-hidden bg-white shadow-md z-10`}>
           <Image
@@ -61,7 +63,10 @@ export const HorseProfileHeader: FC<HorseProfileHeaderProps> = ({ horse }) => {
 
         {/* Action Area */}
         <div>
-          <button className="flex items-center gap-2 px-6 py-3 bg-[#3d2a1b] text-white rounded-xl hover:bg-[#2c1f14] transition-colors font-semibold text-lg">
+          <button
+            onClick={() => router.push(`/${locale}/horses/${horse.id}/mating-test`)}
+            className="flex items-center gap-2 px-6 py-3 bg-[#3d2a1b] text-white rounded-xl hover:bg-[#2c1f14] transition-colors font-semibold text-lg"
+          >
             <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
               <circle cx="10" cy="14" r="5" />
               <line x1="14" y1="10" x2="19" y2="5" />
