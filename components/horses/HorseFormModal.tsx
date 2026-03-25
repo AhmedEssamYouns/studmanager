@@ -232,19 +232,19 @@ export const HorseFormModal: FC<HorseFormModalProps> = ({
   );
 
   return (
-    <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/40 p-4 md:p-6">
+    <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/40 p-2 md:p-4 lg:p-6">
       <div
         dir={direction}
-        className="w-full max-w-6xl overflow-hidden rounded-[28px] bg-white shadow-xl"
+        className="w-full max-w-6xl max-h-[95vh] md:max-h-[90vh] overflow-hidden rounded-[20px] md:rounded-[28px] bg-white shadow-xl flex flex-col"
       >
-        <div className="flex items-start justify-between px-8 pb-4 pt-8 md:px-10 flex-row-reverse ">
+        <div className="flex items-start justify-between px-4 md:px-8 lg:px-10 pb-3 md:pb-4 pt-4 md:pt-8 flex-row-reverse shrink-0">
           <button
             type="button"
             onClick={handleClose}
-            className="text-[#5b5b5b] transition hover:text-black"
+            className="text-[#5b5b5b] transition hover:text-black flex-shrink-0"
             aria-label="Close"
           >
-            <svg className="h-7 w-7" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <svg className="h-6 w-6 md:h-7 md:w-7" fill="none" stroke="currentColor" viewBox="0 0 24 24">
               <path
                 strokeLinecap="round"
                 strokeLinejoin="round"
@@ -254,24 +254,24 @@ export const HorseFormModal: FC<HorseFormModalProps> = ({
             </svg>
           </button>
 
-          <h2 className="text-[20px] font-bold text-[#2F2740] md:text-[22px]">
+          <h2 className="text-[18px] md:text-[20px] lg:text-[22px] font-bold text-[#2F2740] mr-2 md:mr-0">
             {t('horses.manualAddTitle')}
           </h2>
         </div>
 
-        <div className="px-8 pb-8 pt-2 md:px-10">
+        <div className="px-4 md:px-8 lg:px-10 pb-4 md:pb-8 pt-2 flex-1 overflow-y-auto">
           {isManual && (
-            <div className="mb-10 overflow-x-auto">
-              <div className="flex min-w-max items-center justify-between gap-8 px-2">
+            <div className="mb-6 md:mb-10 overflow-x-auto">
+              <div className="flex min-w-max items-center justify-between gap-4 md:gap-8 px-2">
                 {steps.map((step) => {
                   const active = step.id === currentStep;
                   const completed = step.id < currentStep;
 
                   return (
-                    <div key={step.id} className="flex min-w-[170px] flex-col items-center">
-                      <div className="flex flex-row-reverse items-center gap-3">
+                    <div key={step.id} className="flex min-w-[140px] md:min-w-[170px] flex-col items-center">
+                      <div className="flex flex-row-reverse items-center gap-2 md:gap-3">
                         <span
-                          className={`whitespace-nowrap text-sm transition ${active
+                          className={`whitespace-nowrap text-xs md:text-sm transition ${active
                             ? 'font-semibold text-[#2b1a12]'
                             : completed
                               ? 'font-semibold text-[#2b1a12]'
@@ -284,14 +284,14 @@ export const HorseFormModal: FC<HorseFormModalProps> = ({
                         <button
                           type="button"
                           onClick={() => setCurrentStep(step.id)}
-                          className={`flex h-11 w-11 items-center justify-center rounded-full border text-sm font-semibold transition ${active || completed
+                          className={`flex h-9 w-9 md:h-11 md:w-11 items-center justify-center rounded-full border text-xs md:text-sm font-semibold transition ${active || completed
                             ? 'border-[#3f2416] bg-[#3f2416] text-white'
                             : 'border-[#d8cec8] bg-white text-[#b7aca6]'
                             }`}
                         >
                           {completed ? (
                             <svg
-                              className="h-5 w-5"
+                              className="h-4 w-4 md:h-5 md:w-5"
                               viewBox="0 0 24 24"
                               fill="none"
                               stroke="currentColor"
@@ -309,7 +309,7 @@ export const HorseFormModal: FC<HorseFormModalProps> = ({
                         </button>
                       </div>
 
-                      <div className="mt-3 h-[4px] w-full rounded-full bg-transparent">
+                      <div className="mt-2 md:mt-3 h-[3px] md:h-[4px] w-full rounded-full bg-transparent">
                         {active && <div className="h-full w-full rounded-full bg-[#4a2b1a]" />}
                       </div>
                     </div>
@@ -326,7 +326,7 @@ export const HorseFormModal: FC<HorseFormModalProps> = ({
                   {t('horses.image')}
                 </p>
 
-                <div className="flex w-full cursor-pointer flex-col items-center justify-center gap-3 rounded-2xl border border-dashed border-[#d5ccc6] bg-[#faf7f2] py-10 transition hover:bg-[#f5ede7]">
+                <div className="flex w-full cursor-pointer flex-col items-center justify-center gap-3 rounded-2xl border border-dashed border-[#d5ccc6] bg-[#faf7f2] py-6 md:py-10 transition hover:bg-[#f5ede7] px-4">
                   <UploadCloudIcon />
                   <p className="text-sm font-medium text-[#3a2c24]">
                     {t('horses.dragDropImage')}
@@ -429,7 +429,7 @@ export const HorseFormModal: FC<HorseFormModalProps> = ({
                   </select>
                 </div>
 
-                <div className="grid grid-cols-2 gap-3">
+                <div className="grid grid-cols-1 gap-3 md:grid-cols-2">
                   <select
                     name="height"
                     value={formData.height}
@@ -455,7 +455,7 @@ export const HorseFormModal: FC<HorseFormModalProps> = ({
                   </select>
                 </div>
 
-                <div className="grid grid-cols-2 gap-3">
+                <div className="grid grid-cols-1 gap-3 md:grid-cols-2">
                   <select
                     name="currentCountry"
                     value={formData.currentCountry}
@@ -481,7 +481,7 @@ export const HorseFormModal: FC<HorseFormModalProps> = ({
                   </select>
                 </div>
 
-                <div className="grid grid-cols-2 gap-3">
+                <div className="grid grid-cols-1 gap-3 md:grid-cols-2">
                   <input
                     dir="rtl"
                     name="ownerName"
@@ -513,7 +513,7 @@ export const HorseFormModal: FC<HorseFormModalProps> = ({
                   </option>
                 </select>
 
-                <div className="grid grid-cols-2 gap-3">
+                <div className="grid grid-cols-1 gap-3 md:grid-cols-2">
                   <select
                     name="frontLeftLeg"
                     value={formData.frontLeftLeg}
@@ -539,7 +539,7 @@ export const HorseFormModal: FC<HorseFormModalProps> = ({
                   </select>
                 </div>
 
-                <div className="grid grid-cols-2 gap-3">
+                <div className="grid grid-cols-1 gap-3 md:grid-cols-2">
                   <select
                     name="backLeftLeg"
                     value={formData.backLeftLeg}
@@ -579,7 +579,7 @@ export const HorseFormModal: FC<HorseFormModalProps> = ({
 
             {currentStep === 3 && (
               <div className="space-y-6">
-                <div className="grid grid-cols-1 gap-x-6 gap-y-5 md:grid-cols-2">
+                <div className="grid grid-cols-1 gap-4 md:grid-cols-2">
                   <input
                     dir={isRTL ? 'rtl' : 'ltr'}
                     name="registrationNumber"
