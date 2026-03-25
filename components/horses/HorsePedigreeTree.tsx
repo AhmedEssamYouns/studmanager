@@ -4,6 +4,7 @@ import { FC, useEffect, useMemo, useRef, useState } from "react";
 import Image from "next/image";
 import { toPng } from "html-to-image";
 import { useLocale } from "@/lib/locale-context";
+import { X } from "lucide-react";
 
 interface Horse {
   id?: string;
@@ -392,6 +393,19 @@ export const HorsePedigreeTree: FC<HorsePedigreeTreeProps> = ({
             : ""
         }`}
       >
+        {isFullscreen && isMobileViewport && (
+          <button
+            type="button"
+            onClick={() => setIsFullscreen(false)}
+            className={`absolute top-4 z-[80] flex h-11 w-11 items-center justify-center rounded-full bg-white/95 text-[#3e3640] shadow-md ${
+              isRTL ? "left-4" : "right-4"
+            }`}
+            aria-label={isRTL ? "إغلاق" : "Close"}
+          >
+            <X className="h-5 w-5" />
+          </button>
+        )}
+
         <div
           className={`w-full overflow-x-auto overflow-y-hidden rounded-[22px] ${
             isFullscreen && !isMobileViewport
