@@ -5,6 +5,7 @@ import { useLocale } from "@/lib/locale-context";
 import { MainLayout } from "@/components/layout/MainLayout";
 import { ArrowLeft, ArrowRight, Menu, X } from "lucide-react";
 import { LottieAnimation } from "@/components/common/LottieAnimation";
+import { AICategoryPicker } from "@/components/ai/AICategoryPicker";
 import aiAnimation from "@/public/brand/Ai (1).json";
 import { useRouter } from "next/navigation";
 
@@ -100,6 +101,22 @@ export default function AIChatPage() {
             >
               <Menu size={20} className="text-gray-700" />
             </button>
+          </div>
+
+          <div className="px-4 md:hidden">
+            <AICategoryPicker
+              trigger={
+                <div className="flex w-full items-center justify-center gap-2 rounded-2xl border border-[#d6cfc9] bg-white px-4 py-3 text-sm font-bold text-[#2b2330] shadow-sm">
+                  <img
+                    src="/ai/الاداء.svg"
+                    alt=""
+                    className="h-6 w-6 object-contain"
+                  />
+                  <span>{isRTL ? "اختر التصنيف" : "Choose category"}</span>
+                </div>
+              }
+              triggerClassName="block w-full"
+            />
           </div>
 
           {/* Empty State / Center Content */}
