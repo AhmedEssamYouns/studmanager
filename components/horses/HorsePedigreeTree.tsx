@@ -176,6 +176,7 @@ export const HorsePedigreeTree: FC<HorsePedigreeTreeProps> = ({
 }) => {
   const { direction } = useLocale();
   const isRTL = direction === "rtl";
+  const [isMobileViewport, setIsMobileViewport] = useState(false);
 
   const fullscreenRef = useRef<HTMLDivElement | null>(null);
   const exportRef = useRef<HTMLDivElement | null>(null);
@@ -188,8 +189,26 @@ export const HorsePedigreeTree: FC<HorsePedigreeTreeProps> = ({
   }, [isRTL]);
 
   useEffect(() => {
+    const media = window.matchMedia("(max-width: 767px)");
+    const apply = () => setIsMobileViewport(media.matches);
+
+    apply();
+    media.addEventListener("change", apply);
+    return () => media.removeEventListener("change", apply);
+  }, []);
+
+  useEffect(() => {
     const onFullscreenChange = () => {
-      setIsFullscreen(Boolean(document.fullscreenElement));
+      const active = Boolean(document.fullscreenElement);
+      setIsFullscreen(active);
+
+      if (!active) {
+        (
+          screen.orientation as ScreenOrientation & {
+            unlock?: () => void;
+          }
+        )?.unlock?.();
+      }
     };
 
     document.addEventListener("fullscreenchange", onFullscreenChange);
@@ -205,6 +224,13 @@ export const HorsePedigreeTree: FC<HorsePedigreeTreeProps> = ({
         await document.exitFullscreen();
       } else {
         await fullscreenRef.current.requestFullscreen();
+        if (isMobileViewport) {
+          await (
+            screen.orientation as ScreenOrientation & {
+              lock?: (orientation: string) => Promise<void>;
+            }
+          )?.lock?.("landscape");
+        }
       }
     } catch (error) {
       console.error("Fullscreen error:", error);
@@ -246,7 +272,7 @@ export const HorsePedigreeTree: FC<HorsePedigreeTreeProps> = ({
       dir={isRTL ? "rtl" : "ltr"}
     >
       <div
-        className="mb-4 flex flex-col gap-3 px-1 sm:flex-row sm:items-center sm:justify-between"
+        className="mb-4 flex flex-col items-start gap-3 px-1 sm:flex-row sm:items-center sm:justify-between"
         dir={controlsVariant === "compact" && !showTitle ? "ltr" : undefined}
       >
         {showTitle && (
@@ -255,12 +281,12 @@ export const HorsePedigreeTree: FC<HorsePedigreeTreeProps> = ({
           </h2>
         )}
 
-        <div className="flex items-center gap-2 self-start sm:self-auto">
+        <div className="flex w-auto items-center gap-2 self-start sm:self-auto">
           <button
             type="button"
             onClick={handleDownload}
             disabled={isDownloading}
-            className={`inline-flex items-center justify-center gap-2 bg-white font-semibold text-[#3e3640] transition hover:bg-[#f8f3ed] disabled:cursor-not-allowed disabled:opacity-60 ${
+            className={`inline-flex shrink-0 items-center justify-center gap-2 whitespace-nowrap bg-white font-semibold text-[#3e3640] transition hover:bg-[#f8f3ed] disabled:cursor-not-allowed disabled:opacity-60 ${
               controlsVariant === "compact"
                 ? "h-11 w-11 rounded-xl border border-[#e6ddd4]"
                 : "h-11 rounded-2xl px-4 text-sm"
@@ -284,7 +310,7 @@ export const HorsePedigreeTree: FC<HorsePedigreeTreeProps> = ({
           <button
             type="button"
             onClick={handleToggleFullscreen}
-            className={`inline-flex items-center justify-center gap-2 bg-white font-semibold text-[#3e3640] transition hover:bg-[#f8f3ed] ${
+            className={`inline-flex shrink-0 items-center justify-center gap-2 whitespace-nowrap bg-white font-semibold text-[#3e3640] transition hover:bg-[#f8f3ed] ${
               controlsVariant === "compact"
                 ? "h-11 w-11 rounded-xl border border-[#e6ddd4]"
                 : "h-11 rounded-2xl px-4 text-sm"

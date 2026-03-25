@@ -2,6 +2,7 @@
 
 import { Search } from "lucide-react";
 import type { FC } from "react";
+import Link from "next/link";
 
 type Props = {
   locale: string;
@@ -25,9 +26,12 @@ export const StallionProfileCard: FC<Props> = ({
           isRTL ? "sm:flex-row-reverse" : ""
         }`}
       >
-        <button className="h-11 px-4 rounded-2xl bg-[#4b2f1a] text-white text-sm font-semibold flex items-center justify-center w-[300px] sm:w-auto">
+        <Link
+          href={`/${locale}/horses/1`}
+          className="flex h-11 w-full items-center justify-center rounded-2xl bg-[#4b2f1a] px-4 text-sm font-semibold text-white sm:w-auto sm:min-w-[220px]"
+        >
           {locale === "ar" ? "رؤية الملف الشخصي" : "View profile"}
-        </button>
+        </Link>
 
         <div className="relative w-full">
           <span

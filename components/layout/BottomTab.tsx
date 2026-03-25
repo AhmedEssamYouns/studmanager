@@ -3,6 +3,7 @@
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import { useLocale, useTranslation } from '@/lib/locale-context';
+import Image from 'next/image';
 import { 
   Home, 
   LayoutGrid, 
@@ -31,6 +32,7 @@ export function BottomTab() {
         const href = `/${locale}/${tab.route}`;
         const isActive = pathname.startsWith(href);
         const Icon = tab.icon;
+        const isHorseTab = tab.key === 'horses';
 
         return (
           <Link
@@ -43,7 +45,17 @@ export function BottomTab() {
             <div className={`p-1.5 rounded-xl transition-all duration-300 ${
               isActive ? 'bg-[#f5efbb] scale-110' : 'bg-transparent'
             }`}>
-              <Icon size={20} className={isActive ? 'stroke-[2.5px]' : 'stroke-[2px]'} />
+              {isHorseTab ? (
+                <Image
+                  src={isActive ? '/svgs/horse-active.svg' : '/sidebar/horse.svg'}
+                  alt=""
+                  width={20}
+                  height={20}
+                  className="h-5 w-5 object-contain"
+                />
+              ) : (
+                <Icon size={20} className={isActive ? 'stroke-[2.5px]' : 'stroke-[2px]'} />
+              )}
             </div>
             <span className={`text-[10px] font-bold ${isRTL ? 'font-cairo' : ''}`}>
               {t(`sidebar.${tab.key}`)}
