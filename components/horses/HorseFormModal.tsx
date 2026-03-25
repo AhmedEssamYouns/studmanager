@@ -206,7 +206,7 @@ export const HorseFormModal: FC<HorseFormModalProps> = ({
   if (!isOpen) return null;
 
   const UploadCloudIcon = () => (
-    <svg width="68" height="68" viewBox="0 0 68 68" fill="none">
+    <svg width="48" height="48" viewBox="0 0 68 68" fill="none" className="md:w-[68px] md:h-[68px]">
       <path
         d="M44.502 48.1673C50.1329 48.1673 54.6686 43.6315 54.6686 38.0007C54.6686 32.9279 50.9881 28.7409 46.1659 27.9305C45.6033 20.5908 39.4744 14.834 32.0005 14.834C24.8857 14.834 18.989 20.0593 17.9385 26.8825C12.8667 27.4013 8.91699 31.6812 8.91699 36.8898C8.91699 42.4462 13.4704 46.9997 19.0268 46.9997H24.2087"
         stroke="#4B3123"
@@ -665,27 +665,27 @@ export const HorseFormModal: FC<HorseFormModalProps> = ({
             )}
 
             {currentStep === 4 && (
-              <div className="space-y-10">
-                <div className="grid grid-cols-1 gap-6 md:grid-cols-2">
+              <div className="space-y-6 md:space-y-10">
+                <div className="grid grid-cols-1 gap-4 md:gap-6 md:grid-cols-2">
                   <div
                     onDragOver={(e) => e.preventDefault()}
                     onDrop={(e) => handleFileDrop(e, 'image')}
                     onClick={() => imageInputRef.current?.click()}
-                    className="group flex min-h-[180px] cursor-pointer flex-col items-center justify-center rounded-[4px] bg-[#F8F7EE] px-6 py-8 text-center transition hover:bg-[#f3f1e5]"
+                    className="group flex min-h-[140px] md:min-h-[180px] cursor-pointer flex-col items-center justify-center rounded-[4px] bg-[#F8F7EE] px-4 md:px-6 py-6 md:py-8 text-center transition hover:bg-[#f3f1e5]"
                   >
                     {imagePreview ? (
                       <img
                         src={imagePreview}
                         alt="Horse"
-                        className="h-[140px] w-full rounded-xl object-cover"
+                        className="h-[100px] md:h-[140px] w-full rounded-xl object-cover"
                       />
                     ) : (
                       <>
                         <UploadCloudIcon />
-                        <p className="mt-4 text-[17px] font-bold text-[#2D2018]">
+                        <p className="mt-2 md:mt-4 text-sm md:text-[17px] font-bold text-[#2D2018]">
                           {t('horses.dragDropImage')}
                         </p>
-                        <p className="mt-2 text-sm text-[#8B8179]">
+                        <p className="mt-1 md:mt-2 text-xs md:text-sm text-[#8B8179]">
                           {t('horses.supportedImages')}
                         </p>
                       </>
@@ -706,21 +706,21 @@ export const HorseFormModal: FC<HorseFormModalProps> = ({
                     onDragOver={(e) => e.preventDefault()}
                     onDrop={(e) => handleFileDrop(e, 'video')}
                     onClick={() => videoInputRef.current?.click()}
-                    className="group flex min-h-[180px] cursor-pointer flex-col items-center justify-center rounded-[4px] bg-[#F8F7EE] px-6 py-8 text-center transition hover:bg-[#f3f1e5]"
+                    className="group flex min-h-[140px] md:min-h-[180px] cursor-pointer flex-col items-center justify-center rounded-[4px] bg-[#F8F7EE] px-4 md:px-6 py-6 md:py-8 text-center transition hover:bg-[#f3f1e5]"
                   >
                     {videoFile ? (
                       <video
                         src={videoPreview}
                         controls
-                        className="h-[140px] w-full rounded-xl object-cover"
+                        className="h-[100px] md:h-[140px] w-full rounded-xl object-cover"
                       />
                     ) : (
                       <>
                         <UploadCloudIcon />
-                        <p className="mt-4 text-[17px] font-bold text-[#2D2018]">
+                        <p className="mt-2 md:mt-4 text-sm md:text-[17px] font-bold text-[#2D2018]">
                           {t('horses.uploadVideo')}
                         </p>
-                        <p className="mt-2 text-sm text-[#8B8179]">
+                        <p className="mt-1 md:mt-2 text-xs md:text-sm text-[#8B8179]">
                           {t('horses.supportedVideos')}
                         </p>
                       </>
@@ -744,21 +744,29 @@ export const HorseFormModal: FC<HorseFormModalProps> = ({
                   value={formData.videoLink ?? ''}
                   onChange={handleInputChange}
                   placeholder={t('horses.addVideoLink')}
-                  className="h-[52px] w-full rounded-[18px] border border-[#bfb6b1] bg-white px-5 text-sm text-[#2b1a12] outline-none transition placeholder:text-[#5F554F] focus:border-[#5a3b25] focus:ring-2 focus:ring-[#5a3b25]/10"
+                  className="h-[44px] md:h-[52px] w-full rounded-[18px] border border-[#bfb6b1] bg-white px-4 md:px-5 text-sm text-[#2b1a12] outline-none transition placeholder:text-[#5F554F] focus:border-[#5a3b25] focus:ring-2 focus:ring-[#5a3b25]/10"
                 />
               </div>
             )}
 
-            <div className="flex items-center flex-row-reverse justify-between pt-2">
-              <div className="flex items-center flex-row-reverse gap-3">
+            <div className="flex flex-col-reverse gap-3 pt-4 md:flex-row md:items-center md:justify-between md:pt-2 md:flex-row-reverse">
+              <button
+                type="button"
+                onClick={handleClose}
+                className="w-full rounded-[16px] border border-[#eadfd9] bg-white py-3 text-gray-700 transition hover:bg-gray-50 md:hidden"
+              >
+                {t('common.cancel')}
+              </button>
+
+              <div className="flex items-center flex-row-reverse justify-center gap-2 md:justify-start md:gap-3">
                 {currentStep > 1 && (
                   <button
                     type="button"
                     onClick={() => setCurrentStep((p) => p - 1)}
-                    className="flex flex-row-reverse items-center gap-2 rounded-[16px] border border-[#4A2B1A] bg-white px-6 py-3 font-semibold text-[#2b1a12] transition hover:bg-gray-50"
+                    className="flex flex-row-reverse items-center gap-2 rounded-[16px] border border-[#4A2B1A] bg-white px-4 md:px-6 py-3 font-semibold text-[#2b1a12] transition hover:bg-gray-50"
                   >
                     <svg
-                      className={`h-5 w-5 ${isRTL ? '' : 'rotate-180'}`}
+                      className={`h-4 w-4 md:h-5 md:w-5 ${isRTL ? '' : 'rotate-180'}`}
                       viewBox="0 0 24 24"
                       fill="none"
                       stroke="currentColor"
@@ -766,7 +774,7 @@ export const HorseFormModal: FC<HorseFormModalProps> = ({
                     >
                       <path d="M15 6l-6 6 6 6" strokeLinecap="round" strokeLinejoin="round" />
                     </svg>
-                    {t('common.back')}
+                    <span className="text-sm md:text-base">{t('common.back')}</span>
                   </button>
                 )}
 
@@ -779,12 +787,12 @@ export const HorseFormModal: FC<HorseFormModalProps> = ({
                     }
                     setCurrentStep((p) => p + 1);
                   }}
-                  className="flex items-center gap-2 rounded-[16px] bg-[#4a2b1a] px-6 py-3 font-semibold text-white transition hover:opacity-90"
+                  className="flex items-center gap-2 rounded-[16px] bg-[#4a2b1a] px-4 md:px-6 py-3 font-semibold text-white transition hover:opacity-90"
                 >
-                  {currentStep === steps.length ? t('common.save') : t('common.next')}
+                  <span className="text-sm md:text-base">{currentStep === steps.length ? t('common.save') : t('common.next')}</span>
                   {currentStep !== steps.length && (
                     <svg
-                      className={`h-5 w-5 ${isRTL ? 'rotate-180' : ''}`}
+                      className={`h-4 w-4 md:h-5 md:w-5 ${isRTL ? 'rotate-180' : ''}`}
                       viewBox="0 0 24 24"
                       fill="none"
                       stroke="currentColor"
@@ -795,7 +803,7 @@ export const HorseFormModal: FC<HorseFormModalProps> = ({
                   )}
                   {currentStep === steps.length && (
                     <svg
-                      className="h-5 w-5"
+                      className="h-4 w-4 md:h-5 md:w-5"
                       viewBox="0 0 24 24"
                       fill="none"
                       stroke="currentColor"
