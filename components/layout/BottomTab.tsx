@@ -47,14 +47,14 @@ export function BottomTab() {
             }`}>
               {isHorseTab ? (
                 <Image
-                  src={isActive ? '/svgs/horse-active.svg' : '/sidebar/horse.svg'}
+                  src={isActive ? '/svgs/horse-active.svg' : '/sidebar/ho.svg'}
                   alt=""
                   width={20}
                   height={20}
                   className="h-5 w-5 object-contain"
                 />
               ) : (
-                <Icon size={20} className={isActive ? 'stroke-[2.5px]' : 'stroke-[2px]'} />
+                <Icon size={20} color='#181818' className={isActive ? 'stroke-[2.5px]' : 'stroke-[2px]'} />
               )}
             </div>
             <span className={`text-[10px] font-bold ${isRTL ? 'font-cairo' : ''}`}>
