@@ -115,6 +115,31 @@ const getTopPercent = (count: number, index: number) => {
 
 const labelForNode = (node: PedigreeNode) => `${node.name} (${node.role})`;
 
+const waitForRenderableImages = async (container: HTMLElement) => {
+  const images = Array.from(container.querySelectorAll("img"));
+
+  await Promise.all(
+    images.map(
+      (img) =>
+        new Promise<void>((resolve) => {
+          if (img.complete && img.naturalWidth > 0) {
+            resolve();
+            return;
+          }
+
+          const done = () => {
+            img.removeEventListener("load", done);
+            img.removeEventListener("error", done);
+            resolve();
+          };
+
+          img.addEventListener("load", done, { once: true });
+          img.addEventListener("error", done, { once: true });
+        }),
+    ),
+  );
+};
+
 const DownloadIcon = ({ className = "h-5 w-5" }: { className?: string }) => (
   <svg
     className={className}
@@ -199,38 +224,43 @@ export const HorsePedigreeTree: FC<HorsePedigreeTreeProps> = ({
 
   useEffect(() => {
     const onFullscreenChange = () => {
+      if (isMobileViewport) return;
+
       const active = Boolean(document.fullscreenElement);
       setIsFullscreen(active);
-
-      if (!active) {
-        (
-          screen.orientation as ScreenOrientation & {
-            unlock?: () => void;
-          }
-        )?.unlock?.();
-      }
     };
 
     document.addEventListener("fullscreenchange", onFullscreenChange);
     return () =>
       document.removeEventListener("fullscreenchange", onFullscreenChange);
-  }, []);
+  }, [isMobileViewport]);
+
+  useEffect(() => {
+    if (!isMobileViewport) return;
+
+    const previousOverflow = document.body.style.overflow;
+    if (isFullscreen) {
+      document.body.style.overflow = "hidden";
+    }
+
+    return () => {
+      document.body.style.overflow = previousOverflow;
+    };
+  }, [isFullscreen, isMobileViewport]);
 
   const handleToggleFullscreen = async () => {
     if (!fullscreenRef.current) return;
+
+    if (isMobileViewport) {
+      setIsFullscreen((current) => !current);
+      return;
+    }
 
     try {
       if (document.fullscreenElement) {
         await document.exitFullscreen();
       } else {
         await fullscreenRef.current.requestFullscreen();
-        if (isMobileViewport) {
-          await (
-            screen.orientation as ScreenOrientation & {
-              lock?: (orientation: string) => Promise<void>;
-            }
-          )?.lock?.("landscape");
-        }
       }
     } catch (error) {
       console.error("Fullscreen error:", error);
@@ -242,11 +272,20 @@ export const HorsePedigreeTree: FC<HorsePedigreeTreeProps> = ({
 
     try {
       setIsDownloading(true);
+      await waitForRenderableImages(exportRef.current);
+
+      const exportWidth = exportRef.current.scrollWidth;
+      const exportHeight = exportRef.current.scrollHeight;
 
       const dataUrl = await toPng(exportRef.current, {
         cacheBust: true,
         pixelRatio: 3,
         backgroundColor: "#f7f3ee",
+        width: exportWidth,
+        height: exportHeight,
+        canvasWidth: exportWidth * 3,
+        canvasHeight: exportHeight * 3,
+        skipAutoScale: true,
       });
 
       const link = document.createElement("a");
@@ -344,21 +383,30 @@ export const HorsePedigreeTree: FC<HorsePedigreeTreeProps> = ({
       <div
         ref={fullscreenRef}
         className={`rounded-[26px] bg-[#efeae5] p-2 sm:p-3 ${
-          isFullscreen
+          isFullscreen && !isMobileViewport
             ? "flex min-h-screen items-center justify-center bg-[#efeae5]"
+            : ""
+        } ${
+          isFullscreen && isMobileViewport
+            ? "fixed inset-0 z-[70] rounded-none bg-[#efeae5] p-3"
             : ""
         }`}
       >
         <div
           className={`w-full overflow-x-auto overflow-y-hidden rounded-[22px] ${
-            isFullscreen
+            isFullscreen && !isMobileViewport
               ? "flex items-center justify-center overflow-hidden"
               : ""
+          } ${
+            isFullscreen && isMobileViewport ? "h-full overflow-auto" : ""
           }`}
           style={{
             WebkitOverflowScrolling: "touch",
             overscrollBehaviorX: "contain",
-            touchAction: "pan-x pan-y",
+            overscrollBehaviorY: "contain",
+            touchAction: isFullscreen && isMobileViewport
+              ? "pan-x pan-y pinch-zoom"
+              : "pan-x pan-y",
           }}
         >
           <div
@@ -366,27 +414,26 @@ export const HorsePedigreeTree: FC<HorsePedigreeTreeProps> = ({
             className="relative overflow-hidden rounded-[20px] bg-[#f7f3ee] shadow-[0_10px_30px_rgba(0,0,0,0.05)]"
             style={{
               aspectRatio: `${CERTIFICATE_ASPECT}`,
-              width: isFullscreen
-                ? `min(96vw, calc((100dvh - 72px) * ${CERTIFICATE_ASPECT}))`
-                : "100%",
-              minWidth: isFullscreen ? undefined : "980px",
+              width:
+                isFullscreen && isMobileViewport
+                  ? "980px"
+                  : isFullscreen
+                    ? `min(96vw, calc((100dvh - 72px) * ${CERTIFICATE_ASPECT}))`
+                    : "100%",
+              minWidth: isFullscreen && !isMobileViewport ? undefined : "980px",
               maxWidth: isFullscreen ? undefined : "1500px",
             }}
           >
-            <Image
+            <img
               src="/horse/border.png"
               alt="Border Frame"
-              fill
-              priority
-              className="pointer-events-none absolute inset-0 z-0 object-fill"
+              className="pointer-events-none absolute inset-0 z-0 h-full w-full object-fill"
             />
 
             <div className="pointer-events-none absolute inset-0 z-[1] flex items-center justify-center px-8">
-              <Image
+              <img
                 src="/horse/centerinnerlogoofpedgree.svg"
                 alt="Pedigree Center Logo"
-                width={520}
-                height={520}
                 className="h-auto w-[34%] max-w-[420px] object-contain"
               />
             </div>
@@ -422,11 +469,10 @@ export const HorsePedigreeTree: FC<HorsePedigreeTreeProps> = ({
                 isRTL ? "left-8 sm:left-8" : "left-4 sm:left-5"
               }`}
             >
-              <Image
+              <img
                 src="/horse/studbooklogo.png"
                 alt="Studbook Logo"
-                fill
-                className="object-contain object-left"
+                className="h-full w-full object-contain object-left"
               />
             </div>
           </div>
