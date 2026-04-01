@@ -1,10 +1,12 @@
 'use client';
 
 import Link from 'next/link';
-import { usePathname } from 'next/navigation';
+import { usePathname, useRouter } from 'next/navigation';
+import { LogOut } from 'lucide-react';
 import { useLocale, useTranslation } from '@/lib/locale-context';
 import { DashboardIcon } from './AppIcons';
 import { LocaleMenu } from '@/components/common/LocaleMenu';
+import { clearAuthCookie } from '@/lib/auth';
 
 const sidebarItems = [
   { key: 'dashboard' },
@@ -177,12 +179,20 @@ interface SidebarProps {
 
 export function Sidebar({ open = true, onClose }: SidebarProps) {
   const { locale, direction } = useLocale();
+  const { t } = useTranslation();
   const pathname = usePathname();
+  const router = useRouter();
   const isRTL = direction === 'rtl';
+
+  const handleLogout = () => {
+    clearAuthCookie();
+    onClose?.();
+    router.replace(`/${locale}/login`);
+  };
 
   return (
     <aside
-      className={`fixed z-50 h-full w-[17rem] overflow-y-auto rounded-none bg-white px-4 py-5 shadow-[0_20px_40px_rgba(96,56,23,0.08)] transition-transform duration-300 ease-in-out
+      className={`fixed z-50 flex h-full w-[17rem] flex-col overflow-y-auto rounded-none bg-white px-4 py-5 shadow-[0_20px_40px_rgba(96,56,23,0.08)] transition-transform duration-300 ease-in-out
         md:top-8 md:z-20 md:h-[calc(100vh-4rem)] md:w-[17.5rem] md:rounded-[28px] md:px-5 md:py-6 md:translate-x-0
         ${isRTL
           ? `top-0 right-0 md:right-10 ${open ? 'translate-x-0' : 'translate-x-full md:translate-x-0'}`
@@ -195,7 +205,7 @@ export function Sidebar({ open = true, onClose }: SidebarProps) {
         </Link>
       </div>
 
-      <nav className="space-y-1">
+      <nav className="flex-1 space-y-1">
         {sidebarItems.map((item) => {
           const route = item.route || item.key;
           const href = `/${locale}/${route}`;
@@ -207,8 +217,19 @@ export function Sidebar({ open = true, onClose }: SidebarProps) {
           );
         })}
 
-        {/* Mobile-only language toggle */}
-        <div className="md:hidden mt-6 pt-6 border-t border-gray-100 flex justify-center">
+        <div className="mt-6 border-t border-gray-100 pt-6">
+          <button
+            onClick={handleLogout}
+            className={`flex w-full items-center gap-3 rounded-xl px-3 py-2.5 text-[#8d3a2a] transition-all duration-300 hover:bg-[#fff1ea] ${
+              direction === 'rtl' ? 'flex-row-reverse justify-end text-right' : 'flex-row justify-start text-left'
+            }`}
+          >
+            <LogOut className="h-5 w-5 flex-shrink-0" />
+            <span className="text-[0.82rem] font-semibold leading-tight">{t('common.logout')}</span>
+          </button>
+        </div>
+
+        <div className="md:hidden mt-4 flex justify-center border-t border-gray-100 pt-6">
           <LocaleMenu variant="mobile" />
         </div>
       </nav>

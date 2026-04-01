@@ -1,21 +1,28 @@
 'use client';
 
 import { useMemo, useState } from 'react';
+import { usePathname, useRouter, useSearchParams } from 'next/navigation';
 import { PlusCircleIcon, SearchIcon } from '@/components/layout/AppIcons';
 import { useLocale, useTranslation } from '@/lib/locale-context';
 import { TeamMemberModal } from './TeamMemberModal';
 import { TeamMembersTable } from './TeamMembersTable';
 import { emptyMemberForm, initialMembers, type Member, type MemberFormState } from './types';
 import { ListCheck } from 'lucide-react';
+import { TeamTasksPanel } from './TeamTasksPanel';
 
 export function TeamPageContent() {
   const { direction } = useLocale();
   const { t } = useTranslation();
+  const router = useRouter();
+  const pathname = usePathname();
+  const searchParams = useSearchParams();
   const [members, setMembers] = useState(initialMembers);
   const [query, setQuery] = useState('');
   const [mode, setMode] = useState<'add' | 'edit' | null>(null);
   const [editingMemberId, setEditingMemberId] = useState<string | null>(null);
   const [form, setForm] = useState<MemberFormState>(emptyMemberForm);
+
+  const activeView = searchParams.get('view') === 'tasks' ? 'tasks' : 'members';
 
   const filteredMembers = useMemo(() => {
     if (!query.trim()) return members;
@@ -63,51 +70,75 @@ export function TeamPageContent() {
     closeModal();
   };
 
+  const updateTeamView = (view: 'members' | 'tasks') => {
+    const params = new URLSearchParams(searchParams.toString());
+
+    if (view === 'tasks') {
+      params.set('view', 'tasks');
+    } else {
+      params.delete('view');
+    }
+
+    params.delete('task');
+
+    const nextQuery = params.toString();
+    router.replace(nextQuery ? `${pathname}?${nextQuery}` : pathname, { scroll: false });
+  };
+
   return (
     <div className="space-y-7">
-      <section className="space-y-5">
-        <div className="flex flex-col gap-5 sm:flex-row sm:items-center sm:justify-between">
-          <h1 className="text-[2.1rem] font-bold text-[#27304a]">{t('team.title')}</h1>
+      {activeView === 'tasks' ? (
+        <TeamTasksPanel onBackToMembers={() => updateTeamView('members')} />
+      ) : (
+        <section className="space-y-5 [animation:var(--tab-animation)_0.35s_ease]">
+          <div className="flex flex-col gap-5 sm:flex-row sm:items-center sm:justify-between">
+            <h1 className="text-[2.1rem] font-bold text-[#27304a]">{t('team.title')}</h1>
 
-          <div className="flex flex-col gap-4 sm:flex-row sm:items-center sm:gap-5">
-            <div className="relative w-full sm:w-[24rem]">
-              <SearchIcon
-                className={`absolute top-1/2 h-5 w-5 -translate-y-1/2 text-[#5a473d] ${direction === 'rtl' ? 'right-4' : 'left-4'
+            <div className="flex flex-col gap-4 sm:flex-row sm:items-center sm:gap-5">
+              <div className="relative w-full sm:w-[24rem]">
+                <SearchIcon
+                  className={`absolute top-1/2 h-5 w-5 -translate-y-1/2 text-[#5a473d] ${
+                    direction === 'rtl' ? 'right-4' : 'left-4'
                   }`}
-              />
-              <input
-                type="search"
-                value={query}
-                onChange={(e) => setQuery(e.target.value)}
-                placeholder={t('common.search')}
-                className={`h-11 w-full rounded-2xl border border-[#ece2da] bg-white text-sm text-[#2c2330] outline-none transition placeholder:text-[#d9cfc5] focus:border-[#5a3b25] focus:ring-2 focus:ring-[#5a3b25]/10 ${direction === 'rtl' ? 'pr-12 text-right' : 'pl-12 text-left'
+                />
+                <input
+                  type="search"
+                  value={query}
+                  onChange={(e) => setQuery(e.target.value)}
+                  placeholder={t('common.search')}
+                  className={`h-11 w-full rounded-2xl border border-[#ece2da] bg-white text-sm text-[#2c2330] outline-none transition placeholder:text-[#d9cfc5] focus:border-[#5a3b25] focus:ring-2 focus:ring-[#5a3b25]/10 ${
+                    direction === 'rtl' ? 'pr-12 text-right' : 'pl-12 text-left'
                   }`}
-              />
-            </div>
+                />
+              </div>
 
-            <div className="flex items-center gap-3">
-              <button
-                onClick={openAddModal}
-                className="flex flex-1 items-center justify-center gap-2 rounded-[18px] bg-[#4b2f1a] px-6 py-3 text-[1.05rem] font-bold text-white whitespace-nowrap"
-              >
-                <PlusCircleIcon className="h-5 w-5" />
-                <span>{t('team.addUser')}</span>
-              </button>
+              <div className="flex flex-col items-stretch gap-3 sm:flex-row">
+                <button
+                  onClick={openAddModal}
+                  className="flex items-center justify-center gap-2 rounded-[18px] bg-[#4b2f1a] px-6 py-3 text-[1.05rem] font-bold text-white whitespace-nowrap"
+                >
+                  <PlusCircleIcon className="h-5 w-5" />
+                  <span>{t('team.addUser')}</span>
+                </button>
 
-              <button className="flex flex-1 items-center justify-center gap-2 rounded-[18px] bg-[#4b2f1a] px-6 py-3 text-[1.05rem] font-bold text-white whitespace-nowrap">
-                <ListCheck className="h-5 w-5" />
-                <span>{t('team.tasks')}</span>
-              </button>
+                <button
+                  onClick={() => updateTeamView('tasks')}
+                  className="flex items-center justify-center gap-2 rounded-[18px] border border-[#d8c7b9] bg-white px-6 py-3 text-[1.05rem] font-bold text-[#4b2f1a] whitespace-nowrap shadow-[0_12px_26px_rgba(91,53,24,0.08)]"
+                >
+                  <ListCheck className="h-5 w-5" />
+                  <span>{t('team.tasks')}</span>
+                </button>
+              </div>
             </div>
           </div>
-        </div>
 
-        <TeamMembersTable
-          members={filteredMembers}
-          onEdit={openEditModal}
-          onDelete={(id) => setMembers((current) => current.filter((member) => member.id !== id))}
-        />
-      </section>
+          <TeamMembersTable
+            members={filteredMembers}
+            onEdit={openEditModal}
+            onDelete={(id) => setMembers((current) => current.filter((member) => member.id !== id))}
+          />
+        </section>
+      )}
 
       {mode && (
         <TeamMemberModal

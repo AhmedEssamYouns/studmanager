@@ -1,5 +1,6 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { locales, defaultLocale } from './lib/i18n';
+import { AUTH_COOKIE, AUTH_VALUE } from './lib/auth';
 
 const PUBLIC_FILE_REGEX = /\.[^/]+$/;
 
@@ -16,7 +17,7 @@ export function proxy(request: NextRequest) {
 
   if (pathname === '/') {
     return NextResponse.redirect(
-      new URL(`/${defaultLocale}/dashboard`, request.url)
+      new URL(`/${defaultLocale}/login`, request.url)
     );
   }
 
@@ -26,6 +27,28 @@ export function proxy(request: NextRequest) {
   );
 
   if (pathnameHasLocale) {
+    const authCookie = request.cookies.get(AUTH_COOKIE)?.value;
+    const isAuthenticated = authCookie === AUTH_VALUE;
+    const locale = locales.find(
+      (value) => pathname.startsWith(`/${value}/`) || pathname === `/${value}`
+    ) || defaultLocale;
+    const isLoginRoute = pathname === `/${locale}/login`;
+    const isLocaleIndex = pathname === `/${locale}`;
+
+    if (isLocaleIndex) {
+      return NextResponse.redirect(
+        new URL(`/${locale}/${isAuthenticated ? 'dashboard' : 'login'}`, request.url)
+      );
+    }
+
+    if (isLoginRoute && isAuthenticated) {
+      return NextResponse.redirect(new URL(`/${locale}/dashboard`, request.url));
+    }
+
+    if (!isLoginRoute && !isAuthenticated) {
+      return NextResponse.redirect(new URL(`/${locale}/login`, request.url));
+    }
+
     return NextResponse.next();
   }
 
